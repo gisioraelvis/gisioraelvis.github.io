@@ -6,245 +6,451 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elvis Gisiora | Software Engineer</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <meta name="description"
+        content="Elvis Gisiora - Software Engineer specializing in full-stack development, system integration, and DevOps.">
 </head>
 
 <body class="dark">
-    <div class="theme-toggle">
-        <button id="themeToggle" aria-label="Toggle dark/light mode">
-            <i class="fas fa-moon"></i>
-        </button>
-    </div>
+    <div class="noise"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">GEM</div>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button id="themeToggle" aria-label="Toggle dark/light mode">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
     <div class="container">
-        <!-- Header Section -->
-        <header>
-            <div class="profile-container">
-                <div class="profile-image">
-                    <img src="https://api.dicebear.com/7.x/initials/svg?seed=EG&backgroundColor=0077b6&textColor=ffffff"
-                        alt="Elvis Gisiora">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="glitch" data-text="Elvis Gisiora">Elvis Gisiora</h1>
+                    <h2 class="subtitle">Software Engineer</h2>
+                    <p class="hero-description">I design, implement, and maintain end-to-end web applications and
+                        RESTful APIs.</p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="primary-btn">Get in touch</a>
+                        <a href="#projects" class="secondary-btn">View projects</a>
+                    </div>
                 </div>
-                <div class="profile-info">
-                    <h1>Elvis Gisiora</h1>
-                    <p>Software Engineer at Griffin Global Technologies</p>
-                    <p>Previously: THE Jitu, Nuru Express, Freelance</p>
-                    <p class="bio">I design, implement, and maintain end-to-end web applications and RESTful APIs.</p>
+                <div class="hero-image">
+                    <div class="profile-image">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=EG&backgroundColor=0078d7&textColor=ffffff"
+                            alt="Elvis Gisiora">
+                    </div>
+                    <div class="floating-badges">
+                        <div class="badge" style="--delay: 0s">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="badge" style="--delay: 0.5s">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="badge" style="--delay: 1s">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <div class="badge" style="--delay: 1.5s">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="badge" style="--delay: 2s">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="badge" style="--delay: 2.5s">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <div class="badge" style="--delay: 3s">
+                            <i class="fab fa-angular"></i>
+                        </div>
+                        <div class="badge" style="--delay: 3.5s">
+                            <i class="fab fa-github"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="social-links">
-                <a href="https://github.com/gisioraelvis" target="_blank" aria-label="GitHub"><i
-                        class="fab fa-github"></i></a>
                 <a href="https://linkedin.com/in/gisioraelvis" target="_blank" aria-label="LinkedIn"><i
                         class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/gisioraelvis">
+                    <i class="fab fa-brands fa-square-x-twitter"></i>
+                </a>
+                <a href="https://github.com/gisioraelvis" target="_blank" aria-label="GitHub"><i
+                        class="fab fa-github"></i></a>
                 <a href="mailto:gisioraelvis20@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+254705640212" aria-label="Phone"><i class="fas fa-phone"></i></a>
             </div>
-        </header>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </section>
 
-        <!-- Summary Section -->
-        <section id="summary" class="section">
-            <h2 class="section-title">Summary</h2>
-            <p>
-                Skilled software engineer with proven expertise in full‐stack development, system integration,
-                and troubleshooting. Adept at designing, deploying, and maintaining scalable applications
-                using robust APIs and automated testing. Passionate about continuous improvement,
-                collaboration, and leveraging Agile DevOps practices to ensure high system reliability.
-            </p>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <p class="about-text">
+                    Skilled software engineer with proven expertise in full‐stack development, system integration,
+                    and troubleshooting. Adept at designing, deploying, and maintaining scalable applications
+                    using robust APIs and automated testing. Passionate about continuous improvement,
+                    collaboration, and leveraging Agile DevOps practices to ensure high system reliability.
+                </p>
+                <div class="about-cards">
+                    <div class="about-card">
+                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                        <h3>Development</h3>
+                        <p>Building scalable web applications with modern frameworks and best practices.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon"><i class="fas fa-server"></i></div>
+                        <h3>DevOps</h3>
+                        <p>Setting up CI/CD pipelines and automated testing for reliable deployments.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3>Collaboration</h3>
+                        <p>Working with cross-functional teams to deliver efficient solutions.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="section">
-            <h2 class="section-title">Experience <a href="#" class="view-all">View all →</a></h2>
-
-            <div class="experience-item">
-                <div class="company-logo">
-                    <img src="/placeholder.svg?height=60&width=60" alt="Griffin Global Technologies">
-                </div>
-                <div class="experience-details">
-                    <h3>Software Engineer</h3>
-                    <h4>Griffin Global Technologies</h4>
-                    <p class="location-time">Alpharetta, Georgia USA (Remote) | Aug 2023 – Present | Full-Time</p>
-                    <ul>
-                        <li>Designing, implementing, and maintaining end‑to‑end web applications and RESTful APIs to
-                            ensure high performance and scalability.</li>
-                        <li>Collaborating with cross‑functional teams in Agile ceremonies to define project scope,
-                            prioritize tasks, and drive efficient delivery.</li>
-                        <li>Engage in code reviews, troubleshoot issues, and reduce mean time to resolution (MTTR).</li>
-                        <li>Setting up CI/CD pipelines and automated testing frameworks to enhance code quality and
-                            deployment reliability.</li>
-                        <li>Integrating robust monitoring and alerting strategies to mitigate downtimes and ensure site
-                            reliability.</li>
-                    </ul>
-                </div>
+        <section id="experience" class="section" data-paginate="true">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Experience</h2>
+                <div class="section-line"></div>
             </div>
 
-            <div class="experience-item">
-                <div class="company-logo">
-                    <img src="/placeholder.svg?height=60&width=60" alt="Nuru Express">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">
+                        <span>Aug 2023 - Present</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Software Engineer</h3>
+                        <h4>Griffin Global Technologies</h4>
+                        <p class="location">Alpharetta, Georgia USA (Remote) | Full-Time</p>
+                        <ul>
+                            <li>Designing, implementing, and maintaining end‑to‑end web applications and RESTful APIs to
+                                ensure high performance and scalability.</li>
+                            <li>Collaborating with cross‑functional teams in Agile ceremonies to define project scope,
+                                prioritize tasks, and drive efficient delivery.</li>
+                            <li>Engage in code reviews, troubleshoot issues, and reduce mean time to resolution (MTTR).
+                            </li>
+                            <li>Setting up CI/CD pipelines and automated testing frameworks to enhance code quality and
+                                deployment reliability.</li>
+                            <li>Integrating robust monitoring and alerting strategies to mitigate downtimes and ensure
+                                site reliability.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="experience-details">
-                    <h3>Software Engineer (Co-Founder)</h3>
-                    <h4>Nuru Express (e-commerce and logistics startup)</h4>
-                    <p class="location-time">Nairobi, Kenya | Sept 2023 – Aug 2024 | Part-Time</p>
-                    <ul>
-                        <li>Lead sprint planning, backlog refinement, and daily stand-up meetings, ensuring alignment
-                            with project goals and timelines.</li>
-                        <li>Assisted in designing, developing, and integrating RESTful APIs to support system
-                            functionalities such as payments, geolocation, and notifications services to improve user
-                            engagement and retention rates.</li>
-                        <li>Collaborated with UI/UX designers to implement responsive and intuitive user interfaces,
-                            focusing on usability and accessibility standards.</li>
-                        <li>Contributed to technical documentation to facilitate knowledge transfer and efficient
-                            onboarding.</li>
-                        <li>Researched and evaluated new technologies and tools to enhance development and address
-                            emerging challenges.</li>
-                    </ul>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">
+                        <span>Sept 2023 - Aug 2024</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Software Engineer (Co-Founder)</h3>
+                        <h4>Nuru Express</h4>
+                        <p class="location">Nairobi, Kenya | Part-Time</p>
+                        <ul>
+                            <li>Lead sprint planning, backlog refinement, and daily stand-up meetings, ensuring
+                                alignment with project goals and timelines.</li>
+                            <li>Assisted in designing, developing, and integrating RESTful APIs to support system
+                                functionalities such as payments, geolocation, and notifications services.</li>
+                            <li>Collaborated with UI/UX designers to implement responsive and intuitive user interfaces,
+                                focusing on usability and accessibility standards.</li>
+                            <li>Contributed to technical documentation to facilitate knowledge transfer and efficient
+                                onboarding.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">
+                        <span>Jan 2023 - Jul 2023</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Junior Software Engineer</h3>
+                        <h4>THE Jitu</h4>
+                        <p class="location">Nairobi, Kenya | Intern</p>
+                        <ul>
+                            <li>Completed an intensive 3‑month training program in full‑stack development, Agile
+                                methodologies, and DevOps tools.</li>
+                            <li>Participated in designing, developing, and testing web applications using automated
+                                tools (e.g., Playwright, Cypress).</li>
+                            <li>Assisted in debugging and troubleshooting to identify root causes and implement
+                                effective solutions.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="experience-item">
-                <div class="company-logo">
-                    <img src="/placeholder.svg?height=60&width=60" alt="THE Jitu">
+        <!-- Education Section -->
+        <section id="education" class="section" data-paginate="true">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Education</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="education-container">
+                <div class="education-item">
+                    <div class="education-year">2018 - 2022</div>
+                    <div class="education-content">
+                        <h3>B.Sc. in Computer Science</h3>
+                        <p>Egerton University, Kenya</p>
+                        <p class="education-grade">Second Class Honours, Upper Division</p>
+                    </div>
                 </div>
-                <div class="experience-details">
-                    <h3>Junior Software Engineer</h3>
-                    <h4>THE Jitu</h4>
-                    <p class="location-time">Nairobi, Kenya | Jan 2023 – Jul 2023 | Intern</p>
-                    <ul>
-                        <li>Completed an intensive 3‑month training program in full‑stack development, Agile
-                            methodologies, and DevOps tools.</li>
-                        <li>Participated in designing, developing, and testing web applications using automated tools
-                            (e.g., Playwright, Cypress).</li>
-                        <li>Assisted in debugging and troubleshooting to identify root causes and implement effective
-                            solutions.</li>
-                        <li>Contributed to technical documentation and collaborated with team members to meet project
-                            deadlines.</li>
-                    </ul>
+
+                <div class="certifications-section">
+                    <h3 class="certifications-title">Certifications & Awards</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="certification-icon"><i class="fab fa-microsoft"></i></div>
+                            <div class="certification-content">
+                                <h4>Azure Developer Associate</h4>
+                                <p>Microsoft</p>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon"><i class="fab fa-microsoft"></i></div>
+                            <div class="certification-content">
+                                <h4>Azure AI Fundamentals</h4>
+                                <p>Microsoft</p>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon"><i class="fab fa-aws"></i></div>
+                            <div class="certification-content">
+                                <h4>AWS Cloud Essentials</h4>
+                                <p>AWS</p>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon"><i class="fab fa-google"></i></div>
+                            <div class="certification-content">
+                                <h4>Google Cloud Digital Leader</h4>
+                                <p>Google</p>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon"><i class="fas fa-code"></i></div>
+                            <div class="certification-content">
+                                <h4>Full Stack Web Development</h4>
+                                <p>THE Jitu</p>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon"><i class="fas fa-paper-plane"></i></div>
+                            <div class="certification-content">
+                                <h4>Postman APIs Expert</h4>
+                                <p>Postman</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
         <section id="skills" class="section">
-            <h2 class="section-title">Skills</h2>
-
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Languages & Frameworks</h3>
-                    <p>JavaScript, TypeScript, Java, C#; Node.js, Express.js, Nest.js, Spring Boot, .NET; ReactJS,
-                        NextJS, Angular</p>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Databases</h3>
-                    <p>MSSQL, PostgreSQL, MySQL, MongoDB, Redis</p>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Cloud & DevOps</h3>
-                    <p>AWS, Azure, GCP, Vercel, Firebase, Docker, Kubernetes, GitHub, GitLab, Jenkins, Agile, Azure
-                        DevOps, JIRA, Postman, Figma</p>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Soft Skills</h3>
-                    <p>Problem-solving, analytical, teamwork, communication</p>
-                </div>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Skills</h2>
+                <div class="section-line"></div>
             </div>
-        </section>
 
-        <!-- Education Section -->
-        <section id="education" class="section">
-            <h2 class="section-title">Education <a href="#" class="view-all">View all →</a></h2>
-
-            <div class="education-item">
-                <div class="education-logo">
-                    <img src="/placeholder.svg?height=60&width=60" alt="Egerton University">
-                </div>
-                <div class="education-details">
-                    <h3>Egerton University</h3>
-                    <p>B.Sc. in Computer Science</p>
-                    <p>Second Class Honours, Upper Division</p>
-                    <p>2018 - 2022</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications Section -->
-        <section id="certifications" class="section">
-            <h2 class="section-title">Certifications & Awards</h2>
-
-            <div class="certifications-container">
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>Azure Developer Associate – Microsoft</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>Azure AI Fundamentals – Microsoft</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>AWS Cloud Essentials – AWS</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>Google Cloud Digital Leader – Google</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>Full Stack Web Development – THE Jitu</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>Postman APIs Expert – Postman</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>EF SET English Level C2 Proficient – EF</p>
-                </div>
-                <div class="certification-item">
-                    <i class="fas fa-certificate"></i>
-                    <p>AgChain Hackathon – AgUnity</p>
-                </div>
+            <div class="skills-table-container">
+                <table class="skills-table">
+                    <tr>
+                        <td valign="top">
+                            <h3>Languages & Frameworks</h3>
+                            <div class="skills-icons">
+                                <!-- Web Foundations -->
+                                <a href="#" title="HTML5"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg"
+                                        alt="html5" width="40" height="40" /></a>
+                                <a href="#" title="CSS3"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg"
+                                        alt="css3" width="40" height="40" /></a>
+                                <!-- JavaScript Ecosystem -->
+                                <a href="#" title="JavaScript"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
+                                        alt="javascript" width="40" height="40" /></a>
+                                <a href="#" title="TypeScript"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
+                                        alt="typescript" width="40" height="40" /></a>
+                                <a href="#" title="Node.js"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg"
+                                        alt="nodejs" width="40" height="40" /></a>
+                                <a href="#" title="Express.js"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg"
+                                        alt="express" width="40" height="40" /></a>
+                                <a href="#" title="NestJS"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg"
+                                        alt="nestjs" width="40" height="40" /></a>
+                                <a href="#" title="React"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
+                                        alt="react" width="40" height="40" /></a>
+                                <a href="#" title="Next.js"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
+                                        alt="nextjs" width="40" height="40" /></a>
+                                <a href="#" title="Angular"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
+                                        alt="angular" width="40" height="40" /></a>
+                                <!-- Java Ecosystem -->
+                                <a href="#" title="Java"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"
+                                        alt="java" width="40" height="40" /></a>
+                                <a href="#" title="Spring Boot"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
+                                        alt="spring" width="40" height="40" /></a>
+                                <!-- .NET Ecosystem -->
+                                <a href="#" title="C#"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg"
+                                        alt="csharp" width="40" height="40" /></a>
+                                <a href="#" title=".NET"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg"
+                                        alt="dotnet" width="40" height="40" /></a>
+                            </div>
+                        </td>
+                        <td valign="top">
+                            <h3>Databases</h3>
+                            <div class="skills-icons">
+                                <a href="#" title="Microsoft SQL Server"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
+                                        alt="mssql" width="40" height="40" /></a>
+                                <a href="#" title="PostgreSQL"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg"
+                                        alt="postgresql" width="40" height="40" /></a>
+                                <a href="#" title="MySQL"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg"
+                                        alt="mysql" width="40" height="40" /></a>
+                                <a href="#" title="MongoDB"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg"
+                                        alt="mongodb" width="40" height="40" /></a>
+                                <a href="#" title="Redis"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg"
+                                        alt="redis" width="40" height="40" /></a>
+                            </div>
+                        </td>
+                        <td valign="top">
+                            <h3>Cloud & DevOps</h3>
+                            <div class="skills-icons">
+                                <a href="#" title="AWS"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+                                        alt="aws" width="40" height="40" /></a>
+                                <a href="#" title="Azure"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg"
+                                        alt="azure" width="40" height="40" /></a>
+                                <a href="#" title="GCP"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg"
+                                        alt="gcp" width="40" height="40" /></a>
+                                <a href="#" title="Docker"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg"
+                                        alt="docker" width="40" height="40" /></a>
+                                <a href="#" title="Kubernetes"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg"
+                                        alt="kubernetes" width="40" height="40" /></a>
+                                <a href="#" title="GitHub"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg"
+                                        alt="github" width="40" height="40" /></a>
+                                <a href="#" title="GitLab"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/gitlab/gitlab-original.svg"
+                                        alt="gitlab" width="40" height="40" /></a>
+                                <a href="#" title="Jenkins"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg"
+                                        alt="jenkins" width="40" height="40" /></a>
+                                <a href="#" title="Azure DevOps"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg"
+                                        alt="azuredevops" width="40" height="40" /></a>
+                                <a href="#" title="Jira"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jira/jira-original.svg"
+                                        alt="jira" width="40" height="40" /></a>
+                                <a href="#" title="Figma"><img
+                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg"
+                                        alt="figma" width="40" height="40" /></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2 class="section-title">Projects <a href="https://github.com/gisioraelvis?tab=repositories"
-                    target="_blank" class="view-all">View all →</a></h2>
+        <section id="projects" class="section" data-paginate="true">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Projects</h2>
+                <div class="section-line"></div>
+            </div>
 
-            <div id="github-projects" class="projects-container">
-                <div class="loading-spinner">
-                    <div class="spinner"></div>
-                    <p>Loading projects...</p>
+            <div id="github-projects" class="projects-grid">
+                <div class="loading-container">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                    <p>Fetching projects...</p>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="section">
-            <h2 class="section-title">Contact</h2>
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">Let's Connect</h2>
+                <div class="section-line"></div>
+            </div>
 
             <div class="contact-container">
-                <div class="contact-info">
+                <div class="contact-card">
                     <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <p><a href="mailto:gisioraelvis20@gmail.com">gisioraelvis20@gmail.com</a></p>
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <h3>Email</h3>
+                            <a href="mailto:gisioraelvis20@gmail.com">gisioraelvis20@gmail.com</a>
+                        </div>
                     </div>
+
+
+
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <p><a href="tel:+254705640212">+254 705 640 212</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <p><a href="https://github.com/gisioraelvis" target="_blank">github.com/gisioraelvis</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <p><a href="https://linkedin.com/in/gisioraelvis"
-                                target="_blank">linkedin.com/in/gisioraelvis</a></p>
+                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                        <div class="contact-info">
+                            <h3>LinkedIn</h3>
+                            <a href="https://linkedin.com/in/gisioraelvis"
+                                target="_blank">linkedin.com/in/gisioraelvis</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -252,7 +458,12 @@
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2025 Elvis Gisiora. All rights reserved.</p>
+            <div class="footer-content">
+                <p>&copy; 2025 Elvis Gisiora. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#hero">Back to top</a>
+                </div>
+            </div>
         </footer>
     </div>
 
