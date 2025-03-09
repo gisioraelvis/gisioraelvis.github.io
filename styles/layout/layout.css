@@ -1,0 +1,101 @@
+/* Layout styles for main structural elements */
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-header);
+}
+
+main {
+  min-height: 100vh;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+section {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+
+footer {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--card-border);
+  margin-top: var(--space-xl);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.footer-content p {
+  color: var(--text-lighter);
+  font-size: var(--font-size-sm);
+}
+
+.footer-links a {
+  color: var(--text-light);
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Ensure container spans properly */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Fix for iOS when body has overflow: hidden */
+body.no-scroll {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .section {
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}

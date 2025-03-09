@@ -33,7 +33,7 @@ export const CONFIG = {
   showMore: {
     initialItems: {
       experience: 2, // Initial number of timeline items to show
-      education: 4, // Initial number of certification items to show
+      education: 6, // Initial number of certification items to show
       projects: 4, // Initial number of project items to show
     },
   },

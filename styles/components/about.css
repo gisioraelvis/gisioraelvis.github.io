@@ -1,0 +1,97 @@
+/* About Section Styles */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-text {
+  font-size: var(--font-size-lg);
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.about-card {
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-xl);
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  height: 100%; /* Ensure all cards have the same height */
+  display: flex;
+  flex-direction: column;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.card-icon {
+  font-size: var(--font-size-3xl);
+  color: var(--primary-color);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.about-card h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-md);
+  text-align: center;
+  color: var(--text-color);
+}
+
+.about-card p {
+  color: var(--text-light);
+  text-align: center;
+  /* Make text take remaining height with flex grow */
+  flex-grow: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .about-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .about-text {
+    font-size: var(--font-size-base);
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card h3 {
+    text-align: left;
+  }
+
+  .about-card p {
+    text-align: left;
+  }
+
+  .card-icon {
+    text-align: left;
+  }
+}

@@ -1,0 +1,24 @@
+/* 
+  Main CSS Entry Point
+  This file imports all modular CSS components
+*/
+
+/* Base styles */
+@import "base/variables.css";
+@import "base/reset.css";
+@import "base/accessibility.css";
+
+/* Layout styles */
+@import "layout/layout.css";
+@import "layout/sections.css";
+
+/* Component styles */
+@import "components/navbar.css";
+@import "components/hero.css";
+@import "components/about.css";
+@import "components/buttons.css";
+@import "components/timeline.css";
+@import "components/education.css";
+@import "components/skills.css";
+@import "components/projects.css";
+@import "components/contact.css";

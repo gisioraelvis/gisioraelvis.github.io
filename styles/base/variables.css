@@ -1,0 +1,122 @@
+:root {
+  /* Color Palette */
+  --primary-color: #0078d7;
+  --primary-light: #2b88d8;
+  --primary-dark: #005a9e;
+  --secondary-color: #10b981;
+  --secondary-light: #34d399;
+  --secondary-dark: #059669;
+  --accent-color: #f59e0b;
+
+  /* Primary color in RGB format for transparency */
+  --primary-color-rgb: 0, 120, 215;
+
+  /* Text Colors */
+  --text-color: #1f2937;
+  --text-light: #4b5563;
+  --text-lighter: #9ca3af;
+
+  /* Background Colors */
+  --background-color: #ffffff;
+  --background-color-rgb: 255, 255, 255; /* Added RGB version for transparency */
+  --background-light: #f9fafb;
+  --background-dark: #f3f4f6;
+
+  /* Component Colors */
+  --card-background: #ffffff;
+  --card-border: #e5e7eb;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Typography */
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-5xl: 3rem; /* 48px */
+  --font-size-6xl: 4rem; /* 64px */
+
+  /* Spacing */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-2xl: 3rem; /* 48px */
+  --space-3xl: 4rem; /* 64px */
+  --space-4xl: 6rem; /* 96px */
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Border Radius */
+  --border-radius-sm: 0.25rem;
+  --border-radius: 0.5rem;
+  --border-radius-lg: 1rem;
+
+  /* Layout */
+  --container-width: 1200px;
+  --section-spacing: 6rem;
+
+  /* Z-index levels */
+  --z-below: -1;
+  --z-normal: 0;
+  --z-above: 1;
+  --z-header: 100;
+  --z-overlay: 1000;
+  --z-modal: 2000;
+  --z-popover: 3000;
+  --z-tooltip: 4000;
+
+  /* Add responsive breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+/* Dark Theme Variables */
+.dark {
+  --primary-color: #0ea5e9;
+  --primary-light: #38bdf8;
+  --primary-dark: #0284c7;
+
+  /* Primary color in RGB format for transparency */
+  --primary-color-rgb: 14, 165, 233;
+
+  --secondary-color: #10b981;
+  --secondary-light: #34d399;
+  --secondary-dark: #059669;
+  --accent-color: #f59e0b;
+
+  --text-color: #f9fafb;
+  --text-light: #e5e7eb;
+  --text-lighter: #9ca3af;
+
+  --background-color: #1e1e1e;
+  --background-color-rgb: 30, 30, 30; /* Added RGB version for transparency */
+  --background-light: #252526;
+  --background-dark: #1a1a1a;
+
+  --card-background: #252526;
+  --card-border: #333333;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.26);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.25);
+}

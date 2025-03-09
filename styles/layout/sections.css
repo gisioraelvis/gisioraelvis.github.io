@@ -1,0 +1,52 @@
+/* Section Styles */
+.section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 1rem;
+}
+
+.section-number {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--primary-color);
+  opacity: 0.7;
+}
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  color: var(--text-color);
+  position: relative;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--card-border);
+  margin-left: var(--space-md);
+}
+
+/* Responsive sections */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .section-line {
+    display: none;
+  }
+}

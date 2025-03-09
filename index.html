@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elvis Gisiora | Software Engineer</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -30,25 +30,37 @@
 </head>
 
 <body class="dark">
-    <div class="noise"></div>
-
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">GEM</div>
-            <div class="nav-links">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+    <!-- Header with navigation -->
+    <header>
+        <nav class="navbar" aria-label="Main navigation">
+            <div class="nav-container">
+                <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <span class="hamburger-icon">
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                    </span>
+                </button>
+                <div class="logo" role="banner">GEM</div>
+                <ul class="nav-links">
+                    <button class="close-menu" aria-label="Close menu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li style="--item-index: 0"><a href="#about" class="nav-link">About</a></li>
+                    <li style="--item-index: 1"><a href="#experience" class="nav-link">Experience</a></li>
+                    <li style="--item-index: 2"><a href="#skills" class="nav-link">Skills</a></li>
+                    <li style="--item-index: 3"><a href="#projects" class="nav-link">Projects</a></li>
+                    <li style="--item-index: 4"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button id="themeToggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                </button>
             </div>
-            <button id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun"></i>
-            </button>
-        </div>
-    </nav>
+        </nav>
+        <div class="menu-overlay"></div>
+    </header>
 
-    <div class="container">
+    <main id="main-content" class="container">
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="hero-content">
@@ -64,47 +76,179 @@
                 </div>
                 <div class="hero-image">
                     <div class="profile-image">
-                        <img src="assets/gisioraelvis-passport.jpg" alt="Elvis Gisiora">
+                        <img src="assets/gisioraelvis-passport.jpg"
+                            alt="Elvis Gisiora - Software Engineer portrait photo">
                     </div>
-                    <div class="floating-badges">
-                        <div class="badge" style="--delay: 0s">
-                            <i class="fab fa-react"></i>
+                    <div class="floating-badges" aria-hidden="true">
+                        <!-- Core/Foundational Technologies (closest to image) -->
+                        <div class="badge frontend"
+                            style="--delay: 0.5s; --x-pos: -140px; --y-pos: -100px; --drift-x: 15px; --drift-y: 10px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                alt="HTML5" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 0.5s">
-                            <i class="fab fa-node-js"></i>
+                        <div class="badge frontend"
+                            style="--delay: 1.2s; --x-pos: -90px; --y-pos: -150px; --drift-x: 12px; --drift-y: 14px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                alt="CSS3" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 1s">
-                            <i class="fab fa-aws"></i>
+                        <div class="badge frontend"
+                            style="--delay: 1.8s; --x-pos: 50px; --y-pos: -160px; --drift-x: 16px; --drift-y: 12px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                alt="JavaScript" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 1.5s">
-                            <i class="fab fa-docker"></i>
+                        <div class="badge frontend"
+                            style="--delay: 2.3s; --x-pos: 140px; --y-pos: -120px; --drift-x: 14px; --drift-y: 18px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                                alt="TypeScript" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 2s">
-                            <i class="fab fa-js"></i>
+
+                        <!-- Second Layer - Common Frameworks/Libraries -->
+                        <div class="badge frontend"
+                            style="--delay: 1.0s; --x-pos: -180px; --y-pos: -160px; --drift-x: 18px; --drift-y: 15px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                alt="React" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 2.5s">
-                            <i class="fab fa-java"></i>
+                        <div class="badge frontend"
+                            style="--delay: 2.5s; --x-pos: -130px; --y-pos: -220px; --drift-x: 20px; --drift-y: 16px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                                alt="Next.js" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 3s">
-                            <i class="fab fa-angular"></i>
+                        <div class="badge frontend"
+                            style="--delay: 3.2s; --x-pos: 180px; --y-pos: -170px; --drift-x: 17px; --drift-y: 14px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
+                                alt="Angular" width="24" height="24" />
                         </div>
-                        <div class="badge" style="--delay: 3.5s">
-                            <i class="fab fa-github"></i>
+
+                        <!-- Backend Core -->
+                        <div class="badge backend"
+                            style="--delay: 1.5s; --x-pos: 170px; --y-pos: 50px; --drift-x: 16px; --drift-y: 12px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                                alt="Node.js" width="24" height="24" />
+                        </div>
+                        <div class="badge backend"
+                            style="--delay: 2.7s; --x-pos: 160px; --y-pos: 120px; --drift-x: 14px; --drift-y: 18px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                                alt="Express" width="24" height="24" />
+                        </div>
+                        <div class="badge backend"
+                            style="--delay: 3.4s; --x-pos: 110px; --y-pos: 170px; --drift-x: 18px; --drift-y: 16px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
+                                alt="NestJS" width="24" height="24" />
+                        </div>
+
+                        <!-- Programming Languages/Frameworks -->
+                        <div class="badge backend"
+                            style="--delay: 0.8s; --x-pos: -100px; --y-pos: 160px; --drift-x: 15px; --drift-y: 14px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                alt="Java" width="24" height="24" />
+                        </div>
+                        <div class="badge backend"
+                            style="--delay: 2.0s; --x-pos: -160px; --y-pos: 120px; --drift-x: 18px; --drift-y: 20px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
+                                alt="Spring" width="24" height="24" />
+                        </div>
+                        <div class="badge backend"
+                            style="--delay: 3.6s; --x-pos: -180px; --y-pos: 50px; --drift-x: 16px; --drift-y: 12px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
+                                alt="C#" width="24" height="24" />
+                        </div>
+
+                        <!-- Database badges (third layer) -->
+                        <div class="badge database"
+                            style="--delay: 0.7s; --x-pos: -210px; --y-pos: -80px; --drift-x: 20px; --drift-y: 16px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                alt="MySQL" width="24" height="24" />
+                        </div>
+                        <div class="badge database"
+                            style="--delay: 1.9s; --x-pos: -230px; --y-pos: 40px; --drift-x: 22px; --drift-y: 18px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                                alt="PostgreSQL" width="24" height="24" />
+                        </div>
+                        <div class="badge database"
+                            style="--delay: 3.1s; --x-pos: -190px; --y-pos: 140px; --drift-x: 19px; --drift-y: 15px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                                alt="MongoDB" width="24" height="24" />
+                        </div>
+                        <div class="badge database"
+                            style="--delay: 4.2s; --x-pos: -110px; --y-pos: 180px; --drift-x: 17px; --drift-y: 20px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+                                alt="Redis" width="24" height="24" />
+                        </div>
+
+                        <!-- DevOps & Cloud (outermost layer) -->
+                        <div class="badge cloud"
+                            style="--delay: 0.9s; --x-pos: -250px; --y-pos: -160px; --drift-x: 22px; --drift-y: 17px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                                alt="AWS" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 2.2s; --x-pos: -60px; --y-pos: -250px; --drift-x: 24px; --drift-y: 18px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                                alt="Azure" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 3.8s; --x-pos: 220px; --y-pos: -190px; --drift-x: 20px; --drift-y: 16px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
+                                alt="Google Cloud" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 1.3s; --x-pos: 250px; --y-pos: -80px; --drift-x: 25px; --drift-y: 15px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                alt="Docker" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 2.9s; --x-pos: 240px; --y-pos: 40px; --drift-x: 18px; --drift-y: 22px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                                alt="Kubernetes" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 4.4s; --x-pos: 210px; --y-pos: 160px; --drift-x: 21px; --drift-y: 19px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                alt="GitHub" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 3.5s; --x-pos: 140px; --y-pos: 230px; --drift-x: 19px; --drift-y: 16px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg"
+                                alt="GitLab" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 1.6s; --x-pos: 10px; --y-pos: 260px; --drift-x: 23px; --drift-y: 20px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                                alt="Jenkins" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 2.6s; --x-pos: -90px; --y-pos: 240px; --drift-x: 20px; --drift-y: 17px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg"
+                                alt="GitHub Actions" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 4.0s; --x-pos: -210px; --y-pos: 210px; --drift-x: 18px; --drift-y: 21px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
+                                alt="Kafka" width="24" height="24" />
+                        </div>
+                        <div class="badge cloud"
+                            style="--delay: 4.5s; --x-pos: -270px; --y-pos: 120px; --drift-x: 22px; --drift-y: 19px;">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"
+                                alt="Digital Ocean" width="24" height="24" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/gisioraelvis" target="_blank" aria-label="LinkedIn"><i
-                        class="fab fa-linkedin"></i></a>
-                <a href="https://x.com/gisioraelvis">
-                    <i class="fab fa-brands fa-square-x-twitter"></i>
+            <div class="social-links" aria-label="Social media links">
+                <a href="https://linkedin.com/in/gisioraelvis" target="_blank" aria-label="LinkedIn profile">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
                 </a>
-                <a href="https://github.com/gisioraelvis" target="_blank" aria-label="GitHub"><i
-                        class="fab fa-github"></i></a>
-                <a href="mailto:gisioraelvis20@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://x.com/gisioraelvis" target="_blank" aria-label="X (Twitter) profile">
+                    <i class="fab fa-brands fa-square-x-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/gisioraelvis" target="_blank" aria-label="GitHub profile">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="mailto:gisioraelvis20@gmail.com" aria-label="Email me">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </a>
             </div>
-            <div class="scroll-indicator">
+            <div class="scroll-indicator" aria-hidden="true">
                 <div class="mouse">
                     <div class="wheel"></div>
                 </div>
@@ -119,9 +263,9 @@
         <!-- About Section -->
         <section id="about" class="section">
             <div class="section-header">
-                <span class="section-number">01</span>
+                <span class="section-number" aria-hidden="true">01</span>
                 <h2 class="section-title">About Me</h2>
-                <div class="section-line"></div>
+                <div class="section-line" aria-hidden="true"></div>
             </div>
             <div class="about-content">
                 <p class="about-text">
@@ -131,21 +275,21 @@
                     collaboration, and leveraging Agile DevOps practices to ensure high system reliability.
                 </p>
                 <div class="about-cards">
-                    <div class="about-card">
-                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <article class="about-card">
+                        <div class="card-icon" aria-hidden="true"><i class="fas fa-code"></i></div>
                         <h3>Development</h3>
                         <p>Building scalable web applications with modern frameworks and best practices.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="card-icon"><i class="fas fa-server"></i></div>
+                    </article>
+                    <article class="about-card">
+                        <div class="card-icon" aria-hidden="true"><i class="fas fa-server"></i></div>
                         <h3>DevOps</h3>
                         <p>Setting up CI/CD pipelines and automated testing for reliable deployments.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                    </article>
+                    <article class="about-card">
+                        <div class="card-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
                         <h3>Collaboration</h3>
                         <p>Working with cross-functional teams to deliver efficient solutions.</p>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -153,14 +297,14 @@
         <!-- Experience Section -->
         <section id="experience" class="section" data-paginate="true">
             <div class="section-header">
-                <span class="section-number">02</span>
+                <span class="section-number" aria-hidden="true">02</span>
                 <h2 class="section-title">Experience</h2>
-                <div class="section-line"></div>
+                <div class="section-line" aria-hidden="true"></div>
             </div>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+            <div class="timeline" role="list">
+                <article class="timeline-item" role="listitem">
+                    <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-date">
                         <span>Aug 2023 - Present</span>
                     </div>
@@ -181,10 +325,10 @@
                                 site reliability.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                <article class="timeline-item" role="listitem">
+                    <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-date">
                         <span>Sept 2023 - Aug 2024</span>
                     </div>
@@ -203,10 +347,10 @@
                                 onboarding.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                <article class="timeline-item" role="listitem">
+                    <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-date">
                         <span>Jan 2023 - Jul 2023</span>
                     </div>
@@ -223,73 +367,114 @@
                                 effective solutions.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
+
+                <article class="timeline-item" role="listitem">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div class="timeline-date">
+                        <span>Apr 2020 - Jan 2023</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Web Developer</h3>
+                        <h4>Freelance</h4>
+                        <p class="location">Global (Remote) | Part-Time</p>
+                        <ul>
+                            <li>Designed and developed custom websites and web applications.</li>
+                            <li>Managed project timelines and client communications to deliver projects on
+                                time and within budget.</li>
+                            <li>Provided ongoing maintenance, troubleshooting, and performance
+                                optimizations for diverse clients.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="timeline-item" role="listitem">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div class="timeline-date">
+                        <span>Jan 2022 - Apr 2022</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Technical Writer</h3>
+                        <h4>Section.io</h4>
+                        <p class="location">Global (Remote) | Part-Time</p>
+                        <ul>
+                            <li>Authored technical documentation, tutorials, and articles on software
+                                development concepts and best practices.</li>
+                            <li>Conducted research and collaborated with subject matter experts to ensure
+                                content accuracy and relevance.</li>
+                            <li>Edited and refined materials for clarity, consistency, and adherence to
+                                editorial standards.</li>
+                            <li>Supported marketing efforts by creating engaging blogs, social media, and
+                                newsletter content.</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
         </section>
 
         <!-- Education Section -->
         <section id="education" class="section" data-paginate="true">
             <div class="section-header">
-                <span class="section-number">03</span>
+                <span class="section-number" aria-hidden="true">03</span>
                 <h2 class="section-title">Education</h2>
-                <div class="section-line"></div>
+                <div class="section-line" aria-hidden="true"></div>
             </div>
 
             <div class="education-container">
-                <div class="education-item">
+                <article class="education-item">
                     <div class="education-year">2018 - 2022</div>
                     <div class="education-content">
                         <h3>B.Sc. in Computer Science</h3>
                         <p>Egerton University, Kenya</p>
                         <p class="education-grade">Second Class Honours, Upper Division</p>
                     </div>
-                </div>
+                </article>
 
                 <div class="certifications-section">
                     <h3 class="certifications-title">Certifications & Awards</h3>
-                    <div class="certifications-grid">
-                        <div class="certification-item">
-                            <div class="certification-icon"><i class="fab fa-microsoft"></i></div>
+                    <div class="certifications-grid" role="list">
+                        <article class="certification-item" role="listitem">
+                            <div class="certification-icon" aria-hidden="true"><i class="fab fa-microsoft"></i></div>
                             <div class="certification-content">
                                 <h4>Azure Developer Associate</h4>
                                 <p>Microsoft</p>
                             </div>
-                        </div>
-                        <div class="certification-item">
-                            <div class="certification-icon"><i class="fab fa-microsoft"></i></div>
+                        </article>
+                        <article class="certification-item" role="listitem">
+                            <div class="certification-icon" aria-hidden="true"><i class="fab fa-microsoft"></i></div>
                             <div class="certification-content">
                                 <h4>Azure AI Fundamentals</h4>
                                 <p>Microsoft</p>
                             </div>
-                        </div>
-                        <div class="certification-item">
-                            <div class="certification-icon"><i class="fab fa-aws"></i></div>
+                        </article>
+                        <article class="certification-item" role="listitem">
+                            <div class="certification-icon" aria-hidden="true"><i class="fab fa-aws"></i></div>
                             <div class="certification-content">
                                 <h4>AWS Cloud Essentials</h4>
                                 <p>AWS</p>
                             </div>
-                        </div>
-                        <div class="certification-item">
-                            <div class="certification-icon"><i class="fab fa-google"></i></div>
+                        </article>
+                        <article class="certification-item" role="listitem">
+                            <div class="certification-icon" aria-hidden="true"><i class="fab fa-google"></i></div>
                             <div class="certification-content">
                                 <h4>Google Cloud Digital Leader</h4>
                                 <p>Google</p>
                             </div>
-                        </div>
-                        <div class="certification-item">
-                            <div class="certification-icon"><i class="fas fa-code"></i></div>
+                        </article>
+                        <article class="certification-item" role="listitem">
+                            <div class="certification-icon" aria-hidden="true"><i class="fas fa-code"></i></div>
                             <div class="certification-content">
                                 <h4>Full Stack Web Development</h4>
                                 <p>THE Jitu</p>
                             </div>
-                        </div>
-                        <div class="certification-item">
-                            <div class="certification-icon"><i class="fas fa-paper-plane"></i></div>
+                        </article>
+                        <article class="certification-item" role="listitem">
+                            <div class="certification-icon" aria-hidden="true"><i class="fas fa-paper-plane"></i></div>
                             <div class="certification-content">
                                 <h4>Postman APIs Expert</h4>
                                 <p>Postman</p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -298,139 +483,211 @@
         <!-- Skills Section -->
         <section id="skills" class="section">
             <div class="section-header">
-                <span class="section-number">04</span>
+                <span class="section-number" aria-hidden="true">04</span>
                 <h2 class="section-title">Skills</h2>
-                <div class="section-line"></div>
+                <div class="section-line" aria-hidden="true"></div>
             </div>
 
-            <div class="skills-table-container">
-                <table class="skills-table">
-                    <tr>
-                        <td valign="top">
-                            <h3>Languages & Frameworks</h3>
-                            <div class="skills-icons">
-                                <!-- Web Foundations -->
-                                <a href="#" title="HTML5"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg"
-                                        alt="html5" width="40" height="40" /></a>
-                                <a href="#" title="CSS3"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg"
-                                        alt="css3" width="40" height="40" /></a>
-                                <!-- JavaScript Ecosystem -->
-                                <a href="#" title="JavaScript"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
-                                        alt="javascript" width="40" height="40" /></a>
-                                <a href="#" title="TypeScript"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
-                                        alt="typescript" width="40" height="40" /></a>
-                                <a href="#" title="Node.js"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg"
-                                        alt="nodejs" width="40" height="40" /></a>
-                                <a href="#" title="Express.js"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg"
-                                        alt="express" width="40" height="40" /></a>
-                                <a href="#" title="NestJS"><img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg"
-                                        alt="nestjs" width="40" height="40" /></a>
-                                <a href="#" title="React"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
-                                        alt="react" width="40" height="40" /></a>
-                                <a href="#" title="Next.js"><img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
-                                        alt="nextjs" width="40" height="40" /></a>
-                                <a href="#" title="Angular"><img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
-                                        alt="angular" width="40" height="40" /></a>
-                                <!-- Java Ecosystem -->
-                                <a href="#" title="Java"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"
-                                        alt="java" width="40" height="40" /></a>
-                                <a href="#" title="Spring Boot"><img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
-                                        alt="spring" width="40" height="40" /></a>
-                                <!-- .NET Ecosystem -->
-                                <a href="#" title="C#"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg"
-                                        alt="csharp" width="40" height="40" /></a>
-                                <a href="#" title=".NET"><img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg"
-                                        alt="dotnet" width="40" height="40" /></a>
+            <div class="skills-container">
+                <!-- Tech Stack Subsection -->
+                <div class="skills-subsection">
+                    <h3 class="skills-subsection-title">Tech Stack</h3>
+
+                    <div class="skills-table-container">
+                        <div class="skills-table">
+                            <div class="skills-category" id="languages">
+                                <h3>Languages & Frameworks</h3>
+                                <div class="skills-icons">
+                                    <!-- Web Foundations -->
+                                    <a href="#" tabindex="-1" title="HTML5"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                            alt="HTML5" width="40" height="40" /></a>
+                                    <a href="#" title="CSS3"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                            alt="css3" width="40" height="40" /></a>
+                                    <!-- JavaScript Ecosystem -->
+                                    <a href="#" title="JavaScript"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                            alt="javascript" width="40" height="40" /></a>
+                                    <a href="#" title="TypeScript"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                                            alt="typescript" width="40" height="40" /></a>
+                                    <a href="#" title="Node.js"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                                            alt="nodejs" width="40" height="40" /></a>
+                                    <a href="#" title="Express.js"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                                            alt="express" width="40" height="40" /></a>
+                                    <a href="#" title="NestJS"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
+                                            alt="nestjs" width="40" height="40" /></a>
+                                    <a href="#" title="React"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                            alt="react" width="40" height="40" /></a>
+                                    <a href="#" title="Next.js"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                                            alt="nextjs" width="40" height="40" /></a>
+                                    <a href="#" title="Angular"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
+                                            alt="angular" width="40" height="40" /></a>
+                                    <!-- Java Ecosystem -->
+                                    <a href="#" title="Java"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                            alt="java" width="40" height="40" /></a>
+                                    <a href="#" title="Spring Boot"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
+                                            alt="spring" width="40" height="40" /></a>
+                                    <!-- .NET Ecosystem -->
+                                    <a href="#" title="C#"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
+                                            alt="csharp" width="40" height="40" /></a>
+                                    <a href="#" title=".NET"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg"
+                                            alt="dotnet" width="40" height="40" /></a>
+                                </div>
                             </div>
-                        </td>
-                        <td valign="top">
-                            <h3>Databases</h3>
-                            <div class="skills-icons">
-                                <a href="#" title="Microsoft SQL Server"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
-                                        alt="mssql" width="40" height="40" /></a>
-                                <a href="#" title="PostgreSQL"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg"
-                                        alt="postgresql" width="40" height="40" /></a>
-                                <a href="#" title="MySQL"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg"
-                                        alt="mysql" width="40" height="40" /></a>
-                                <a href="#" title="MongoDB"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg"
-                                        alt="mongodb" width="40" height="40" /></a>
-                                <a href="#" title="Redis"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg"
-                                        alt="redis" width="40" height="40" /></a>
+                            <div class="skills-category" id="databases">
+                                <h3>Databases</h3>
+                                <div class="skills-icons">
+                                    <a href="#" title="MySQL"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                            alt="mysql" width="40" height="40" /></a>
+                                    <a href="#" title="PostgreSQL"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                                            alt="postgresql" width="40" height="40" /></a>
+                                    <a href="#" title="SQLite"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
+                                            alt="sqlite" width="40" height="40" /></a>
+                                    <a href="#" title="Microsoft SQL Server"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
+                                            alt="mssql" width="40" height="40" /></a>
+                                    <a href="#" title="MongoDB"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                                            alt="mongodb" width="40" height="40" /></a>
+                                    <a href="#" title="Redis"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+                                            alt="redis" width="40" height="40" /></a>
+                                </div>
                             </div>
-                        </td>
-                        <td valign="top">
-                            <h3>Cloud & DevOps</h3>
-                            <div class="skills-icons">
-                                <a href="#" title="AWS"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-                                        alt="aws" width="40" height="40" /></a>
-                                <a href="#" title="Azure"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg"
-                                        alt="azure" width="40" height="40" /></a>
-                                <a href="#" title="GCP"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg"
-                                        alt="gcp" width="40" height="40" /></a>
-                                <a href="#" title="Docker"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg"
-                                        alt="docker" width="40" height="40" /></a>
-                                <a href="#" title="Kubernetes"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg"
-                                        alt="kubernetes" width="40" height="40" /></a>
-                                <a href="#" title="GitHub"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg"
-                                        alt="github" width="40" height="40" /></a>
-                                <a href="#" title="GitLab"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/gitlab/gitlab-original.svg"
-                                        alt="gitlab" width="40" height="40" /></a>
-                                <a href="#" title="Jenkins"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg"
-                                        alt="jenkins" width="40" height="40" /></a>
-                                <a href="#" title="Azure DevOps"><img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg"
-                                        alt="azuredevops" width="40" height="40" /></a>
-                                <a href="#" title="Jira"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jira/jira-original.svg"
-                                        alt="jira" width="40" height="40" /></a>
-                                <a href="#" title="Figma"><img
-                                        src="https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg"
-                                        alt="figma" width="40" height="40" /></a>
+                            <div class="skills-category" id="devops">
+                                <h3>Cloud & DevOps</h3>
+                                <div class="skills-icons">
+                                    <a href="#" title="AWS"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                                            alt="aws" width="40" height="40" /></a>
+                                    <a href="#" title="Azure"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                                            alt="azure" width="40" height="40" /></a>
+                                    <a href="#" title="GCP"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
+                                            alt="gcp" width="40" height="40" /></a>
+                                    <a href="#" title="Digital Ocean"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"
+                                            alt="digitalocean" width="40" height="40" /></a>
+                                    <a href="#" title="Docker"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                            alt="docker" width="40" height="40" /></a>
+                                    <a href="#" title="Kubernetes"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                                            alt="kubernetes" width="40" height="40" /></a>
+                                    <a href="#" title="GitHub"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                            alt="github" width="40" height="40" /></a>
+                                    <a href="#" title="GitHub Actions"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg"
+                                            alt="github actions" width="40" height="40" /></a>
+                                    <a href="#" title="GitLab"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg"
+                                            alt="gitlab" width="40" height="40" /></a>
+                                    <a href="#" title="Jenkins"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                                            alt="jenkins" width="40" height="40" /></a>
+                                    <a href="#" title="Azure DevOps"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuredevops/azuredevops-original.svg"
+                                            alt="azuredevops" width="40" height="40" /></a>
+                                    <a href="#" title="Jira"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg"
+                                            alt="jira" width="40" height="40" /></a>
+                                    <a href="#" title="Figma"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+                                            alt="figma" width="40" height="40" /></a>
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills Subsection -->
+                <div class="skills-subsection">
+                    <h3 class="skills-subsection-title">Soft Skills</h3>
+
+                    <div class="skills-table-container">
+                        <div class="soft-skills-grid">
+                            <div class="soft-skill-item">
+                                <div class="soft-skill-icon"><i class="fas fa-brain"></i></div>
+                                <div class="soft-skill-content">
+                                    <h4>Critical Thinking</h4>
+                                    <p>Analyzing situations from multiple perspectives to identify optimal solutions.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="soft-skill-item">
+                                <div class="soft-skill-icon"><i class="fas fa-puzzle-piece"></i></div>
+                                <div class="soft-skill-content">
+                                    <h4>Analytical Problem-Solving</h4>
+                                    <p>Breaking complex problems into manageable components to develop effective
+                                        solutions.</p>
+                                </div>
+                            </div>
+                            <div class="soft-skill-item">
+                                <div class="soft-skill-icon"><i class="fas fa-users"></i></div>
+                                <div class="soft-skill-content">
+                                    <h4>Teamwork</h4>
+                                    <p>Collaborating effectively with diverse teams to achieve common goals.</p>
+                                </div>
+                            </div>
+                            <div class="soft-skill-item">
+                                <div class="soft-skill-icon"><i class="fas fa-comments"></i></div>
+                                <div class="soft-skill-content">
+                                    <h4>Clear Communication</h4>
+                                    <p>Conveying complex technical concepts clearly to both technical and non-technical
+                                        stakeholders.</p>
+                                </div>
+                            </div>
+                            <div class="soft-skill-item">
+                                <div class="soft-skill-icon"><i class="fas fa-sync-alt"></i></div>
+                                <div class="soft-skill-content">
+                                    <h4>Adaptability</h4>
+                                    <p>Quickly adjusting to changing requirements, technologies, and environments.</p>
+                                </div>
+                            </div>
+                            <div class="soft-skill-item">
+                                <div class="soft-skill-icon"><i class="fas fa-lightbulb"></i></div>
+                                <div class="soft-skill-content">
+                                    <h4>Creative Problem-Solving</h4>
+                                    <p>Finding innovative solutions to complex technical challenges and business
+                                        requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects" class="section" data-paginate="true">
             <div class="section-header">
-                <span class="section-number">05</span>
+                <span class="section-number" aria-hidden="true">05</span>
                 <h2 class="section-title">Projects</h2>
-                <div class="section-line"></div>
+                <div class="section-line" aria-hidden="true"></div>
             </div>
 
-            <div id="github-projects" class="projects-grid">
+            <div id="github-projects" class="projects-grid" role="list" aria-live="polite">
                 <div class="loading-container">
-                    <div class="loading-spinner">
+                    <div class="loading-spinner" role="status" aria-label="Loading projects">
                         <div class="spinner"></div>
                     </div>
                     <p>Fetching projects...</p>
@@ -441,47 +698,46 @@
         <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="section-header">
-                <span class="section-number">06</span>
+                <span class="section-number" aria-hidden="true">06</span>
                 <h2 class="section-title">Let's Connect</h2>
-                <div class="section-line"></div>
+                <div class="section-line" aria-hidden="true"></div>
             </div>
 
             <div class="contact-container">
                 <div class="contact-card">
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <article class="contact-item">
+                        <div class="contact-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
                         <div class="contact-info">
-                            <h3>Email</h3>
-                            <a href="mailto:gisioraelvis20@gmail.com">gisioraelvis20@gmail.com</a>
+                            <h3 id="email-heading">Email</h3>
+                            <a href="mailto:gisioraelvis20@gmail.com"
+                                aria-labelledby="email-heading">gisioraelvis20@gmail.com</a>
                         </div>
-                    </div>
+                    </article>
 
-
-
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                    <article class="contact-item">
+                        <div class="contact-icon" aria-hidden="true"><i class="fab fa-linkedin"></i></div>
                         <div class="contact-info">
-                            <h3>LinkedIn</h3>
-                            <a href="https://linkedin.com/in/gisioraelvis"
-                                target="_blank">linkedin.com/in/gisioraelvis</a>
+                            <h3 id="linkedin-heading">LinkedIn</h3>
+                            <a href="https://linkedin.com/in/gisioraelvis" target="_blank"
+                                aria-labelledby="linkedin-heading">linkedin.com/in/gisioraelvis</a>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <p>&copy; 2025 Elvis Gisiora. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="#hero">Back to top</a>
-                </div>
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; <span id="copyright-year"></span> Elvis Gisiora. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#hero">Back to top</a>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 
 </html>
