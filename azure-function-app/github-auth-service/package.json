@@ -1,0 +1,12 @@
+{
+  "name": "github-auth-service",
+  "version": "1.0.0",
+  "description": "Azure Functions app for GitHub authentication",
+  "main": "src/functions/getGithubToken/index.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
