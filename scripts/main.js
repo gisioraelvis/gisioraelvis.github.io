@@ -7,6 +7,7 @@ import { UIEffects } from "./modules/ui-effects.js";
 import { AnimationController } from "./modules/animation.js";
 import { ContentExpander } from "./modules/content.js";
 import { GitHubProjects } from "./modules/github-projects.js";
+import { SEO } from "./modules/seo.js";
 import { Utils } from "./utils/utils.js";
 
 /**
@@ -19,10 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   AnimationController.init();
   ContentExpander.init();
   GitHubProjects.init();
-
-  // Set copyright year
+  SEO.init();
   Utils.setCopyrightYear();
-
-  // Log initialization complete
   Utils.log("Website initialization complete", "info");
 });
