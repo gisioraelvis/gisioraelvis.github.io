@@ -28,6 +28,9 @@ export const ContentExpander = {
       CONFIG.showMore.initialItems.projects,
       "projects"
     );
+
+    // Initialize soft skills toggle
+    this.initSoftSkillsToggle();
   },
 
   /**
@@ -103,6 +106,39 @@ export const ContentExpander = {
             block: "end",
           });
         }
+      }
+    });
+  },
+
+  /**
+   * Initialize toggle functionality for soft skills section
+   */
+  initSoftSkillsToggle() {
+    const toggleBtn = document.getElementById("soft-skills-toggle");
+    if (!toggleBtn) return;
+
+    let isExpanded = false;
+    const hiddenItems = document.querySelectorAll(
+      ".soft-skill-item.hidden-item"
+    );
+
+    toggleBtn.addEventListener("click", () => {
+      isExpanded = !isExpanded;
+
+      hiddenItems.forEach((item) => {
+        if (isExpanded) {
+          item.classList.remove("hidden-item");
+          item.classList.add("show-item");
+        } else {
+          item.classList.remove("show-item");
+          item.classList.add("hidden-item");
+        }
+      });
+
+      if (isExpanded) {
+        toggleBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+      } else {
+        toggleBtn.innerHTML = 'Show More <i class="fas fa-chevron-down"></i>';
       }
     });
   },
