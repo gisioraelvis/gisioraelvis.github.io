@@ -1,15 +1,45 @@
-/* Skills Styles */
+/* Skills Styles - Enhanced Version */
 .skills-table-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .skills-table {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(320px, 1fr)
+  ); /* Slightly smaller for better fit */
+  gap: 2rem; /* Reduced from 2.5rem */
+}
+
+/* Main Category Styling */
+.skills-main-category {
+  margin-bottom: 2.5rem; /* Reduced from 3.5rem */
+  width: 100%;
+}
+
+.skills-main-heading {
+  font-size: var(--font-size-xxl);
+  margin-bottom: 2rem;
+  position: relative;
+  color: var(--primary-color);
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.skills-main-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 10%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
 }
 
 .skills-category {
@@ -17,15 +47,27 @@
   border: 1px solid var(--card-border);
   border-radius: var(--border-radius);
   padding: var(--space-xl);
-  transition: transform var(--transition-fast),
-    box-shadow var(--transition-fast);
-  margin-bottom: 2rem;
+  transition: all var(--transition-medium);
+  margin-bottom: 0;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Enhanced category styling */
+.skills-category::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  opacity: 0.8;
 }
 
 .skills-category:hover {
-  transform: translateY(-5px);
+  transform: translateY(-7px);
   box-shadow: var(--shadow);
 }
 
@@ -34,12 +76,17 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   background: var(--accent-color);
   opacity: 0.05;
   clip-path: polygon(0 0, 100% 0, 100% 100%);
   z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skills-category:hover::after {
+  opacity: 0.1;
 }
 
 .skills-category h3 {
@@ -47,93 +94,255 @@
   margin-bottom: var(--space-lg);
   font-size: var(--font-size-xl);
   color: var(--primary-color);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 8px;
 }
 
+.skills-category h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+/* Skills Heading Icons */
+.skills-main-heading i,
+.skills-category h3 i {
+  margin-right: 0.5rem;
+  color: var(--accent-color);
+}
+
+/* Simplified skill icons */
 .skills-icons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .skills-icons a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  padding: var(--space-sm);
+  width: 65px;
+  height: 65px;
+  padding: var(--space-xs);
   border-radius: 8px;
-  background-color: var(--bg-color-secondary);
+  background-color: transparent; /* Remove background to preserve brand identity */
   border: 1px solid var(--card-border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease,
-    background-color 0.3s ease;
+  transition: all 0.25s ease-out;
   position: relative;
   overflow: hidden;
 }
 
-/* Add proficiency meter on hover */
+/* Enhanced proficiency indicators */
 .skills-icons a::before {
   content: attr(title);
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 2px 0;
-  background-color: var(--primary-color);
+  padding: 4px 0; /* Slightly more padding */
+  background-color: rgba(var(--primary-color-rgb), 0.85);
   color: var(--text-on-dark);
-  font-size: 10px;
+  font-size: 11px; /* Slightly larger for better readability */
   text-align: center;
   transform: translateY(100%);
   transition: transform 0.2s ease-out;
   z-index: 1;
+  letter-spacing: 0.2px; /* Improved letter spacing for readability */
+  border-radius: 0 0 4px 4px; /* Rounded corners on bottom */
 }
 
+/* Change background color to border bottom for expertise level */
+.skills-icons a[title*="90%"]::after {
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  height: 4px;
+  box-shadow: 0 0 6px rgba(var(--primary-color-rgb), 0.3); /* Subtle glow effect */
+}
+
+.skills-icons a[title*="85%"]::after {
+  background: var(--primary-color);
+  height: 4px;
+}
+
+.skills-icons a[title*="80%"]::after {
+  background: var(--accent-color);
+  height: 3px;
+}
+
+.skills-icons a[title*="75%"]::after {
+  background: linear-gradient(
+    90deg,
+    var(--accent-color),
+    var(--secondary-color)
+  );
+  height: 3px;
+}
+
+.skills-icons a[title*="70%"]::after {
+  background: var(--secondary-color);
+  height: 2px;
+}
+
+.skills-icons a[title*="65%"]::after,
+.skills-icons a[title*="60%"]::after {
+  background: linear-gradient(
+    90deg,
+    var(--secondary-color),
+    var(--text-secondary)
+  );
+  height: 2px;
+}
+
+/* Remove background color styles that affect brand identity */
+.skills-icons a[title*="90%"],
+.skills-icons a[title*="85%"],
+.skills-icons a[title*="80%"],
+.skills-icons a[title*="75%"],
+.skills-icons a[title*="70%"],
+.skills-icons a[title*="65%"],
+.skills-icons a[title*="60%"] {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Improved hover indicators for skill proficiency levels */
 .skills-icons a:hover::before,
 .skills-icons a:focus::before {
   transform: translateY(0);
+  background-color: rgba(
+    var(--primary-color-rgb),
+    0.95
+  ); /* Increased opacity for better contrast */
+  font-weight: 500; /* Make text slightly bolder */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25); /* Add shadow for better visibility */
+  letter-spacing: 0.3px; /* Improved readability */
 }
 
 .skills-icons a:hover,
 .skills-icons a:focus {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for better visibility */
+  border-color: var(--accent-color);
+  z-index: 2; /* Ensure hovering items are above others */
 }
 
-/* Proficiency background indicators */
-.skills-icons a[title*="90%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.15);
-}
-
-.skills-icons a[title*="85%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.12);
-}
-
-.skills-icons a[title*="80%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.09);
-}
-
-.skills-icons a[title*="75%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.07);
-}
-
-.skills-icons a[title*="70%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.05);
-}
-
-.skills-icons a[title*="65%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.04);
-}
-
-.skills-icons a[title*="60%"] {
-  background-color: rgba(var(--primary-color-rgb), 0.03);
-}
-
+/* Preserve original icon appearance */
 .skills-icons img {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  transition: transform 0.2s ease;
+  filter: none; /* Remove any filters that might affect brand colors */
+}
+
+.skills-icons a:hover img {
+  transform: scale(1.1);
+}
+
+/* Update legend to match new indicator style */
+.skills-legend-color.expert {
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+}
+
+.skills-legend-color.advanced {
+  background-color: var(--primary-color);
+}
+
+.skills-legend-color.intermediate {
+  background-color: var(--secondary-color);
+}
+
+.skills-legend-color.beginner {
+  background-color: var(--text-secondary);
+}
+
+/* Add skill level legend */
+.skills-legend {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0 2rem; /* Reduced top margin */
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.skills-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.skills-legend-color {
+  width: 20px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* Improved responsive adjustments */
+@media (max-width: 1200px) {
+  .skills-table {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem; /* Reduced gap */
+  }
+}
+
+@media (max-width: 992px) {
+  .skills-table {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .skills-category {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-icons {
+    gap: 0.85rem; /* Slightly reduced from 1rem */
+  }
+
+  .skills-icons a {
+    width: 62px; /* Slightly reduced from 65px */
+    height: 62px; /* Slightly reduced from 65px */
+  }
+
+  .skills-icons img {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-icons {
+    gap: 0.6rem; /* Further reduced gap */
+  }
+
+  .skills-icons a {
+    width: 52px; /* Further reduced from 60px */
+    height: 52px; /* Further reduced from 60px */
+    padding: var(--space-xs);
+  }
+
+  .skills-icons img {
+    width: 28px; /* Further reduced from 32px */
+    height: 28px; /* Further reduced from 32px */
+  }
+
+  .skills-legend {
+    margin: 1rem 0 1.5rem; /* Further reduced margin */
+    gap: 0.75rem; /* Further reduced gap */
+  }
 }
 
 /* Dark mode adjustments for icons */
@@ -371,5 +580,28 @@
   .skills-icons img {
     width: 30px;
     height: 30px;
+  }
+}
+
+/* Responsive adjustments for main categories */
+@media (max-width: 992px) {
+  .skills-main-heading {
+    font-size: var(--font-size-xl);
+    margin-bottom: 1.25rem; /* Reduced from 1.5rem */
+  }
+
+  .skills-main-category {
+    margin-bottom: 2rem; /* Reduced from 2.5rem */
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-main-heading {
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem; /* Reduced from 1.25rem */
+  }
+
+  .skills-main-category {
+    margin-bottom: 1.75rem; /* Reduced from 2rem */
   }
 }
