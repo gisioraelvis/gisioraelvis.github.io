@@ -1,5 +1,5 @@
 > [!NOTE]
-> Goes into a [special repo](https://github.com/gisioraelvis/gisioraelvis.git) that appears on my github profile!
+> Goes into the [special repo](https://github.com/gisioraelvis/gisioraelvis.git) that appears on my github profile!
 
 <img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=gisioraelvis.gisioraelvis">
 
