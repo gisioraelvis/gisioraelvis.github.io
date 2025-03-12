@@ -1,5 +1,5 @@
 > [!NOTE]
-> This is a special README.md that will appear on my github(gisioraelvis/gisioraelvis repository) profile!
+> Goes into a [special repo](https://github.com/gisioraelvis/gisioraelvis.git) that appears on my github profile!
 
 <img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=gisioraelvis.gisioraelvis">
 
