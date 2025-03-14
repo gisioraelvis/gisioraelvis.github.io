@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "github-profile/README.md"
-  # Manual trigger for testing
+  # Manual trigger
   workflow_dispatch:
 
 jobs:
