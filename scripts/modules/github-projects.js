@@ -409,3 +409,9 @@ export const GitHubProjects = {
     return colors[language] || "#8257e5"; // Default purple color if not found
   },
 };
+
+
+/* Refactor the projects section to:
+First, fetch the pinned repos, then the algorithmically determined repos excluding any if they are already in the pinned repos. The View More project on GitHub should only show after the show/less button. Feel free to design/style the section better. In the process ensure the most optimal implementation/design/styling and any security considerations. 
+
+Add an equivalent show more/less to the projects when they exceed 6 and then view more on GitHub */
