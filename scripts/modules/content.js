@@ -29,8 +29,13 @@ export const ContentExpander = {
       "projects"
     );
 
-    // Initialize soft skills toggle
-    this.initSoftSkillsToggle();
+    // Add soft skills to the standard pattern
+    this.addShowMoreFunctionality(
+      ".soft-skills-grid",
+      ".soft-skill-item",
+      CONFIG.showMore.initialItems.softSkills,
+      "skills"
+    );
   },
 
   /**
@@ -61,6 +66,9 @@ export const ContentExpander = {
       buttonContainer = document.createElement("div");
       buttonContainer.className = "show-more-container";
       container.parentNode.insertBefore(buttonContainer, container.nextSibling);
+    } else {
+      // Clear any existing content in button container
+      buttonContainer.innerHTML = "";
     }
 
     // Create show more button
@@ -74,6 +82,9 @@ export const ContentExpander = {
     items.forEach((item, index) => {
       if (index >= initialCount) {
         item.classList.add("hidden-item");
+      } else {
+        // Remove hidden-item class for items that should be initially visible
+        item.classList.remove("hidden-item");
       }
     });
 
@@ -110,36 +121,5 @@ export const ContentExpander = {
     });
   },
 
-  /**
-   * Initialize toggle functionality for soft skills section
-   */
-  initSoftSkillsToggle() {
-    const toggleBtn = document.getElementById("soft-skills-toggle");
-    if (!toggleBtn) return;
-
-    let isExpanded = false;
-    const hiddenItems = document.querySelectorAll(
-      ".soft-skill-item.hidden-item"
-    );
-
-    toggleBtn.addEventListener("click", () => {
-      isExpanded = !isExpanded;
-
-      hiddenItems.forEach((item) => {
-        if (isExpanded) {
-          item.classList.remove("hidden-item");
-          item.classList.add("show-item");
-        } else {
-          item.classList.remove("show-item");
-          item.classList.add("hidden-item");
-        }
-      });
-
-      if (isExpanded) {
-        toggleBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
-      } else {
-        toggleBtn.innerHTML = 'Show More <i class="fas fa-chevron-down"></i>';
-      }
-    });
-  },
+  // Remove initSoftSkillsToggle() method as it's now redundant
 };

@@ -35,6 +35,7 @@ export const CONFIG = {
       experience: 2, // Initial number of timeline items to show
       education: 6, // Initial number of certification items to show
       projects: 4, // Initial number of project items to show
+      softSkills: 6, // Initial number of soft skills to show
     },
   },
   // SEO configuration and structured data
