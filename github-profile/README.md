@@ -7,145 +7,74 @@
 
 > Software Engineer | Full-Stack Developer | Cloud Architect
 
-## 🔧 Expert At
+<summary>🔧 <b>Expert At</b></summary>
+<br>
 
-- 🚀 Developing full-stack web applications with modern frameworks and libraries  
-- ☁️ Architecting and managing cloud infrastructure across multiple service providers  
-- 🔌 Designing robust API ecosystems with comprehensive documentation and security  
-- 🧪 Implementing end-to-end testing strategies across all application layers  
-- 🔄 Building automated CI/CD workflows for efficient software delivery  
-- 📱 Creating responsive, accessible, and performant user interfaces  
+- 🚀 Developing full-stack web applications with modern frameworks and libraries
+- ☁️ Architecting and managing cloud infrastructure across multiple service providers
+- 🔌 Designing robust API ecosystems with comprehensive documentation and security
+- 🧪 Implementing end-to-end testing strategies across all application layers
+- 🔄 Building automated CI/CD workflows for efficient software delivery
+- 📱 Creating responsive, accessible, and performant user interfaces
 - 💾 Working with both SQL and NoSQL database systems for optimal data management
 
-## 📚 Currently Learning
-
+<details>
+<summary>📚 <b>Currently Learning</b></summary>
+<br>
 I'm focused on Solutions Architecture and Systems Scalability and Availability.
 
-- 🏗️ Enterprise-level architectural patterns for distributed systems  
-- ☁️ Multi-cloud deployment strategies and best practices  
-- 🔄 High-availability design patterns for mission-critical applications  
-- 🧩 Microservices orchestration at scale  
+- 🏗️ Enterprise-level architectural patterns for distributed systems
+- ☁️ Multi-cloud deployment strategies and best practices
+- 🔄 High-availability design patterns for mission-critical applications
+- 🧩 Microservices orchestration at scale
 - 💰 Cloud cost optimization and resource governance
+</details>
 
-## 🛠️ Tech Stack
+<details open>
+<summary> 🛠️ <b>Tech Stack</b></summary>
+<br>
+<summary>🌐 <b>Frontend</b></summary>
+<img src="https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white" />
+<img src="https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3" />
+<img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />
+<img src="https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" />
+<img src="https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black" />
+<img src="https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js" />
+<img src="https://img.shields.io/badge/-Angular-DD0031?style=flat&logo=angular" />
+<img src="https://img.shields.io/badge/-Tailwind-06B6D4?style=flat&logo=tailwindcss&logoColor=white" />
 
-<table style="width:100%; table-layout:fixed">
-  <tr>
-    <th align="center" colspan="2">💻 Core Development</th>
-    <th align="center">⚙️ Operations & Infrastructure</th>
-  </tr>
-  <tr>
-    <td valign="top" width="33%">
-      <h3 align="center">🌐 Frontend </h3>
-      <div align="center" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px">
-        <!-- Web Foundations -->
-        <a href="#" title="HTML5 - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="html5" width="40" height="40"/></a>
-        <a href="#" title="CSS3 - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="css3" width="40" height="40"/></a>
-        <a href="#" title="JavaScript - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/></a>
-        <a href="#" title="TypeScript - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/></a>
-        <a href="#" title="React - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="react" width="40" height="40"/></a>
-        <a href="#" title="React Router - 85%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" alt="react router" width="40" height="40"/></a>
-        <a href="#" title="Redux - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/></a>
-        <a href="#" title="Next.js - 85%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="nextjs" width="40" height="40"/></a>
-        <a href="#" title="Angular - 75%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" alt="angular" width="40" height="40"/></a>
-        <a href="#" title="Tailwind CSS - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" alt="tailwindcss" width="40" height="40"/></a>
-        <a href="#" title="Material UI - 80%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg" alt="materialui" width="40" height="40"/></a>
-        <a href="#" title="PWA - 80%"><img src="https://raw.githubusercontent.com/webmaxru/progressive-web-apps-logo/master/pwalogo.svg" alt="pwa" width="40" height="40"/></a>
-        <a href="#" title="Flutter - 60%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg" alt="flutter" width="40" height="40"/></a>
-      </div>
-    </td>
-    <td valign="top" width="33%">
-      <h3 align="center">🔌 Backend & APIs</h3>
-      <div align="center" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px">
-        <!-- JS/TS Ecosystem (Primary) -->
-        <a href="#" title="Node.js - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" alt="nodejs" width="40" height="40"/></a>
-        <a href="#" title="Express.js - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" alt="express" width="40" height="40"/></a>
-        <a href="#" title="NestJS - 85%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg" alt="nestjs" width="40" height="40"/></a>
-        <!-- Java Ecosystem (Mid-level) -->
-        <a href="#" title="Java - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/></a>
-        <a href="#" title="Spring Boot - 70%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="spring" width="40" height="40"/></a>
-        <!-- .NET Ecosystem (Mid-level) -->
-        <a href="#" title="C# - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/></a>
-        <a href="#" title=".NET - 75%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg" alt="dotnet" width="40" height="40"/></a>
-        <!-- Messaging -->
-        <a href="#" title="Kafka - 70%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachekafka/apachekafka-original.svg" alt="kafka" width="40" height="40"/></a>
-        <!-- API Documentation -->
-        <a href="#" title="Swagger/OpenAPI - 85%"><img src="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png" alt="swagger" width="40" height="40"/></a>
-        <a href="#" title="GraphQL - 65%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/graphql/graphql-plain.svg" alt="graphql" width="40" height="40"/></a>
-      </div>
-    </td>
-    <td valign="top" width="33%">
-      <h3 align="center">☁️ Cloud & DevOps</h3>
-      <div align="center" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px">
-        <!-- Cloud Platforms -->
-        <a href="#" title="Azure - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg" alt="azure" width="40" height="40"/></a>
-        <a href="#" title="AWS - 80%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/></a>
-        <a href="#" title="GCP - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg" alt="gcp" width="40" height="40"/></a>
-        <a href="#" title="Vercel - 80%"><img src="https://cdn.worldvectorlogo.com/logos/vercel.svg" alt="vercel" width="40" height="40"/></a>
-        <a href="#" title="Digital Ocean - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg" alt="digital ocean" width="40" height="40"/></a>
-        <!-- Containerization -->
-        <a href="#" title="Docker - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="docker" width="40" height="40"/></a>
-        <a href="#" title="Kubernetes - 70%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg" alt="kubernetes" width="40" height="40"/></a>
-        <a href="#" title="OpenShift - 65%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redhat/redhat-original.svg" alt="openshift" width="40" height="40"/></a>
-        <!-- CI/CD -->
-        <a href="#" title="GitHub - 90%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github" width="40" height="40"/></a>
-        <a href="#" title="GitHub Actions - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="github actions" width="40" height="40"/></a>
-        <a href="#" title="Azure DevOps - 80%"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg" alt="azure devops" width="40" height="40"/></a>
-        <a href="#" title="Jenkins - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg" alt="jenkins" width="40" height="40"/></a>
-        <a href="#" title="Terraform - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg" alt="terraform" width="40" height="40"/></a>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" width="33%">
-      <h3 align="center">🧪 Testing & QA</h3>
-      <div align="center" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px">
-        <!-- JavaScript Testing (Primary) -->
-        <a href="#" title="Jest - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jest/jest-plain.svg" alt="jest" width="40" height="40"/></a>
-        <a href="#" title="Cypress - 80%"><img src="https://raw.githubusercontent.com/cypress-io/cypress-icons/master/src/logo/cypress-io-logo-round.svg" alt="cypress" width="40" height="40"/></a>
-        <a href="#" title="Playwright - 80%"><img src="https://playwright.dev/img/playwright-logo.svg" alt="playwright" width="40" height="40"/></a>
-        <!-- .NET Testing (Mid-level) -->
-        <a href="#" title="xUnit - 75%"><img src="https://avatars.githubusercontent.com/u/2092016?s=200&v=4" alt="xunit" width="40" height="40"/></a>
-        <a href="#" title="NUnit - 75%"><img src="https://www.nuget.org/profiles/nunit/avatar?imageSize=512" alt="nunit" width="40" height="40"/></a>
-        <!-- Java Testing (Mid-level) -->
-        <a href="#" title="JUnit - 75%"><img src="https://avatars.githubusercontent.com/u/874086?s=200&v=4" alt="junit" width="40" height="40"/></a>
-        <a href="#" title="Mockito - 70%"><img src="https://raw.githubusercontent.com/mockito/mockito.github.io/master/img/logo.png" alt="mockito" width="40" height="40"/></a>
-        <!-- API Testing -->
-        <a href="#" title="Postman - 90%"><img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/></a>
-        <!-- Performance Testing -->
-        <a href="#" title="Artillery - 75%"><img src="https://avatars.githubusercontent.com/u/12608521" alt="artillery" width="40" height="40"/></a>
-        <a href="#" title="JMeter - 65%"><img src="https://jmeter.apache.org/images/jmeter_square.svg" alt="jmeter" width="40" height="40"/></a>
-      </div>
-    </td>
-    <td valign="top" width="33%">
-      <h3 align="center">💾 Data & Storage</h3>
-      <div align="center" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px">
-        <!-- SQL -->
-        <a href="#" title="Microsoft SQL Server - 80%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="mssql" width="40" height="40"/></a>
-        <a href="#" title="PostgreSQL - 80%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="postgresql" width="40" height="40"/></a>
-        <a href="#" title="MySQL - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="mysql" width="40" height="40"/></a>
-        <!-- NoSQL -->
-        <a href="#" title="MongoDB - 85%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="mongodb" width="40" height="40"/></a>
-        <a href="#" title="Redis - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg" alt="redis" width="40" height="40"/></a>
-        <!-- Hosting & BaaS -->
-        <a href="#" title="Firebase - 80%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" alt="firebase" width="40" height="40"/></a>
-        <!-- ORM/Data Access -->
-        <a href="#" title="Prisma - 80%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/prisma/prisma-original.svg" alt="prisma" width="40" height="40"/></a>
-      </div>
-    </td>
-    <td valign="top" width="33%">
-      <h3 align="center">📊 Observability & Analytics</h3>
-      <div align="center" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px">
-        <!-- Monitoring -->
-        <a href="#" title="Grafana - 75%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/grafana/grafana-original.svg" alt="grafana" width="40" height="40"/></a>
-        <a href="#" title="Prometheus - 70%"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/prometheus/prometheus-original.svg" alt="prometheus" width="40" height="40"/></a>
-        <!-- Analytics -->
-        <a href="#" title="Google Analytics - 80%"><img src="https://www.vectorlogo.zone/logos/google_analytics/google_analytics-icon.svg" alt="google analytics" width="40" height="40"/></a>
-        <a href="#" title="Microsoft Clarity - 75%"><img src="https://raw.githubusercontent.com/gisioraelvis/gisioraelvis/refs/heads/v1/assets/images/tech/microsoft-clarity.jpg" alt="microsoft clarity" width="40" height="40"/></a>
-        <!-- Logging -->
-        <a href="#" title="ELK Stack - 65%"><img src="https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg" alt="elk stack" width="40" height="40"/></a>
-        <a href="#" title="Datadog - 60%"><img src="https://imgix.datadoghq.com/img/dd_logo_70x75.png" alt="datadog" width="40" height="40"/></a>
-      </div>
-    </td>
-  </tr>
-</table>
+<summary>🚀 <b>Backend</b></summary>
+<img src="https://img.shields.io/badge/-Node.js-339933?style=flat&logo=node.js&logoColor=white" />
+<img src="https://img.shields.io/badge/-Express-000000?style=flat&logo=express" />
+<img src="https://img.shields.io/badge/-NestJS-E0234E?style=flat&logo=nestjs&logoColor=white" />
+<img src="https://img.shields.io/badge/-Java-007396?style=flat&logo=java&logoColor=white" />
+<img src="https://img.shields.io/badge/-Spring-6DB33F?style=flat&logo=spring&logoColor=white" />
+<img src="https://img.shields.io/badge/-C%23-239120?style=flat&logo=csharp&logoColor=white" />
+<img src="https://img.shields.io/badge/-.NET-512BD4?style=flat&logo=dotnet" />
+
+<summary>💾 <b>Databases</b></summary>
+<img src="https://img.shields.io/badge/-MongoDB-47A248?style=flat&logo=mongodb&logoColor=white" />
+<img src="https://img.shields.io/badge/-PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white" />
+<img src="https://img.shields.io/badge/-MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />
+<img src="https://img.shields.io/badge/-SQL_Server-CC2927?style=flat&logo=microsoftsqlserver&logoColor=white" />
+<img src="https://img.shields.io/badge/-SQLite-003B57?style=flat&logo=sqlite&logoColor=white" />
+<img src="https://img.shields.io/badge/-Redis-DC382D?style=flat&logo=redis&logoColor=white" />
+
+<!-- Testing -->
+<summary>🧪 <b>Testing</b></summary>
+<img src="https://img.shields.io/badge/-Jest-C21325?style=flat&logo=jest&logoColor=white" />
+<img src="https://img.shields.io/badge/-JUnit-25A162?style=flat&logo=junit5&logoColor=white" />
+<img src="https://img.shields.io/badge/-Cypress-17202C?style=flat&logo=cypress&logoColor=white" />
+<img src="https://img.shields.io/badge/-Playwright-2EAD33?style=flat&logo=playwright&logoColor=white" />
+<img src="https://img.shields.io/badge/-Postman-FF6C37?style=flat&logo=postman&logoColor=white" />
+
+<summary>⚙️ <b>DevOps & Cloud</b></summary>
+<img src="https://img.shields.io/badge/-Azure-0078D4?style=flat&logo=microsoftazure" />
+<img src="https://img.shields.io/badge/-AWS-232F3E?style=flat&logo=amazonaws" />
+<img src="https://img.shields.io/badge/-GCP-4285F4?style=flat&logo=googlecloud&logoColor=white" />
+<img src="https://img.shields.io/badge/-Docker-2496ED?style=flat&logo=docker&logoColor=white" />
+<img src="https://img.shields.io/badge/-Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white" />
+<img src="https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat&logo=githubactions&logoColor=white" />
+<img src="https://img.shields.io/badge/-Azure_DevOps-0078D7?style=flat&logo=azuredevops&logoColor=white" />
+<img src="https://img.shields.io/badge/-Terraform-7B42BC?style=flat&logo=terraform&logoColor=white" />
+</details>
