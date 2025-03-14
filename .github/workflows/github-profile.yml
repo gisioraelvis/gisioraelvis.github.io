@@ -15,9 +15,6 @@ jobs:
         with:
           fetch-depth: 0 # Ensure full history
 
-      - name: Fetch Full History
-        run: git fetch --unshallow
-
       - name: Detect README Changes
         id: check_readme
         run: |
