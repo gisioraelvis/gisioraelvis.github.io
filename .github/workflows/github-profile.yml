@@ -2,49 +2,66 @@ name: Update GitHub Profile Repo
 
 on:
   push:
-    branches: [ main ]  # Trigger only on main branch changes
+    branches:
+      - main
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the Portfolio Repo (Source)
       - name: Checkout Portfolio Repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensure we get all history
+          fetch-depth: 0 # Ensure full history
 
-      # 2. Set up Git for committing changes
+      - name: Fetch Full History
+        run: git fetch --unshallow
+
+      - name: Detect README Changes
+        id: check_readme
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q "github-profile/README.md"; then
+            echo "README_CHANGED=true" >> $GITHUB_ENV
+          else
+            echo "README_CHANGED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Exit if README not changed
+        if: env.README_CHANGED == 'false'
+        run: echo "No README changes detected, skipping profile update." && exit 0
+
       - name: Set Up Git
         run: |
           git config --global user.email "ci-bot@example.com"
           git config --global user.name "CI Bot"
 
-      # 3. Clone the GitHub Profile Repo (Target)
       - name: Clone GitHub Profile Repo
         run: |
           git clone "${{ secrets.REPO_GITHUB_PROFILE_URL }}" profile_repo
 
-      # 4. Copy the github-profile folder's content to the root of the Profile Repo
       - name: Sync GitHub Profile Content
         run: |
           rsync -av --delete github-profile/ profile_repo/
 
-      # 5. Remove the unwanted note from README.md
       - name: Clean Up README
         run: |
           sed -i '/^> \[!NOTE\]/{N;d;}' profile_repo/README.md
 
-      # 6. Check for changes and push if necessary
+      - name: Check for Uncommitted Changes
+        run: |
+          cd profile_repo
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          else
+            echo "Changes detected, proceeding with commit..."
+          fi
+
       - name: Commit and Push Changes
         run: |
           cd profile_repo
-          if git diff --quiet; then
-            echo "No changes detected in GitHub Profile Repo."
-          else
-            COMMIT_MSG=$(git -C ../ show -s --format=%B HEAD)
-            git add .
-            git commit -m "Sync GitHub profile (note removed): $COMMIT_MSG"
-            git push origin main
-          fi
+          COMMIT_MSG=$(git -C ../ show -s --format=%B HEAD)
+          git commit -m "Sync GitHub profile (README update): $COMMIT_MSG"
+          git push origin main
