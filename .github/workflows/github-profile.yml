@@ -25,8 +25,11 @@ jobs:
           token: ${{ secrets.PROFILE_REPO_TOKEN }}
           path: profile
 
-      - name: Copy README file
-        run: cp portfolio/github-profile/README.md profile/README.md
+      - name: Process README file (remove note)
+        run: |
+          # Create a clean copy without the note
+          sed '1,3d' portfolio/github-profile/README.md > cleaned_readme.md
+          cp cleaned_readme.md profile/README.md
 
       - name: Commit and push if changed
         run: |
