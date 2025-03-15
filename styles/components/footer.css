@@ -52,7 +52,9 @@ footer {
   transform: translateY(-3px);
 }
 
-/* Back to Top Button */
+/*  
+* Back to Top Button 
+*/
 .back-to-top {
   position: fixed;
   bottom: -60px;
@@ -150,11 +152,16 @@ footer {
     flex-direction: column;
     gap: var(--space-md);
     text-align: center;
-    padding-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+  }
+
+  .footer-content p {
+    order: 2;
+    margin-top: var(--space-sm);
   }
 
   .footer-social {
-    margin-top: var(--space-sm);
+    order: 1;
   }
 
   .back-to-top {
