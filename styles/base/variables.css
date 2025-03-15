@@ -88,10 +88,6 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-
-  /* Noise effect variables */
-  --noise-opacity: 0.03;
-  --noise-blend-mode: overlay;
 }
 
 /* Dark Theme Variables */
@@ -125,8 +121,4 @@
     0 2px 4px -1px rgba(0, 0, 0, 0.26);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
     0 4px 6px -2px rgba(0, 0, 0, 0.25);
-
-  /* Noise effect dark theme adjustments */
-  --noise-opacity: 0.04;
-  --noise-blend-mode: soft-light;
 }
