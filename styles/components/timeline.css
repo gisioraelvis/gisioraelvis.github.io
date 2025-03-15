@@ -1,4 +1,3 @@
-/* Timeline Styles */
 .timeline {
   position: relative;
   max-width: 800px;
@@ -72,6 +71,16 @@
   margin-bottom: 0.5rem;
 }
 
+.timeline-content h4 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.timeline-content h4 a:hover {
+  color: var(--accent-color);
+}
+
 .location {
   font-size: 0.9rem;
   color: var(--text-lighter);
@@ -107,7 +116,6 @@
   color: var(--text-color);
 }
 
-/* Responsive timeline */
 @media (max-width: 992px) {
   .timeline::before {
     left: 20px;
@@ -134,7 +142,6 @@
   }
 }
 
-/* Responsive adjustments for timeline */
 @media (max-width: 768px) {
   .timeline-item {
     grid-template-columns: 100px 1fr;

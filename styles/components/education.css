@@ -30,9 +30,21 @@
   margin-bottom: 0.25rem;
 }
 
+.education-content p a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.education-content p a:hover {
+  color: var(--accent-color);
+}
+
 .education-grade {
   font-style: italic;
   color: var(--text-lighter);
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 .certifications-title {
