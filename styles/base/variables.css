@@ -80,6 +80,7 @@
   --z-modal: 2000;
   --z-popover: 3000;
   --z-tooltip: 4000;
+  --z-back-to-top: 995;
 
   /* Add responsive breakpoints */
   --breakpoint-sm: 576px;

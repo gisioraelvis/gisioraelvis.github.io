@@ -15,6 +15,7 @@ export const UIEffects = {
     this.setupParallaxEffects();
     this.setupAnimationStyles();
     this.setupMobileMenu();
+    this.setupBackToTop();
   },
 
   /**
@@ -216,5 +217,36 @@ export const UIEffects = {
     if (menuToggle) {
       menuToggle.setAttribute("aria-expanded", "false");
     }
+  },
+
+  /**
+   * Set up back to top button behavior
+   */
+  setupBackToTop() {
+    const backToTopButton = document.getElementById("backToTop");
+    if (!backToTopButton) return;
+
+    // Show button when user scrolls down 300px
+    const scrollFunction = Utils.debounce(() => {
+      if (
+        document.body.scrollTop > 300 ||
+        document.documentElement.scrollTop > 300
+      ) {
+        backToTopButton.classList.add("visible");
+      } else {
+        backToTopButton.classList.remove("visible");
+      }
+    }, 50); // Debounce to improve performance
+
+    // Smooth scroll to top when button is clicked
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Attach scroll event listener
+    window.addEventListener("scroll", scrollFunction);
   },
 };
