@@ -10,6 +10,7 @@
 
   /* Primary color in RGB format for transparency */
   --primary-color-rgb: 0, 120, 215;
+  --accent-color-rgb: 245, 158, 11;
 
   /* Text Colors */
   --text-color: #1f2937;

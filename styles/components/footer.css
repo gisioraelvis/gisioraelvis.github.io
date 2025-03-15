@@ -59,9 +59,9 @@ footer {
   position: fixed;
   bottom: -60px;
   right: 20px;
-  width: 40px;
-  height: 65px; /* Increased height to accommodate mouse shape */
-  border-radius: 20px; /* Rounded corners for mouse shape */
+  width: 42px;
+  height: 62px;
+  border-radius: 21px;
   background-color: var(--background-light);
   border: 2px solid var(--primary-color);
   cursor: pointer;
@@ -72,40 +72,48 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
-/* Mouse wheel/button */
+/* Mouse wheel */
 .back-to-top::before {
   content: "";
   width: 4px;
-  height: 8px;
+  height: 7px;
   background-color: var(--primary-color);
   border-radius: 2px;
-  margin-top: 5px;
+  margin-top: 4px;
   transform-origin: center bottom;
   animation: scrollWheel 1.5s ease-in-out infinite;
+  transition: background-color 0.3s ease;
+}
+
+.back-to-top:hover::before {
+  animation-play-state: paused;
+  background-color: var(--accent-color);
 }
 
 /* Mouse left button highlight */
 .back-to-top::after {
   content: "";
   position: absolute;
-  top: 8px;
-  left: 5px;
-  width: 15px;
-  height: 20px;
-  border-radius: 10px 0 0 10px;
+  top: 7px;
+  left: 4px;
+  width: 14px;
+  height: 18px;
+  border-radius: 8px 0 0 8px;
   opacity: 0;
-  background-color: rgba(var(--primary-color-rgb), 0.2);
-  transition: opacity 0.3s ease;
+  background-color: rgba(var(--accent-color-rgb), 0.15);
+  box-shadow: inset 0 0 0 rgba(var(--accent-color-rgb), 0);
+  transition: opacity 0.4s ease, background-color 0.3s ease;
 }
 
 /* Up arrow icon */
 .back-to-top-icon {
   color: var(--primary-color);
-  font-size: 1.2rem;
-  margin-top: 3px;
+  font-size: 1.1rem;
+  margin-top: 12px;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 /* Show button when scrolled */
@@ -117,14 +125,18 @@ footer {
 /* Hover effects */
 .back-to-top:hover {
   transform: scale(1.05);
+  border-color: var(--accent-color);
 }
 
+/* Mouse click animation on hover */
 .back-to-top:hover::after {
   opacity: 1;
+  animation: clickAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
 
 .back-to-top:hover .back-to-top-icon {
   animation: upwardBounce 1s infinite;
+  color: var(--accent-color);
 }
 
 /* Mouse scroll wheel animation */
@@ -137,6 +149,92 @@ footer {
   50% {
     transform: translateY(-3px);
     opacity: 0.5;
+  }
+}
+
+/* Button subtle layered ripple animation */
+@keyframes subtleRipple {
+  0%,
+  100% {
+    background-color: rgba(var(--accent-color-rgb), 0.15);
+    box-shadow: inset 0 0 2px 1px rgba(var(--accent-color-rgb), 0.1);
+  }
+
+  20% {
+    background-color: rgba(var(--accent-color-rgb), 0.25);
+    box-shadow: inset 0 0 3px 1px rgba(var(--accent-color-rgb), 0.15),
+      inset 0 0 6px 2px rgba(var(--accent-color-rgb), 0.05);
+  }
+
+  40% {
+    background-color: rgba(var(--accent-color-rgb), 0.35);
+    box-shadow: inset 0 0 4px 1px rgba(var(--accent-color-rgb), 0.2),
+      inset 0 0 8px 2px rgba(var(--accent-color-rgb), 0.1);
+  }
+
+  50% {
+    background-color: rgba(var(--accent-color-rgb), 0.4);
+    box-shadow: inset 0 0 5px 2px rgba(var(--accent-color-rgb), 0.25),
+      inset 0 0 10px 3px rgba(var(--accent-color-rgb), 0.15),
+      inset 0 0 12px 4px rgba(var(--accent-color-rgb), 0.05);
+  }
+
+  60% {
+    background-color: rgba(var(--accent-color-rgb), 0.35);
+    box-shadow: inset 0 0 4px 1px rgba(var(--accent-color-rgb), 0.2),
+      inset 0 0 8px 2px rgba(var(--accent-color-rgb), 0.1);
+  }
+
+  80% {
+    background-color: rgba(var(--accent-color-rgb), 0.25);
+    box-shadow: inset 0 0 3px 1px rgba(var(--accent-color-rgb), 0.15),
+      inset 0 0 6px 2px rgba(var(--accent-color-rgb), 0.05);
+  }
+}
+
+/* Button click animation */
+@keyframes clickAnimation {
+  0%,
+  60%,
+  100% {
+    background-color: rgba(var(--accent-color-rgb), 0.15);
+    box-shadow: inset 0 0 2px 1px rgba(var(--accent-color-rgb), 0.1);
+    transform: scale(1);
+  }
+
+  /* Quick press down */
+  7% {
+    background-color: rgba(var(--accent-color-rgb), 0.5);
+    box-shadow: inset 0 0 8px 2px rgba(var(--accent-color-rgb), 0.3);
+    transform: scale(0.95);
+  }
+
+  /* Hold pressed state */
+  15% {
+    background-color: rgba(var(--accent-color-rgb), 0.5);
+    box-shadow: inset 0 0 8px 3px rgba(var(--accent-color-rgb), 0.35);
+    transform: scale(0.92);
+  }
+
+  /* Begin release */
+  25% {
+    background-color: rgba(var(--accent-color-rgb), 0.45);
+    box-shadow: inset 0 0 7px 2px rgba(var(--accent-color-rgb), 0.3);
+    transform: scale(0.97);
+  }
+
+  /* Slight bounce back on release */
+  35% {
+    background-color: rgba(var(--accent-color-rgb), 0.25);
+    box-shadow: inset 0 0 4px 1px rgba(var(--accent-color-rgb), 0.2);
+    transform: scale(1.02);
+  }
+
+  /* Return to normal */
+  45% {
+    background-color: rgba(var(--accent-color-rgb), 0.15);
+    box-shadow: inset 0 0 2px 1px rgba(var(--accent-color-rgb), 0.1);
+    transform: scale(1);
   }
 }
 
@@ -158,7 +256,6 @@ footer {
 
 .dark .back-to-top {
   background-color: var(--background-dark);
-  border-color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
@@ -179,13 +276,26 @@ footer {
   }
 
   .back-to-top {
-    width: 35px;
-    height: 55px;
+    width: 32px;
+    height: 48px;
     right: 15px;
+    border-radius: 16px;
   }
 
   .back-to-top.visible {
     bottom: 15px;
+  }
+
+  .back-to-top-icon {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .back-to-top::after {
+    width: 12px;
+    height: 16px;
+    top: 6px;
+    left: 4px;
   }
 }
 
@@ -203,9 +313,10 @@ footer {
 
 @media (max-width: 576px) {
   .back-to-top {
-    width: 30px;
-    height: 50px;
+    width: 28px;
+    height: 42px;
     right: 12px;
+    border-radius: 14px;
   }
 
   .back-to-top.visible {
@@ -213,6 +324,21 @@ footer {
   }
 
   .back-to-top-icon {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+
+  .back-to-top::after {
+    width: 10px;
+    height: 14px;
+    top: 5px;
+    left: 3px;
+    border-radius: 6px 0 0 6px;
+  }
+
+  .back-to-top::before {
+    width: 3px;
+    height: 6px;
+    margin-top: 3px;
   }
 }
