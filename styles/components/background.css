@@ -1,114 +1,118 @@
-/* Background Noise Effects
-   Creates a retro CRT/TV static effect with multiple layers 
-*/
+/* CRT/TV Background Effect */
 :root {
-  --noise-opacity: 0.09;
-  --noise-blend-mode: darken;
-  --noise-animation-1: static-random-1 0.7s steps(2) infinite;
-  --noise-animation-2: static-random-2 0.9s steps(3) infinite;
+  --noise-opacity: 0.12;
+  --noise-blend-mode: multiply;
   --crt-flicker-speed: 2.7s;
 }
 
-/* Create multiple overlapping noise layers for random effects */
+/* Base noise layers on body */
 body::before,
-body::after,
-.noise {
+body::after {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
   z-index: var(--z-below);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.4' numOctaves='2' seed='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   mix-blend-mode: var(--noise-blend-mode);
 }
 
-/* Layer 1 - Base noise */
 body::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.4' numOctaves='2' seed='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   opacity: calc(var(--noise-opacity) * 0.8);
   animation: phosphor-flicker var(--crt-flicker-speed) infinite;
 }
 
-/* Layer 2 - Overlay with different seed */
 body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.5' numOctaves='2' seed='42' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   opacity: calc(var(--noise-opacity) * 0.5);
   animation: phosphor-flicker var(--crt-flicker-speed) infinite 0.4s;
 }
 
-/* Background noise effect - TV static style */
+/* TV static dots effect - random appearing dots */
 .noise {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
-  /* Fine-grained static pattern with higher frequency for TV-like dots */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.4' numOctaves='2' seed='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: var(--noise-opacity);
-  mix-blend-mode: var(--noise-blend-mode);
+  pointer-events: none;
   z-index: var(--z-below);
+  mix-blend-mode: var(--noise-blend-mode);
+}
+
+.noise::before,
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   pointer-events: none;
 }
 
-/* Dark theme noise adjustments */
-.dark {
-  --noise-opacity: 0.06;
-  --noise-blend-mode: screen;
-  --noise-animation-1: static-random-1 0.8s steps(2) infinite;
-  --noise-animation-2: static-random-2 1.2s steps(3) infinite;
+.noise::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.08' numOctaves='3' seed='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0;
+  animation: dot-flicker-1 1.9s infinite;
 }
 
-/* Subtle fade in/out animation for static effect */
+.noise::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.06' numOctaves='2' seed='25' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0;
+  animation: dot-flicker-2 3.1s infinite;
+}
+
+/* Dark theme adjustments */
+.dark {
+  --noise-opacity: 0.07;
+  --noise-blend-mode: screen;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .noise {
-    animation: static-flicker 0.5s steps(3) infinite;
-  }
-
-  @keyframes static-flicker {
-    0% {
-      opacity: var(--noise-opacity);
-    }
-    33% {
-      opacity: calc(var(--noise-opacity) * 1.3);
-    }
-    66% {
-      opacity: calc(var(--noise-opacity) * 0.7);
-    }
-    100% {
-      opacity: var(--noise-opacity);
-    }
-  }
-
-  /* Random flickering animations with different timing */
-  @keyframes static-random-1 {
+  @keyframes dot-flicker-1 {
     0%,
+    20%,
+    40%,
+    65%,
+    85%,
     100% {
-      opacity: calc(var(--noise-opacity) * 0.7);
+      opacity: 0;
     }
-    25% {
-      opacity: calc(var(--noise-opacity) * 1.2);
+    5%,
+    6%,
+    7% {
+      opacity: calc(var(--noise-opacity) * 4.2);
     }
-    50% {
-      opacity: calc(var(--noise-opacity) * 0.5);
+    45%,
+    46%,
+    47% {
+      opacity: calc(var(--noise-opacity) * 3.8);
     }
-    75% {
-      opacity: calc(var(--noise-opacity) * 0.9);
+    75%,
+    76%,
+    77% {
+      opacity: calc(var(--noise-opacity) * 4);
     }
   }
 
-  @keyframes static-random-2 {
+  @keyframes dot-flicker-2 {
     0%,
+    25%,
+    50%,
+    75%,
     100% {
-      opacity: calc(var(--noise-opacity) * 0.6);
+      opacity: 0;
     }
-    33% {
-      opacity: calc(var(--noise-opacity) * 1.1);
+    10%,
+    11%,
+    12% {
+      opacity: calc(var(--noise-opacity) * 4);
     }
-    66% {
-      opacity: calc(var(--noise-opacity) * 0.4);
+    35%,
+    36%,
+    37% {
+      opacity: calc(var(--noise-opacity) * 4.5);
+    }
+    88%,
+    89%,
+    90% {
+      opacity: calc(var(--noise-opacity) * 3.8);
     }
   }
 
@@ -121,13 +125,13 @@ body::after {
       opacity: calc(var(--noise-opacity) * 0.9);
     }
     43% {
-      opacity: calc(var(--noise-opacity) * 1.2);
+      opacity: calc(var(--noise-opacity) * 1.4);
     }
     45% {
       opacity: calc(var(--noise-opacity) * 0.8);
     }
     47% {
-      opacity: calc(var(--noise-opacity) * 1.1);
+      opacity: calc(var(--noise-opacity) * 1.3);
     }
     48%,
     52% {
