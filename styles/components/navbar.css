@@ -39,6 +39,21 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.logo:hover,
+.logo:focus {
+  transform: scale(1.05);
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .nav-links {
@@ -176,6 +191,7 @@
   }
 
   .nav-container {
+    position: relative;
     justify-content: space-between;
   }
 
@@ -183,6 +199,11 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .logo:hover,
+  .logo:focus {
+    transform: translateX(-50%) scale(1.05);
   }
 
   .nav-links {
@@ -233,6 +254,7 @@
     padding-left: 1.25rem;
   }
 
+  /* Nav mobile styles */
   .nav-link::after {
     display: none; /* Hide the underline effect on mobile */
   }
@@ -291,6 +313,18 @@
 
   #themeToggle {
     margin-right: 0.5rem;
+  }
+
+  .logo {
+    /* Ensure consistent positioning on extra small screens */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo:hover,
+  .logo:focus {
+    transform: translateX(-50%) scale(1.05);
   }
 
   .nav-link {
