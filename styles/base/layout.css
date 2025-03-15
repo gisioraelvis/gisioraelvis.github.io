@@ -1,3 +1,41 @@
+/* Base Layout Styles */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-header);
+}
+
+main {
+  min-height: 100vh;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+section {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+
+/* Ensure container spans properly */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Fix for iOS when body has overflow: hidden */
+body.no-scroll {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Section Component Styles */
 .section {
   padding: var(--section-spacing) 0;
   position: relative;
@@ -31,6 +69,7 @@
   margin-left: var(--space-md);
 }
 
+/* Responsive Section Styles */
 @media (max-width: 768px) {
   .section-title {
     font-size: var(--font-size-2xl);
