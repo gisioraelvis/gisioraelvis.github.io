@@ -9,15 +9,15 @@
 
 ## 📖 About Me
 
-I specialize in building scalable, secure and high-performance web applications. My expertise includes:
+I build scalable, secure and high-performance web applications. My expertise includes:
 
+- 📱 Creating responsive, accessible and performant UIs
 - 🚀 Developing full-stack web applications with modern frameworks and libraries
-- ☁️ Architecting and managing cloud infrastructure across multiple service providers
 - 🔌 Designing robust API ecosystems with comprehensive documentation and security
-- 🧪 Implementing end-to-end testing strategies across all application layers
-- 🔄 Building automated CI/CD workflows for efficient software delivery
-- 📱 Creating responsive, accessible, and performant user interfaces
 - 💾 Working with both SQL and NoSQL database systems for optimal data management
+- 🧪 Implementing E2E testing strategies across all application layers
+- 🔄 Building automated CI/CD workflows for efficient software delivery
+- ☁️ Architecting and managing cloud infrastructure across multiple service providers
 
 <details>
 <summary>📚 <b>Currently Learning</b></summary>
