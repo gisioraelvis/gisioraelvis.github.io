@@ -1,4 +1,3 @@
-/* Currently Learning Section */
 .learning-content {
   margin-top: 2.5rem;
 }
@@ -11,7 +10,7 @@
   line-height: 1.6;
 }
 
-/* Refine grid layout for 6 items */
+/* Refined grid layout for 6 items */
 .learning-list {
   list-style-type: none;
   padding-left: 0;
@@ -35,7 +34,9 @@
 }
 
 .learning-list li::before {
-  content: "▹";
+  content: "\f08d"; /* FontAwesome thumbtack/pin icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   position: absolute;
   left: 0.75rem;
   top: 1.45rem;
@@ -66,28 +67,28 @@
   transition: opacity 0.3s ease;
 }
 
-.learning-list li:nth-child(1)::after {
+/* Use data attributes for specific icons */
+.learning-list li[data-icon="architecture"]::after {
   content: "\f0e3"; /* Architecture icon */
 }
 
-.learning-list li:nth-child(2)::after {
+.learning-list li[data-icon="cloud"]::after {
   content: "\f0c2"; /* Cloud icon */
 }
 
-.learning-list li:nth-child(3)::after {
+.learning-list li[data-icon="availability"]::after {
   content: "\f21e"; /* Heartbeat/High availability icon */
 }
 
-.learning-list li:nth-child(4)::after {
+.learning-list li[data-icon="microservices"]::after {
   content: "\f1e0"; /* Network/Microservices icon */
 }
 
-.learning-list li:nth-child(5)::after {
+.learning-list li[data-icon="cost"]::after {
   content: "\f0d6"; /* Money/Cost optimization icon */
 }
 
-/* Add icon for 6th learning area */
-.learning-list li:nth-child(6)::after {
+.learning-list li[data-icon="security"]::after {
   content: "\f023"; /* Lock/Security icon */
 }
 
@@ -95,7 +96,7 @@
   opacity: 0.25;
 }
 
-/* Add better responsive breakpoints for the grid */
+/* Responsive grid breakpoints */
 @media (min-width: 992px) {
   .learning-list {
     grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
@@ -114,7 +115,6 @@
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .learning-intro {
     max-width: 100%;

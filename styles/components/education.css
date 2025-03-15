@@ -1,4 +1,3 @@
-/* Education Styles */
 .education-container {
   max-width: 800px;
   margin: 0 auto 3rem;
@@ -93,7 +92,6 @@
   color: var(--text-lighter);
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .education-item {
     flex-direction: column;

@@ -1,4 +1,3 @@
-/* Hero Section */
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -163,7 +162,6 @@
   object-fit: cover;
 }
 
-/* Update the floating badges styling */
 .floating-badges {
   position: absolute;
   width: 100%;
@@ -531,7 +529,6 @@
   }
 }
 
-/* Responsive hero section */
 @media (max-width: 992px) {
   .hero-content {
     flex-direction: column-reverse;
@@ -575,7 +572,6 @@
   }
 }
 
-/* Responsive styles */
 @media (max-width: 992px) {
   .hero-content {
     flex-direction: column-reverse;
