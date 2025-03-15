@@ -6,13 +6,10 @@
 /* Base styles */
 @import "base/variables.css";
 @import "base/reset.css";
-@import "base/accessibility.css";
-
-/* Layout styles */
-@import "layout/layout.css";
-@import "layout/sections.css";
+@import "base/layout.css";
 
 /* Component styles */
+@import "components/background.css";
 @import "components/navbar.css";
 @import "components/hero.css";
 @import "components/about.css";

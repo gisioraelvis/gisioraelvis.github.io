@@ -21,11 +21,6 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   transition: background-color var(--transition), color var(--transition);
-  --noise-opacity: 0.09;
-  --noise-blend-mode: darken;
-  --noise-animation-1: static-random-1 0.7s steps(2) infinite;
-  --noise-animation-2: static-random-2 0.9s steps(3) infinite;
-  --crt-flicker-speed: 2.7s;
 }
 
 img,
@@ -86,129 +81,42 @@ ul {
   padding: 0 var(--space-lg);
 }
 
-/* Create multiple overlapping noise layers for random effects */
-body::before,
-body::after,
-.noise {
-  content: "";
-  position: fixed;
-  top: 0;
+.skip-link {
+  position: absolute;
+  top: -40px;
   left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: var(--z-below);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.4' numOctaves='2' seed='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  mix-blend-mode: var(--noise-blend-mode);
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px;
+  z-index: var(--z-tooltip);
+  transition: top 0.3s;
+  padding: 10px 15px;
+  font-weight: 500;
 }
 
-/* Layer 1 - Base noise */
-body::before {
-  opacity: calc(var(--noise-opacity) * 0.8);
-  animation: phosphor-flicker var(--crt-flicker-speed) infinite;
-}
-
-/* Layer 2 - Overlay with different seed */
-body::after {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.5' numOctaves='2' seed='42' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: calc(var(--noise-opacity) * 0.5);
-  animation: phosphor-flicker var(--crt-flicker-speed) infinite 0.4s;
-}
-
-/* Background noise effect - TV static style */
-.noise {
-  position: fixed;
+.skip-link:focus {
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Fine-grained static pattern with higher frequency for TV-like dots */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.4' numOctaves='2' seed='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: var(--noise-opacity);
-  mix-blend-mode: var(--noise-blend-mode);
-  z-index: var(--z-below);
-  pointer-events: none;
+  outline: none;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary-color);
 }
 
-/* Dark theme noise adjustments */
-.dark {
-  --noise-opacity: 0.06;
-  --noise-blend-mode: screen;
-  --noise-animation-1: static-random-1 0.8s steps(2) infinite;
-  --noise-animation-2: static-random-2 1.2s steps(3) infinite;
+/* Focus outline styles */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
-/* Subtle fade in/out animation for static effect */
-@media (prefers-reduced-motion: no-preference) {
-  .noise {
-    animation: static-flicker 0.5s steps(3) infinite;
-  }
+/* But remove outline for non-keyboard focus */
+:focus:not(:focus-visible) {
+  outline: none;
+}
 
-  @keyframes static-flicker {
-    0% {
-      opacity: var(--noise-opacity);
-    }
-    33% {
-      opacity: calc(var(--noise-opacity) * 1.3);
-    }
-    66% {
-      opacity: calc(var(--noise-opacity) * 0.7);
-    }
-    100% {
-      opacity: var(--noise-opacity);
-    }
-  }
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
 
-  /* Random flickering animations with different timing */
-  @keyframes static-random-1 {
-    0%,
-    100% {
-      opacity: calc(var(--noise-opacity) * 0.7);
-    }
-    25% {
-      opacity: calc(var(--noise-opacity) * 1.2);
-    }
-    50% {
-      opacity: calc(var(--noise-opacity) * 0.5);
-    }
-    75% {
-      opacity: calc(var(--noise-opacity) * 0.9);
-    }
-  }
-
-  @keyframes static-random-2 {
-    0%,
-    100% {
-      opacity: calc(var(--noise-opacity) * 0.6);
-    }
-    33% {
-      opacity: calc(var(--noise-opacity) * 1.1);
-    }
-    66% {
-      opacity: calc(var(--noise-opacity) * 0.4);
-    }
-  }
-
-  @keyframes phosphor-flicker {
-    0%,
-    100% {
-      opacity: calc(var(--noise-opacity) * 0.7);
-    }
-    42% {
-      opacity: calc(var(--noise-opacity) * 0.9);
-    }
-    43% {
-      opacity: calc(var(--noise-opacity) * 1.2);
-    }
-    45% {
-      opacity: calc(var(--noise-opacity) * 0.8);
-    }
-    47% {
-      opacity: calc(var(--noise-opacity) * 1.1);
-    }
-    48%,
-    52% {
-      opacity: calc(var(--noise-opacity) * 0.9);
-    }
-  }
+/* High contrast focus styles for dark mode */
+.dark :focus-visible {
+  outline-color: var(--primary-light);
 }
