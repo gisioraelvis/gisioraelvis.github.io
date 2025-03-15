@@ -1,6 +1,5 @@
 /* 
-  Main CSS Entry Point
-  This file imports all modular CSS components
+  Main CSS Entry Point, imports all modular CSS components
 */
 
 /* Base styles */
@@ -20,5 +19,4 @@
 @import "components/skills.css";
 @import "components/projects.css";
 @import "components/contact.css";
-@import "components/back-to-top.css";
 @import "components/footer.css";

@@ -5,10 +5,6 @@ footer {
   background-color: var(--background-light);
 }
 
-.dark footer {
-  background-color: rgba(30, 30, 30, 0.4);
-}
-
 .footer-content {
   display: flex;
   justify-content: space-between;
@@ -56,6 +52,99 @@ footer {
   transform: translateY(-3px);
 }
 
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: -60px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  z-index: var(--z-back-to-top);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    background-color 0.3s ease;
+  overflow: hidden;
+}
+
+.back-to-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.3s ease;
+}
+
+.back-to-top:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.back-to-top:hover::before {
+  transform: scale(1.5);
+}
+
+.back-to-top:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-color);
+}
+
+.back-to-top:active {
+  transform: scale(0.95);
+}
+
+.back-to-top.visible {
+  bottom: 20px;
+  opacity: 1;
+}
+
+.back-to-top-icon {
+  position: relative;
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.back-to-top:hover .back-to-top-icon {
+  animation: backToTopBounce 1.2s infinite;
+}
+
+@keyframes backToTopBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Dark Mode Adjustments */
+.dark footer {
+  background-color: rgba(30, 30, 30, 0.4);
+}
+
+.dark .back-to-top {
+  background-color: var(--primary-color);
+  color: var(--dark-background);
+}
+
+.dark .back-to-top:hover {
+  background-color: var(--accent-color);
+}
+
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
@@ -66,6 +155,16 @@ footer {
 
   .footer-social {
     margin-top: var(--space-sm);
+  }
+
+  .back-to-top {
+    width: 45px;
+    height: 45px;
+    right: 15px;
+  }
+
+  .back-to-top.visible {
+    bottom: 15px;
   }
 }
 
@@ -78,5 +177,21 @@ footer {
     width: 36px;
     height: 36px;
     font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 576px) {
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    right: 12px;
+  }
+
+  .back-to-top.visible {
+    bottom: 12px;
+  }
+
+  .back-to-top-icon {
+    font-size: 1rem;
   }
 }
