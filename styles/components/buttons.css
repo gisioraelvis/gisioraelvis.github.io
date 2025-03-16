@@ -5,13 +5,15 @@
   color: white;
   border-radius: var(--border-radius);
   font-weight: 500;
-  transition: background-color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .primary-btn:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--accent-color);
   text-decoration: none;
   color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .secondary-btn {
@@ -26,9 +28,11 @@
 }
 
 .secondary-btn:hover {
-  background-color: var(--background-light);
-  border-color: var(--primary-color);
+  background-color: rgba(var(--accent-color-rgb), 0.1);
   text-decoration: none;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .show-more-btn {
@@ -46,9 +50,11 @@
 }
 
 .show-more-btn:hover {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .show-more-container {
@@ -78,7 +84,7 @@
   padding-top: 6px;
 }
 
-/* Mouse wheel indicator */
+/* Mouse wheel indicator - always visible when button is showing */
 .back-to-top::before {
   content: "";
   width: 4px;
@@ -86,14 +92,21 @@
   background-color: var(--primary-color);
   border-radius: 2px;
   margin-top: 4px;
+  opacity: 0;
   transform-origin: center bottom;
-  animation: scrollWheel 1.5s ease-in-out infinite;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
-.back-to-top:hover::before {
-  animation-play-state: paused;
+/* Make wheel visible with primary color when button is visible */
+.back-to-top.visible::before {
+  opacity: 1;
+  background-color: var(--primary-color);
+}
+
+/* Change wheel to accent color and animate when scrolling */
+.back-to-top.scrolling::before {
   background-color: var(--accent-color);
+  animation: scrollWheel 1.5s ease-in-out infinite;
 }
 
 /* Mouse button highlight */
@@ -123,9 +136,29 @@
   opacity: 1;
 }
 
+/* Back to Top Button hover effects */
 .back-to-top:hover {
   transform: scale(1.05);
   border-color: var(--accent-color);
+}
+
+/* Mouse button highlight animation on hover */
+.back-to-top:hover::after {
+  opacity: 1;
+  animation: clickAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Synchronized up arrow animation on hover - continuous gentle bounce */
+.back-to-top:hover .back-to-top-icon {
+  color: var(--accent-color);
+  animation: gentleUpBounce 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  animation-delay: 0.35s; /* Syncs with the click animation's peak */
+}
+
+/* Rapid up arrow animation when actually clicked */
+.back-to-top.active .back-to-top-icon {
+  animation: upwardBounce 0.7s ease-out;
+  color: var(--accent-color);
 }
 
 .back-to-top:hover::after {
@@ -133,8 +166,8 @@
   animation: clickAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
 
-.back-to-top:hover .back-to-top-icon {
-  animation: upwardBounce 1s infinite;
+.back-to-top:active .back-to-top-icon {
+  animation: upwardBounce 1s ease-out;
   color: var(--accent-color);
 }
 
@@ -186,13 +219,62 @@
   }
 }
 
-@keyframes upwardBounce {
+@keyframes gentleUpBounce {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(-5px);
+  }
+  70% {
+    transform: translateY(-3px);
+  }
+  85% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Update the rapid bounce animation for click state - make it faster and more pronounced */
+@keyframes upwardBounce {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-12px);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-14px);
+  }
+  75% {
+    transform: translateY(-10px);
+  }
+  90% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes upwardBounce {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+  70% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 

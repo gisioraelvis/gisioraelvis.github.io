@@ -207,16 +207,45 @@ export const Animations = {
     const backToTopButton = document.getElementById("backToTop");
     if (!backToTopButton) return;
 
-    // Show button when user scrolls down 300px
+    let isScrolling;
+
+    // Handle scroll events for both visibility and scrolling animation
     const scrollFunction = Utils.debounce(() => {
+      // Check scroll position for visibility
       const scrolled =
         document.body.scrollTop > 300 ||
         document.documentElement.scrollTop > 300;
+
+      // Toggle visibility class
       backToTopButton.classList.toggle("visible", scrolled);
+
+      // If visible, handle scrolling animation
+      if (scrolled) {
+        // Add scrolling class to show wheel animation
+        backToTopButton.classList.add("scrolling");
+
+        // Clear the previous timeout
+        clearTimeout(isScrolling);
+
+        // Set a timeout to remove the scrolling class when scrolling stops
+        isScrolling = setTimeout(() => {
+          backToTopButton.classList.remove("scrolling");
+        }, 1000);
+      }
     }, 50);
 
     // Smooth scroll to top when button is clicked
-    backToTopButton.addEventListener("click", () => {
+    backToTopButton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // Add active class to trigger click animation
+      backToTopButton.classList.add("active");
+
+      // Remove active class after animation completes
+      setTimeout(() => {
+        backToTopButton.classList.remove("active");
+      }, 1000);
+
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -224,6 +253,9 @@ export const Animations = {
     });
 
     window.addEventListener("scroll", scrollFunction);
+
+    // Call scroll function initially to set correct state
+    scrollFunction();
   },
 
   /**
