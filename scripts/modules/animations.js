@@ -210,59 +210,63 @@ export const Animations = {
     let scrollTimer;
     let lastScrollTop = 0;
     let wasVisible = false;
+    let isAnimating = false;
 
-    const handleScroll = Utils.debounce(() => {
-      const scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
+    const updateButtonState = (scrollTop) => {
       const shouldShow = scrollTop > 300;
-
-      // Track if button was previously visible
-      if (backToTopButton.classList.contains("visible")) {
-        wasVisible = true;
-      }
-
-      // Control visibility
       backToTopButton.classList.toggle("visible", shouldShow);
 
-      // Apply was-visible class for animation control
       if (shouldShow) {
         backToTopButton.classList.toggle("was-visible", wasVisible);
+        wasVisible = true;
+
+        const direction =
+          scrollTop > lastScrollTop ? "scrolling-down" : "scrolling-up";
+        lastScrollTop = scrollTop;
+
+        if (!isAnimating) {
+          backToTopButton.classList.remove("scrolling-up", "scrolling-down");
+          backToTopButton.classList.add(direction);
+        }
+
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          if (!isAnimating) {
+            backToTopButton.classList.remove("scrolling-up", "scrolling-down");
+          }
+        }, 500);
       } else {
-        // Reset was-visible state after hiding
         setTimeout(() => {
           wasVisible = false;
           backToTopButton.classList.remove("was-visible");
         }, 300);
       }
+    };
 
-      if (shouldShow) {
-        // Determine scroll direction
-        const direction =
-          scrollTop > lastScrollTop ? "scrolling-down" : "scrolling-up";
-        lastScrollTop = scrollTop;
-
-        // Set direction class
-        backToTopButton.classList.remove("scrolling-up", "scrolling-down");
-        backToTopButton.classList.add(direction);
-
-        // Stop animation when scrolling stops
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-          backToTopButton.classList.remove("scrolling-up", "scrolling-down");
-        }, 500);
-      }
+    const handleScroll = Utils.debounce(() => {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      updateButtonState(scrollTop);
     }, 50);
 
-    // Handle click event
     backToTopButton.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // Trigger click animation
       backToTopButton.classList.add("active");
+      isAnimating = true;
 
       setTimeout(() => {
         backToTopButton.classList.remove("active");
-      }, 700);
+        isAnimating = false;
+
+        const currentScrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScrollTop < 50) {
+          backToTopButton.classList.remove("scrolling-up", "scrolling-down");
+        } else {
+          updateButtonState(currentScrollTop);
+        }
+      }, 1000);
 
       window.scrollTo({
         top: 0,
@@ -270,7 +274,6 @@ export const Animations = {
       });
     });
 
-    // Set up event listeners
     window.addEventListener("scroll", handleScroll);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
@@ -278,7 +281,6 @@ export const Animations = {
       }
     });
 
-    // Initial state check
     handleScroll();
   },
 

@@ -474,6 +474,7 @@
   }
 }
 
+/* Mobile styling for back-to-top button */
 @media (max-width: 576px) {
   .back-to-top {
     width: 44px;
@@ -489,30 +490,39 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     transition: all 0.3s ease;
     transform: none;
   }
 
-  /* Hide mouse container on mobile */
   .back-to-top .mouse-container {
     display: none;
   }
 
-  /* Rocket icon display */
+  /* Position arrow closer to button */
+  .back-to-top-icon {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    opacity: 1;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
   .back-to-top .arrow-container {
     margin-top: 0;
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     z-index: 2;
   }
 
   .back-to-top .arrow-container::before {
-    content: "\f135"; /* Rocket icon */
+    content: "\f135";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 1.1rem;
@@ -525,12 +535,89 @@
     transition: transform 0.3s ease, color 0.3s ease;
   }
 
-  .back-to-top-icon,
   .back-to-top .arrow-container::after {
     display: none;
   }
 
-  /* Special effects */
+  /* States */
+  .back-to-top.visible {
+    bottom: 15px;
+    opacity: 1;
+  }
+
+  .back-to-top.visible:not(.was-visible) {
+    animation: fabSlideIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .back-to-top.visible.was-visible:not(.scrolling-up) {
+    animation: fabFloat 3s ease-in-out infinite;
+  }
+
+  /* Scrolling states */
+  .back-to-top.visible.scrolling-up {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .back-to-top.scrolling-up .arrow-container::before {
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    animation: rocketScrollUp 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+
+  .back-to-top.scrolling-up .back-to-top-icon {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+  }
+
+  .back-to-top.scrolling-down {
+    background-color: var(--primary-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  /* Touch and active states */
+  .back-to-top:active:not(.scrolling-up) {
+    transform: scale(0.95);
+    background-color: var(--accent-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+  .back-to-top.active {
+    transition: transform 0.3s ease;
+  }
+
+  .back-to-top.active:not(.scrolling-up) {
+    animation: rocketLaunch 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 8px rgba(var(--accent-color-rgb), 0.3),
+      0 0 15px rgba(var(--accent-color-rgb), 0.2);
+  }
+
+  .back-to-top.active.scrolling-up {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .back-to-top.active::after {
+    animation: ripple 0.8s ease-out;
+  }
+
+  .back-to-top.active::before {
+    opacity: 1;
+    animation: flameEffect 1s ease-out;
+  }
+
+  .back-to-top.active .arrow-container::before {
+    animation: rocketUpward 1s ease-out;
+    color: var(--accent-color);
+  }
+
+  .back-to-top.active .back-to-top-icon {
+    animation: arrowFadeOut 0.5s ease-out forwards;
+  }
+
+  /* Effects */
   .back-to-top::before {
     content: "";
     position: absolute;
@@ -561,69 +648,6 @@
     border-radius: 100%;
     transform: scale(1) translate(-50%, -50%);
     transform-origin: 0 0;
-  }
-
-  /* Visibility states */
-  .back-to-top.visible {
-    bottom: 15px;
-    opacity: 1;
-  }
-
-  .back-to-top.visible:not(.was-visible) {
-    animation: fabSlideIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .back-to-top.visible.was-visible:not(.scrolling-up) {
-    animation: fabFloat 3s ease-in-out infinite;
-  }
-
-  /* Scrolling states */
-  .back-to-top.visible.scrolling-up {
-    background-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .back-to-top.scrolling-up .arrow-container::before {
-    color: var(--accent-color);
-    font-size: 1.3rem;
-    animation: rocketScrollUp 1.5s ease-in-out infinite;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-  }
-
-  .back-to-top:not(.visible) {
-    bottom: -70px;
-    opacity: 0;
-    animation: none;
-    transition: opacity 0.3s ease, bottom 0.3s ease;
-    transform: none !important;
-  }
-
-  /* Touch feedback */
-  .back-to-top:active:not(.scrolling-up) {
-    transform: scale(0.95);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    background-color: var(--accent-color);
-  }
-
-  /* Active state */
-  .back-to-top.active:not(.scrolling-up) {
-    animation: rocketLaunch 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.3),
-      0 0 15px rgba(var(--primary-color-rgb), 0.2);
-  }
-
-  .back-to-top.active::after {
-    animation: ripple 0.8s ease-out;
-  }
-
-  .back-to-top.active::before {
-    opacity: 1;
-    animation: flameEffect 1s ease-out;
-  }
-
-  .back-to-top.active .arrow-container::before {
-    animation: rocketUpward 1s ease-out;
-    color: var(--accent-color);
   }
 
   /* Dark mode */
@@ -721,5 +745,17 @@
   }
   100% {
     transform: translate(-50%, -250%) rotate(-45deg);
+  }
+}
+
+/* Keep the arrow fade out animation */
+@keyframes arrowFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-15px);
   }
 }
