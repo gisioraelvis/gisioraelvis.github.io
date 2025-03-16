@@ -120,6 +120,4 @@ export const ContentExpander = {
       }
     });
   },
-
-  // Remove initSoftSkillsToggle() method as it's now redundant
 };

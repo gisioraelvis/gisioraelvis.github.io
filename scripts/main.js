@@ -3,9 +3,8 @@
  * Imports and initializes all modules
  */
 import { ThemeManager } from "./modules/theme.js";
-import { UIEffects } from "./modules/ui-effects.js";
-import { AnimationController } from "./modules/animation.js";
-import { ContentExpander } from "./modules/content.js";
+import { Animations } from "./modules/animations.js";
+import { ContentExpander } from "./modules/expander.js";
 import { GitHubProjects } from "./modules/github-projects.js";
 import { SEO } from "./modules/seo.js";
 import { Utils } from "./utils/utils.js";
@@ -16,8 +15,7 @@ import { Utils } from "./utils/utils.js";
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize all modules
   ThemeManager.init();
-  UIEffects.init();
-  AnimationController.init();
+  Animations.init();
   ContentExpander.init();
   GitHubProjects.init();
   SEO.init();

@@ -4,9 +4,13 @@ import { Utils } from "../utils/utils.js";
 /**
  * Navigation and UI effects module
  */
-export const UIEffects = {
+export const Animations = {
+  // Selector for all animatable elements
+  ANIMATABLE_ELEMENTS:
+    ".about-card, .timeline-item, .certification-item, .skills-category, .project-card, .contact-card",
+
   /**
-   * Initialize all UI effects
+   * Initialize all UI effects and animations
    */
   init() {
     this.setupNavbarScroll();
@@ -16,6 +20,7 @@ export const UIEffects = {
     this.setupAnimationStyles();
     this.setupMobileMenu();
     this.setupBackToTop();
+    this.setupAnimations();
   },
 
   /**
@@ -26,11 +31,7 @@ export const UIEffects = {
     if (!navbar) return;
 
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
     });
   },
 
@@ -52,14 +53,14 @@ export const UIEffects = {
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           navLinks.forEach((link) => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${sectionId}`) {
-              link.classList.add("active");
-            }
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${sectionId}`
+            );
           });
         }
       });
-    }, 50); // Debounce to improve performance
+    }, 50);
 
     window.addEventListener("scroll", highlightNavLink);
   },
@@ -113,7 +114,7 @@ export const UIEffects = {
   setupAnimationStyles() {
     const style = document.createElement("style");
     style.textContent = `
-      .about-card, .timeline-item, .certification-item, .skills-category, .project-card, .contact-card {
+      ${this.ANIMATABLE_ELEMENTS} {
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.6s ease, transform 0.6s ease;
@@ -169,6 +170,50 @@ export const UIEffects = {
   },
 
   /**
+   * Set up animations using Intersection Observer and handle initial visibility
+   */
+  setupAnimations() {
+    // Create and configure the intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            // Once animated, no need to observe anymore
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: CONFIG.animation.threshold }
+    );
+
+    // Observe all animatable elements
+    document.querySelectorAll(this.ANIMATABLE_ELEMENTS).forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Initial check for elements already in view
+    this.checkElementsInView();
+
+    // Also check on window load to ensure all elements are properly animated
+    window.addEventListener("load", () => this.checkElementsInView());
+  },
+
+  /**
+   * Check which elements are in view and animate them immediately
+   */
+  checkElementsInView() {
+    document.querySelectorAll(this.ANIMATABLE_ELEMENTS).forEach((element) => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+
+      if (elementTop < window.innerHeight - elementVisible) {
+        element.classList.add("animate-in");
+      }
+    });
+  },
+
+  /**
    * Set up mobile menu
    */
   setupMobileMenu() {
@@ -180,8 +225,10 @@ export const UIEffects = {
     if (menuToggle) {
       menuToggle.addEventListener("click", () => {
         document.body.classList.toggle("menu-open");
-        const isOpen = document.body.classList.contains("menu-open");
-        menuToggle.setAttribute("aria-expanded", isOpen);
+        menuToggle.setAttribute(
+          "aria-expanded",
+          document.body.classList.contains("menu-open")
+        );
       });
     }
 
@@ -208,12 +255,8 @@ export const UIEffects = {
    * Close the mobile menu
    */
   closeMobileMenu() {
-    const body = document.body;
+    document.body.classList.remove("menu-open");
     const menuToggle = document.querySelector(".menu-toggle");
-
-    body.classList.remove("menu-open");
-
-    // Update aria-expanded attribute
     if (menuToggle) {
       menuToggle.setAttribute("aria-expanded", "false");
     }
@@ -228,15 +271,11 @@ export const UIEffects = {
 
     // Show button when user scrolls down 300px
     const scrollFunction = Utils.debounce(() => {
-      if (
+      const scrolled =
         document.body.scrollTop > 300 ||
-        document.documentElement.scrollTop > 300
-      ) {
-        backToTopButton.classList.add("visible");
-      } else {
-        backToTopButton.classList.remove("visible");
-      }
-    }, 50); // Debounce to improve performance
+        document.documentElement.scrollTop > 300;
+      backToTopButton.classList.toggle("visible", scrolled);
+    }, 50);
 
     // Smooth scroll to top when button is clicked
     backToTopButton.addEventListener("click", () => {
@@ -246,7 +285,6 @@ export const UIEffects = {
       });
     });
 
-    // Attach scroll event listener
     window.addEventListener("scroll", scrollFunction);
   },
 };
