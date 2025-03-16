@@ -68,119 +68,334 @@
   position: fixed;
   bottom: -60px;
   right: 20px;
-  width: 42px;
-  height: 62px;
-  border-radius: 21px;
-  background-color: var(--background-light);
-  border: 2px solid var(--primary-color);
+  width: 50px;
+  height: 100px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
   z-index: var(--z-back-to-top);
-  box-shadow: var(--shadow-md);
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 6px;
+  padding: 6px 0;
 }
 
-/* Mouse wheel indicator - always visible when button is showing */
-.back-to-top::before {
-  content: "";
-  width: 4px;
-  height: 7px;
-  background-color: var(--primary-color);
-  border-radius: 2px;
-  margin-top: 4px;
-  opacity: 0;
-  transform-origin: center bottom;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-}
-
-/* Make wheel visible with primary color when button is visible */
-.back-to-top.visible::before {
-  opacity: 1;
-  background-color: var(--primary-color);
-}
-
-/* Change wheel to accent color and animate when scrolling */
-.back-to-top.scrolling::before {
-  background-color: var(--accent-color);
-  animation: scrollWheel 1.5s ease-in-out infinite;
-}
-
-/* Mouse button highlight */
-.back-to-top::after {
-  content: "";
-  position: absolute;
-  top: 7px;
-  left: 4px;
-  width: 14px;
-  height: 18px;
-  border-radius: 8px 0 0 8px;
-  opacity: 0;
-  background-color: rgba(var(--accent-color-rgb), 0.15);
-  box-shadow: inset 0 0 0 rgba(var(--accent-color-rgb), 0);
-  transition: opacity 0.4s ease, background-color 0.3s ease;
-}
-
-.back-to-top-icon {
-  color: var(--primary-color);
-  font-size: 1.1rem;
-  margin-top: 12px;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
+/* Button visibility */
 .back-to-top.visible {
   bottom: 20px;
   opacity: 1;
 }
 
-/* Back to Top Button hover effects */
+/* Mouse styling */
+.back-to-top .mouse-container {
+  height: 46px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-to-top .mouse {
+  width: 32px;
+  height: 46px;
+  border-radius: 16px;
+  border: 2px solid var(--primary-color);
+  background-color: var(--background-light);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Wheel styling - visible when not scrolling */
+.back-to-top .wheel {
+  width: 5px;
+  height: 9px;
+  background-color: var(--primary-color);
+  border-radius: 2.5px;
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: background-color 0.3s ease;
+  animation: none;
+}
+
+/* Direction-specific wheel animations */
+.back-to-top.scrolling-down .wheel {
+  background-color: var(--accent-color);
+  animation: scrollWheelDown 1.5s ease-in-out infinite;
+}
+
+.back-to-top.scrolling-up .wheel {
+  background-color: var(--accent-color);
+  animation: scrollWheelUp 1.5s ease-in-out infinite;
+}
+
+/* Arrow styling */
+.back-to-top .arrow-container {
+  margin-top: 15px;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.back-to-top-icon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 3;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Trail arrows */
+.back-to-top .arrow-container::before,
+.back-to-top .arrow-container::after {
+  content: "\f077"; /* FontAwesome chevron up */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.back-to-top .arrow-container::before {
+  transform: translateY(15px);
+}
+
+.back-to-top .arrow-container::after {
+  transform: translateY(30px);
+}
+
+/* Hover effects */
 .back-to-top:hover {
   transform: scale(1.05);
+}
+
+.back-to-top:hover .mouse {
   border-color: var(--accent-color);
 }
 
-/* Mouse button highlight animation on hover */
-.back-to-top:hover::after {
+.back-to-top:hover .wheel {
+  background-color: var(--accent-color);
+}
+
+/* Mouse click highlight */
+.back-to-top:hover .mouse::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  width: 12px;
+  height: 16px;
+  border-radius: 6px 0 0 6px;
   opacity: 1;
+  background-color: rgba(var(--accent-color-rgb), 0.15);
   animation: clickAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
 
-/* Synchronized up arrow animation on hover - continuous gentle bounce */
+/* Arrow hover animations */
+.back-to-top:hover .back-to-top-icon,
+.back-to-top:hover .arrow-container::before,
+.back-to-top:hover .arrow-container::after {
+  color: var(--accent-color);
+}
+
 .back-to-top:hover .back-to-top-icon {
-  color: var(--accent-color);
-  animation: gentleUpBounce 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-  animation-delay: 0.35s; /* Syncs with the click animation's peak */
+  animation: arrowBounce1 2.5s infinite;
+  animation-delay: 0.35s;
 }
 
-/* Rapid up arrow animation when actually clicked */
+.back-to-top:hover .arrow-container::before {
+  opacity: 0.7;
+  animation: arrowBounce2 2.5s infinite;
+  animation-delay: 0.45s;
+}
+
+.back-to-top:hover .arrow-container::after {
+  opacity: 0.4;
+  animation: arrowBounce3 2.5s infinite;
+  animation-delay: 0.55s;
+}
+
+/* Click effects */
 .back-to-top.active .back-to-top-icon {
-  animation: upwardBounce 0.7s ease-out;
+  animation: activeArrow1 0.7s ease-out;
   color: var(--accent-color);
 }
 
-.back-to-top:hover::after {
+.back-to-top.active .arrow-container::before {
+  opacity: 0.7;
+  animation: activeArrow2 0.7s ease-out;
+  color: var(--accent-color);
+}
+
+.back-to-top.active .arrow-container::after {
+  opacity: 0.4;
+  animation: activeArrow3 0.7s ease-out;
+  color: var(--accent-color);
+}
+
+.back-to-top.active .mouse::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  width: 12px;
+  height: 16px;
+  border-radius: 6px 0 0 6px;
   opacity: 1;
-  animation: clickAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  background-color: rgba(var(--accent-color-rgb), 0.5);
+  animation: activeClick 0.7s ease-out;
 }
 
-.back-to-top:active .back-to-top-icon {
-  animation: upwardBounce 1s ease-out;
-  color: var(--accent-color);
+/* Dark mode adjustment */
+.dark .back-to-top .mouse {
+  background-color: var(--background-dark);
 }
 
 /* Animations */
-@keyframes scrollWheel {
+@keyframes scrollWheelDown {
+  0%,
+  100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    transform: translateY(4px) translateX(-50%);
+    opacity: 0.7;
+  }
+}
+
+@keyframes scrollWheelUp {
+  0%,
+  100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    transform: translateY(-4px) translateX(-50%);
+    opacity: 0.7;
+  }
+}
+
+@keyframes arrowBounce1 {
   0%,
   100% {
     transform: translateY(0);
-    opacity: 1;
   }
   50% {
-    transform: translateY(-3px);
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes arrowBounce2 {
+  0%,
+  100% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  60% {
+    transform: translateY(-5px);
     opacity: 0.5;
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes arrowBounce3 {
+  0%,
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  65% {
+    transform: translateY(5px);
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+@keyframes activeArrow1 {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  70% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes activeArrow2 {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  40% {
+    transform: translateY(-10px);
+    opacity: 0.5;
+  }
+  65% {
+    transform: translateY(-5px);
+    opacity: 0.4;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+}
+
+@keyframes activeArrow3 {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  45% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  70% {
+    transform: translateY(5px);
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
   }
 }
 
@@ -219,115 +434,75 @@
   }
 }
 
-@keyframes gentleUpBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  70% {
-    transform: translateY(-3px);
-  }
-  85% {
-    transform: translateY(-5px);
-  }
-}
-
-/* Update the rapid bounce animation for click state - make it faster and more pronounced */
-@keyframes upwardBounce {
+@keyframes activeClick {
   0% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(-12px);
-  }
-  40% {
-    transform: translateY(-8px);
-  }
-  60% {
-    transform: translateY(-14px);
-  }
-  75% {
-    transform: translateY(-10px);
-  }
-  90% {
-    transform: translateY(-12px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes upwardBounce {
-  0% {
-    transform: translateY(0);
+    background-color: rgba(var(--accent-color-rgb), 0.15);
   }
   30% {
-    transform: translateY(-10px);
+    background-color: rgba(var(--accent-color-rgb), 0.7);
+    box-shadow: inset 0 0 10px 3px rgba(var(--accent-color-rgb), 0.4);
+    transform: scale(0.9);
   }
   50% {
-    transform: translateY(-7px);
+    background-color: rgba(var(--accent-color-rgb), 0.6);
+    transform: scale(0.95);
   }
   70% {
-    transform: translateY(-10px);
+    background-color: rgba(var(--accent-color-rgb), 0.7);
+    transform: scale(0.9);
   }
   100% {
-    transform: translateY(0);
+    background-color: rgba(var(--accent-color-rgb), 0.15);
+    transform: scale(1);
   }
 }
 
-.dark .back-to-top {
-  background-color: var(--background-dark);
-}
-
+/* Responsive styling */
 @media (max-width: 768px) {
   .back-to-top {
-    width: 32px;
-    height: 48px;
-    right: 15px;
-    border-radius: 16px;
+    width: 40px;
+    height: 85px;
   }
-  .back-to-top.visible {
-    bottom: 15px;
+  .back-to-top .mouse {
+    width: 26px;
+    height: 36px;
+    border-radius: 13px;
   }
-  .back-to-top-icon {
-    font-size: 1rem;
-    margin-top: 10px;
+  .back-to-top .wheel {
+    width: 4px;
+    height: 7px;
   }
-  .back-to-top::after {
-    width: 12px;
-    height: 16px;
-    top: 6px;
-    left: 4px;
+  .back-to-top-icon,
+  .back-to-top .arrow-container::before,
+  .back-to-top .arrow-container::after {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 576px) {
   .back-to-top {
-    width: 28px;
-    height: 42px;
-    right: 12px;
-    border-radius: 14px;
+    width: 36px;
+    height: 75px;
+    right: 15px;
   }
-  .back-to-top.visible {
-    bottom: 12px;
+  .back-to-top .mouse {
+    width: 22px;
+    height: 32px;
+    border-radius: 11px;
   }
-  .back-to-top-icon {
-    font-size: 0.9rem;
-    margin-top: 8px;
-  }
-  .back-to-top::after {
-    width: 10px;
-    height: 14px;
-    top: 5px;
-    left: 3px;
-    border-radius: 6px 0 0 6px;
-  }
-  .back-to-top::before {
-    width: 3px;
+  .back-to-top .wheel {
+    width: 3.5px;
     height: 6px;
-    margin-top: 3px;
   }
+  .back-to-top-icon,
+  .back-to-top .arrow-container::before,
+  .back-to-top .arrow-container::after {
+    font-size: 1rem;
+  }
+}
+
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xl);
 }

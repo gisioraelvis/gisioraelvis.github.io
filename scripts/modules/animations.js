@@ -206,42 +206,63 @@ export const Animations = {
   setupBackToTop() {
     const backToTopButton = document.getElementById("backToTop");
     if (!backToTopButton) return;
-    let isScrolling;
-    const scrollFunction = Utils.debounce(() => {
-      const scrolled =
-        document.body.scrollTop > 300 ||
-        document.documentElement.scrollTop > 300;
 
-      backToTopButton.classList.toggle("visible", scrolled);
+    let scrollTimer;
+    let lastScrollTop = 0;
 
-      if (scrolled) {
-        backToTopButton.classList.add("scrolling");
-        clearTimeout(isScrolling);
-        isScrolling = setTimeout(() => {
-          backToTopButton.classList.remove("scrolling");
-        }, 1000);
+    const handleScroll = Utils.debounce(() => {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      const shouldShow = scrollTop > 300;
+
+      // Control visibility
+      backToTopButton.classList.toggle("visible", shouldShow);
+
+      if (shouldShow) {
+        // Determine scroll direction
+        const direction =
+          scrollTop > lastScrollTop ? "scrolling-down" : "scrolling-up";
+        lastScrollTop = scrollTop;
+
+        // Set direction class
+        backToTopButton.classList.remove("scrolling-up", "scrolling-down");
+        backToTopButton.classList.add(direction);
+
+        // Stop wheel animation when scrolling stops
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          backToTopButton.classList.remove("scrolling-up", "scrolling-down");
+        }, 500);
       }
     }, 50);
 
-    // Smooth scroll to top
+    // Handle click event
     backToTopButton.addEventListener("click", (e) => {
       e.preventDefault();
-      // to trigger click animation
+
+      // Trigger click animation
       backToTopButton.classList.add("active");
-      // after animation completes
+
       setTimeout(() => {
         backToTopButton.classList.remove("active");
-      }, 1000);
+      }, 700);
+
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
     });
 
-    window.addEventListener("scroll", scrollFunction);
+    // Set up event listeners
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        backToTopButton.classList.remove("scrolling-up", "scrolling-down");
+      }
+    });
 
-    // Call scroll function initially to set correct state
-    scrollFunction();
+    // Initial state check
+    handleScroll();
   },
 
   /**
