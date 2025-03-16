@@ -7,6 +7,8 @@
   --secondary-light: #34d399;
   --secondary-dark: #059669;
   --accent-color: #f59e0b;
+  --accent-color-light: #f9d8ae;
+  --accent-color-dark: #c08400;
 
   /* Primary color in RGB format for transparency */
   --primary-color-rgb: 74, 108, 247;
