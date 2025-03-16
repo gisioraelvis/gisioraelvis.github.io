@@ -481,10 +481,75 @@
 
 @media (max-width: 576px) {
   .back-to-top {
-    width: 36px;
-    height: 75px;
+    width: 42px;
+    height: 42px;
     right: 15px;
+    bottom: -60px;
+    border-radius: 50%;
+    background-color: var(--background-light);
+    border: 2px solid var(--primary-color);
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
   }
+
+  /* Hide mouse styling for touch devices */
+  .back-to-top .mouse-container {
+    display: none;
+  }
+
+  /* Reposition arrow container */
+  .back-to-top .arrow-container {
+    margin-top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Enlarge arrow for better touch target */
+  .back-to-top-icon {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  /* Hide trail arrows for cleaner mobile UI */
+  .back-to-top .arrow-container::before,
+  .back-to-top .arrow-container::after {
+    display: none;
+  }
+
+  /* Visible button state */
+  .back-to-top.visible {
+    bottom: 15px;
+    opacity: 1;
+  }
+
+  /* Touch feedback effects */
+  .back-to-top:active {
+    transform: scale(0.92);
+    background-color: rgba(var(--accent-color-rgb), 0.1);
+    border-color: var(--accent-color);
+  }
+
+  .back-to-top:active .back-to-top-icon {
+    color: var(--accent-color);
+  }
+
+  /* Click animation */
+  .back-to-top.active {
+    animation: mobileButtonPulse 0.7s ease-out;
+    border-color: var(--accent-color);
+  }
+
+  .back-to-top.active .back-to-top-icon {
+    animation: mobilePulseIcon 0.7s ease-out;
+    color: var(--accent-color);
+  }
+
   .back-to-top .mouse {
     width: 22px;
     height: 32px;
@@ -498,6 +563,41 @@
   .back-to-top .arrow-container::before,
   .back-to-top .arrow-container::after {
     font-size: 1rem;
+  }
+}
+
+/* Mobile button animations */
+@keyframes mobileButtonPulse {
+  0% {
+    transform: scale(1);
+    background-color: var(--background-light);
+  }
+  30% {
+    transform: scale(0.9);
+    background-color: rgba(var(--accent-color-rgb), 0.15);
+  }
+  70% {
+    transform: scale(1.1);
+    background-color: rgba(var(--accent-color-rgb), 0.1);
+  }
+  100% {
+    transform: scale(1);
+    background-color: var(--background-light);
+  }
+}
+
+@keyframes mobilePulseIcon {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+  70% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
