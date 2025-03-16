@@ -6,7 +6,7 @@ import { Animations } from "./modules/animations.js";
 import { ContentExpander } from "./modules/expander.js";
 import { GitHubProjects } from "./modules/github-projects.js";
 import { SEO } from "./modules/seo.js";
-import { Utils } from "./utils/utils.js";
+import { Utils } from "./utils.js";
 
 /**
  * Initialize all modules when the DOM is loaded

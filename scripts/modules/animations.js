@@ -1,5 +1,5 @@
-import { CONFIG } from "../config.js";
-import { Utils } from "../utils/utils.js";
+import { CONFIGS } from "../configs.js";
+import { Utils } from "../utils.js";
 
 /**
  * Navigation and UI effects module
@@ -79,7 +79,7 @@ export const Animations = {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           window.scrollTo({
-            top: targetElement.offsetTop - CONFIG.animation.scrollOffset,
+            top: targetElement.offsetTop - CONFIGS.animation.scrollOffset,
             behavior: "smooth",
           });
         }
@@ -122,7 +122,7 @@ export const Animations = {
           }
         });
       },
-      { threshold: CONFIG.animation.threshold }
+      { threshold: CONFIGS.animation.threshold }
     );
 
     // Observe all animatable elements

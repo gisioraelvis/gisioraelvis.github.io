@@ -1,7 +1,7 @@
 /**
  * Configuration object for site-wide settings
  */
-export const CONFIG = {
+export const CONFIGS = {
   github: {
     username: "gisioraelvis",
     cacheDuration: 24 * 60 * 60 * 1000, // 24 hours
