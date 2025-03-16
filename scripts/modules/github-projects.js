@@ -1,5 +1,5 @@
-import { CONFIG } from "../config.js";
-import { Utils } from "../utils/utils.js";
+import { CONFIGS } from "../configs.js";
+import { Utils } from "../utils.js";
 
 /**
  * GitHub repository fetching and display module
@@ -16,7 +16,7 @@ export const GitHubProjects = {
    * Fetch GitHub projects and display them
    */
   async fetchGitHubProjects() {
-    const username = CONFIG.github.username;
+    const username = CONFIGS.github.username;
     const projectsContainer = document.getElementById("github-projects");
     if (!projectsContainer) return;
 
@@ -32,8 +32,8 @@ export const GitHubProjects = {
         // Try to refresh cache in the background if it's getting old (over 12 hours)
         const cacheAge =
           Date.now() -
-          JSON.parse(localStorage.getItem(CONFIG.github.cacheKey)).timestamp;
-        if (cacheAge > CONFIG.github.cacheDuration / 2) {
+          JSON.parse(localStorage.getItem(CONFIGS.github.cacheKey)).timestamp;
+        if (cacheAge > CONFIGS.github.cacheDuration / 2) {
           Utils.log("Cache getting old, refreshing in background...");
           this.fetchAndCacheRepos().catch((error) => {
             Utils.log(
@@ -88,12 +88,12 @@ export const GitHubProjects = {
    */
   checkCache() {
     try {
-      const cachedString = localStorage.getItem(CONFIG.github.cacheKey);
+      const cachedString = localStorage.getItem(CONFIGS.github.cacheKey);
       if (!cachedString) return null;
 
       const cache = JSON.parse(cachedString);
       const isExpired =
-        Date.now() - cache.timestamp > CONFIG.github.cacheDuration;
+        Date.now() - cache.timestamp > CONFIGS.github.cacheDuration;
 
       if (isExpired) {
         Utils.log("Cache expired, will fetch fresh data");
@@ -115,24 +115,24 @@ export const GitHubProjects = {
    * @returns {Promise<Array>} The fetched repositories
    */
   async fetchAndCacheRepos() {
-    const username = CONFIG.github.username;
+    const username = CONFIGS.github.username;
 
     Utils.log("Fetching repositories from GitHub API");
 
     // Should we exclude any repos?
     const shouldExcludeRepo = (repoName) => {
-      if (CONFIG.github.excludedRepos.length === 0) return false;
-      return CONFIG.github.excludedRepos.some((excluded) =>
+      if (CONFIGS.github.excludedRepos.length === 0) return false;
+      return CONFIGS.github.excludedRepos.some((excluded) =>
         repoName.toLowerCase().includes(excluded.toLowerCase())
       );
     };
 
     // Fetch repos from GitHub API
     const response = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=pushed&per_page=${CONFIG.github.fetchLimit}`,
+      `https://api.github.com/users/${username}/repos?sort=pushed&per_page=${CONFIGS.github.fetchLimit}`,
       {
         headers: { Accept: "application/vnd.github.v3+json" },
-        signal: AbortSignal.timeout(CONFIG.github.apiTimeout),
+        signal: AbortSignal.timeout(CONFIGS.github.apiTimeout),
       }
     );
 
@@ -150,9 +150,9 @@ export const GitHubProjects = {
     let featuredRepoObjects = [];
     let otherRepos = [];
 
-    if (CONFIG.github.featuredRepos.length > 0) {
+    if (CONFIGS.github.featuredRepos.length > 0) {
       allRepos.forEach((repo) => {
-        if (CONFIG.github.featuredRepos.includes(repo.name)) {
+        if (CONFIGS.github.featuredRepos.includes(repo.name)) {
           featuredRepoObjects.push(repo);
         } else {
           otherRepos.push(repo);
@@ -167,15 +167,15 @@ export const GitHubProjects = {
 
     // Select repositories to analyze in detail (featured + top sized)
     const reposToAnalyze =
-      CONFIG.github.featuredRepos.length > 0
+      CONFIGS.github.featuredRepos.length > 0
         ? [
             ...featuredRepoObjects,
             ...otherRepos.slice(
               0,
-              CONFIG.github.analyzeLimit - featuredRepoObjects.length
+              CONFIGS.github.analyzeLimit - featuredRepoObjects.length
             ),
           ]
-        : otherRepos.slice(0, CONFIG.github.analyzeLimit);
+        : otherRepos.slice(0, CONFIGS.github.analyzeLimit);
 
     // Get detailed stats for selected repositories
     const reposWithCommits = await Promise.all(
@@ -194,13 +194,13 @@ export const GitHubProjects = {
             return {
               ...repo,
               totalCommits,
-              isFeatured: CONFIG.github.featuredRepos.includes(repo.name),
+              isFeatured: CONFIGS.github.featuredRepos.includes(repo.name),
             };
           }
           return {
             ...repo,
             totalCommits: 0,
-            isFeatured: CONFIG.github.featuredRepos.includes(repo.name),
+            isFeatured: CONFIGS.github.featuredRepos.includes(repo.name),
           };
         } catch (error) {
           Utils.log(
@@ -210,7 +210,7 @@ export const GitHubProjects = {
           return {
             ...repo,
             totalCommits: 0,
-            isFeatured: CONFIG.github.featuredRepos.includes(repo.name),
+            isFeatured: CONFIGS.github.featuredRepos.includes(repo.name),
           };
         }
       })
@@ -230,24 +230,24 @@ export const GitHubProjects = {
       const ageInDays = (now - updatedDate) / (1000 * 60 * 60 * 24);
       const recencyScore = Math.max(0, 100 - ageInDays);
 
-      // Calculate weighted score using config weights
+      // Calculate weighted score using CONFIGS weights
       repo.score =
-        repo.size * CONFIG.github.weights.size +
-        repo.totalCommits * CONFIG.github.weights.commits * 10 +
-        repo.stargazers_count * CONFIG.github.weights.stars * 20 +
-        recencyScore * CONFIG.github.weights.recency;
+        repo.size * CONFIGS.github.weights.size +
+        repo.totalCommits * CONFIGS.github.weights.commits * 10 +
+        repo.stargazers_count * CONFIGS.github.weights.stars * 20 +
+        recencyScore * CONFIGS.github.weights.recency;
     });
 
     // Sort repositories - featured first, then by score
     reposWithCommits.sort((a, b) => {
       // Handle featured repos
-      if (CONFIG.github.featuredRepos.length > 0) {
+      if (CONFIGS.github.featuredRepos.length > 0) {
         if (a.isFeatured && !b.isFeatured) return -1;
         if (!a.isFeatured && b.isFeatured) return 1;
         if (a.isFeatured && b.isFeatured) {
           return (
-            CONFIG.github.featuredRepos.indexOf(a.name) -
-            CONFIG.github.featuredRepos.indexOf(b.name)
+            CONFIGS.github.featuredRepos.indexOf(a.name) -
+            CONFIGS.github.featuredRepos.indexOf(b.name)
           );
         }
       }
@@ -257,12 +257,12 @@ export const GitHubProjects = {
     });
 
     // Take top N repositories
-    const repos = reposWithCommits.slice(0, CONFIG.github.displayLimit);
+    const repos = reposWithCommits.slice(0, CONFIGS.github.displayLimit);
 
     // Cache the results
     try {
       localStorage.setItem(
-        CONFIG.github.cacheKey,
+        CONFIGS.github.cacheKey,
         JSON.stringify({
           timestamp: Date.now(),
           data: repos,
@@ -346,7 +346,7 @@ export const GitHubProjects = {
     });
 
     // Add "View More" button after all project cards
-    const username = CONFIG.github.username;
+    const username = CONFIGS.github.username;
     const viewMoreHTML = `
       <div class="view-more-container">
         <a href="https://github.com/${username}?tab=repositories" target="_blank" class="view-more-button">
@@ -366,7 +366,7 @@ export const GitHubProjects = {
           }
         });
       },
-      { threshold: CONFIG.animation.threshold }
+      { threshold: CONFIGS.animation.threshold }
     );
 
     document.querySelectorAll(".project-card").forEach((card) => {
@@ -409,7 +409,6 @@ export const GitHubProjects = {
     return colors[language] || "#8257e5"; // Default purple color if not found
   },
 };
-
 
 /* Refactor the projects section to:
 First, fetch the pinned repos, then the algorithmically determined repos excluding any if they are already in the pinned repos. The View More project on GitHub should only show after the show/less button. Feel free to design/style the section better. In the process ensure the most optimal implementation/design/styling and any security considerations. 

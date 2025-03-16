@@ -37,6 +37,17 @@
   box-shadow: var(--shadow);
 }
 
+/* Animations */
+.about-card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.about-card:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.about-card:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
 .card-icon {
   font-size: var(--font-size-3xl);
   color: var(--primary-color);
@@ -54,11 +65,9 @@
 .about-card p {
   color: var(--text-light);
   text-align: center;
-  /* Make text take remaining height with flex grow */
-  flex-grow: 1;
+  flex-grow: 1; /* Take remaining height */
 }
 
-/* Responsive styles */
 @media (max-width: 992px) {
   .about-cards {
     grid-template-columns: repeat(3, 1fr);

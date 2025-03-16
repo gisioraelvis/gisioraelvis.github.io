@@ -1,8 +1,8 @@
 /**
  * SEO enhancement module
  */
-import { CONFIG } from "../config.js";
-import { Utils } from "../utils/utils.js";
+import { CONFIGS } from "../configs.js";
+import { Utils } from "../utils.js";
 
 export const SEO = {
   /**
@@ -17,16 +17,16 @@ export const SEO = {
    */
   injectStructuredData() {
     try {
-      // Check if structured data exists in config
-      if (!CONFIG.seo || !CONFIG.seo.structuredData) {
-        Utils.log("No structured data found in CONFIG", "warn");
+      // Check if structured data exists in configs
+      if (!CONFIGS.seo || !CONFIGS.seo.structuredData) {
+        Utils.log("No structured data found in configs", "warn");
         return;
       }
 
       // Create script element
       const script = document.createElement("script");
       script.type = "application/ld+json";
-      script.textContent = JSON.stringify(CONFIG.seo.structuredData);
+      script.textContent = JSON.stringify(CONFIGS.seo.structuredData);
 
       // Add to document head
       document.head.appendChild(script);

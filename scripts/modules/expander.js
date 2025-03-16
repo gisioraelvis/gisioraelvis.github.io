@@ -1,4 +1,4 @@
-import { CONFIG } from "../config.js";
+import { CONFIGS } from "../configs.js";
 
 /**
  * Content expansion module for "Show More" functionality
@@ -11,21 +11,21 @@ export const ContentExpander = {
     this.addShowMoreFunctionality(
       ".timeline",
       ".timeline-item",
-      CONFIG.showMore.initialItems.experience,
+      CONFIGS.showMore.initialItems.experience,
       "experience"
     );
 
     this.addShowMoreFunctionality(
       ".certifications-grid",
       ".certification-item",
-      CONFIG.showMore.initialItems.education,
+      CONFIGS.showMore.initialItems.education,
       "education"
     );
 
     this.addShowMoreFunctionality(
       ".projects-grid",
       ".project-card",
-      CONFIG.showMore.initialItems.projects,
+      CONFIGS.showMore.initialItems.projects,
       "projects"
     );
 
@@ -33,7 +33,7 @@ export const ContentExpander = {
     this.addShowMoreFunctionality(
       ".soft-skills-grid",
       ".soft-skill-item",
-      CONFIG.showMore.initialItems.softSkills,
+      CONFIGS.showMore.initialItems.softSkills,
       "skills"
     );
   },
@@ -120,6 +120,4 @@ export const ContentExpander = {
       }
     });
   },
-
-  // Remove initSoftSkillsToggle() method as it's now redundant
 };
