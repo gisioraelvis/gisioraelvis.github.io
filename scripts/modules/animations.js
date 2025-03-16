@@ -17,10 +17,10 @@ export const Animations = {
     this.setupActiveNavLink();
     this.setupSmoothScrolling();
     this.setupParallaxEffects();
-    this.setupAnimationStyles();
     this.setupMobileMenu();
     this.setupBackToTop();
     this.setupAnimations();
+    this.setupShowMoreHandlers();
   },
 
   /**
@@ -109,71 +109,9 @@ export const Animations = {
   },
 
   /**
-   * Set up CSS animation styles
-   */
-  setupAnimationStyles() {
-    const style = document.createElement("style");
-    style.textContent = `
-      ${this.ANIMATABLE_ELEMENTS} {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-      
-      .animate-in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      /* Timeline animations */
-      .timeline-item:nth-child(1) { transition-delay: 0.1s; }
-      .timeline-item:nth-child(2) { transition-delay: 0.2s; }
-      .timeline-item:nth-child(3) { transition-delay: 0.3s; }
-      
-      /* About card animations */
-      .about-card:nth-child(1) { transition-delay: 0.1s; }
-      .about-card:nth-child(2) { transition-delay: 0.2s; }
-      .about-card:nth-child(3) { transition-delay: 0.3s; }
-      
-      /* Certification animations */
-      .certification-item:nth-child(n) { transition-delay: calc(0.1s * var(--n, 1)); }
-      
-      /* Skills animations */
-      .skills-category:nth-child(1) { transition-delay: 0.1s; }
-      .skills-category:nth-child(2) { transition-delay: 0.2s; }
-      .skills-category:nth-child(3) { transition-delay: 0.3s; }
-      
-      /* Hidden items */
-      .hidden-item {
-        display: none;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      
-      .show-item {
-        display: block;
-        animation: fadeInUp 0.5s forwards;
-      }
-      
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  },
-
-  /**
    * Set up animations using Intersection Observer and handle initial visibility
    */
   setupAnimations() {
-    // Create and configure the intersection observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -286,5 +224,50 @@ export const Animations = {
     });
 
     window.addEventListener("scroll", scrollFunction);
+  },
+
+  /**
+   * Set up handlers for "show more" functionality, preserves original display properties
+   */
+  setupShowMoreHandlers() {
+    document.querySelectorAll(".hidden-item").forEach((item) => {
+      const computedStyle = window.getComputedStyle(item);
+      item.dataset.originalDisplay =
+        computedStyle.display !== "none"
+          ? computedStyle.display
+          : item.tagName === "DIV"
+          ? "block"
+          : "inline";
+    });
+
+    // Handle show more/less buttons
+    document
+      .querySelectorAll('[data-action="show-more"], [data-action="show-less"]')
+      .forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = button.getAttribute("data-target");
+          const targetItems = document.querySelectorAll(targetId);
+
+          targetItems.forEach((item) => {
+            if (item.classList.contains("hidden-item")) {
+              item.classList.remove("hidden-item");
+              item.classList.add("show-item");
+              item.style.display = item.dataset.originalDisplay;
+            } else {
+              item.classList.add("hidden-item");
+              item.classList.remove("show-item");
+            }
+          });
+
+          // Toggle button text if data-alt-text is provided
+          const altText = button.getAttribute("data-alt-text");
+          if (altText) {
+            const currentText = button.textContent;
+            button.textContent = altText;
+            button.setAttribute("data-alt-text", currentText);
+          }
+        });
+      });
   },
 };

@@ -1,6 +1,6 @@
 :root {
   /* Color Palette */
-  --primary-color: #0078d7;
+  --primary-color: #4a6cf7;
   --primary-light: #2b88d8;
   --primary-dark: #005a9e;
   --secondary-color: #10b981;
@@ -9,7 +9,7 @@
   --accent-color: #f59e0b;
 
   /* Primary color in RGB format for transparency */
-  --primary-color-rgb: 0, 120, 215;
+  --primary-color-rgb: 74, 108, 247;
   --accent-color-rgb: 245, 158, 11;
 
   /* Text Colors */
@@ -91,13 +91,15 @@
 }
 
 /* Dark Theme Variables */
-.dark {
+.dark,
+[data-theme="dark"] {
   --primary-color: #0ea5e9;
   --primary-light: #38bdf8;
   --primary-dark: #0284c7;
 
   /* Primary color in RGB format for transparency */
   --primary-color-rgb: 14, 165, 233;
+  --accent-color-rgb: 245, 158, 11;
 
   --secondary-color: #10b981;
   --secondary-light: #34d399;
@@ -109,7 +111,7 @@
   --text-lighter: #9ca3af;
 
   --background-color: #1e1e1e;
-  --background-color-rgb: 30, 30, 30; /* Added RGB version for transparency */
+  --background-color-rgb: 30, 30, 30;
   --background-light: #252526;
   --background-dark: #1a1a1a;
 

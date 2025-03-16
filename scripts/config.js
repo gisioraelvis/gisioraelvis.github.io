@@ -4,17 +4,17 @@
 export const CONFIG = {
   github: {
     username: "gisioraelvis",
-    cacheDuration: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
+    cacheDuration: 24 * 60 * 60 * 1000, // 24 hours
     cacheKey: "github_repos_cache",
     fetchLimit: 50,
     analyzeLimit: 15,
     displayLimit: 6,
     apiTimeout: 10000, // 10 seconds
-    // Add repositories you want to exclude from display
+    // Repositories to exclude from display
     excludedRepos: [
       // Example: "test-repo", "playground", "learning"
     ],
-    // Add repositories you want to showcase at the top
+    // Repositories to show at the top
     featuredRepos: [
       // Example: "portfolio-website", "important-project"
     ],
@@ -27,13 +27,13 @@ export const CONFIG = {
     },
   },
   animation: {
-    threshold: 0.1, // Intersection observer threshold
+    threshold: 0.1, // Intersection observer threshold for animations (10%)
     scrollOffset: 80, // Offset for smooth scrolling
   },
   showMore: {
     initialItems: {
       experience: 2, // Initial number of timeline items to show
-      education: 3, // Initial number of certification items to show
+      education: 6, // Initial number of certification items to show
       projects: 4, // Initial number of project items to show
       softSkills: 6, // Initial number of soft skills to show
     },

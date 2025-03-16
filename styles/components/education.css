@@ -70,6 +70,11 @@
     box-shadow var(--transition-fast);
 }
 
+/* Animation */
+.certification-item:nth-child(n) {
+  transition-delay: calc(0.1s * var(--n, 1));
+}
+
 .certification-item:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow);

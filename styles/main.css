@@ -6,6 +6,7 @@
 @import "base/variables.css";
 @import "base/reset.css";
 @import "base/layout.css";
+@import "base/animations.css";
 
 /* Component styles */
 @import "components/background.css";
