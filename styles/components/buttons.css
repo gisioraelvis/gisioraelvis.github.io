@@ -82,7 +82,6 @@
   padding: 6px 0;
 }
 
-/* Button visibility */
 .back-to-top.visible {
   bottom: 20px;
   opacity: 1;
@@ -107,7 +106,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Wheel styling - visible when not scrolling */
 .back-to-top .wheel {
   width: 5px;
   height: 9px;
@@ -152,10 +150,9 @@
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Trail arrows */
 .back-to-top .arrow-container::before,
 .back-to-top .arrow-container::after {
-  content: "\f077"; /* FontAwesome chevron up */
+  content: "\f077";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   position: absolute;
@@ -186,7 +183,6 @@
   background-color: var(--accent-color);
 }
 
-/* Mouse click highlight */
 .back-to-top:hover .mouse::after {
   content: "";
   position: absolute;
@@ -200,7 +196,6 @@
   animation: clickAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
 
-/* Arrow hover animations */
 .back-to-top:hover .back-to-top-icon,
 .back-to-top:hover .arrow-container::before,
 .back-to-top:hover .arrow-container::after {
@@ -481,26 +476,30 @@
 
 @media (max-width: 576px) {
   .back-to-top {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     right: 15px;
-    bottom: -60px;
+    bottom: -70px;
     border-radius: 50%;
-    background-color: var(--background-light);
-    border: 2px solid var(--primary-color);
-    box-shadow: var(--shadow);
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: none;
   }
 
-  /* Hide mouse styling for touch devices */
+  /* Hide mouse container on mobile */
   .back-to-top .mouse-container {
     display: none;
   }
 
-  /* Reposition arrow container */
+  /* Rocket icon display */
   .back-to-top .arrow-container {
     margin-top: 0;
     height: 100%;
@@ -508,101 +507,219 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 2;
   }
 
-  /* Enlarge arrow for better touch target */
-  .back-to-top-icon {
-    font-size: 1.3rem;
-    margin: 0;
+  .back-to-top .arrow-container::before {
+    content: "\f135"; /* Rocket icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: white;
+    opacity: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    transition: transform 0.3s ease, color 0.3s ease;
   }
 
-  /* Hide trail arrows for cleaner mobile UI */
-  .back-to-top .arrow-container::before,
+  .back-to-top-icon,
   .back-to-top .arrow-container::after {
     display: none;
   }
 
-  /* Visible button state */
+  /* Special effects */
+  .back-to-top::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(
+      ellipse at center,
+      var(--accent-color) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .back-to-top::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1) translate(-50%, -50%);
+    transform-origin: 0 0;
+  }
+
+  /* Visibility states */
   .back-to-top.visible {
     bottom: 15px;
     opacity: 1;
   }
 
-  /* Touch feedback effects */
-  .back-to-top:active {
-    transform: scale(0.92);
-    background-color: rgba(var(--accent-color-rgb), 0.1);
-    border-color: var(--accent-color);
+  .back-to-top.visible:not(.was-visible) {
+    animation: fabSlideIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  .back-to-top:active .back-to-top-icon {
+  .back-to-top.visible.was-visible:not(.scrolling-up) {
+    animation: fabFloat 3s ease-in-out infinite;
+  }
+
+  /* Scrolling states */
+  .back-to-top.visible.scrolling-up {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .back-to-top.scrolling-up .arrow-container::before {
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    animation: rocketScrollUp 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+
+  .back-to-top:not(.visible) {
+    bottom: -70px;
+    opacity: 0;
+    animation: none;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    transform: none !important;
+  }
+
+  /* Touch feedback */
+  .back-to-top:active:not(.scrolling-up) {
+    transform: scale(0.95);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    background-color: var(--accent-color);
+  }
+
+  /* Active state */
+  .back-to-top.active:not(.scrolling-up) {
+    animation: rocketLaunch 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.3),
+      0 0 15px rgba(var(--primary-color-rgb), 0.2);
+  }
+
+  .back-to-top.active::after {
+    animation: ripple 0.8s ease-out;
+  }
+
+  .back-to-top.active::before {
+    opacity: 1;
+    animation: flameEffect 1s ease-out;
+  }
+
+  .back-to-top.active .arrow-container::before {
+    animation: rocketUpward 1s ease-out;
     color: var(--accent-color);
   }
 
-  /* Click animation */
-  .back-to-top.active {
-    animation: mobileButtonPulse 0.7s ease-out;
-    border-color: var(--accent-color);
-  }
-
-  .back-to-top.active .back-to-top-icon {
-    animation: mobilePulseIcon 0.7s ease-out;
-    color: var(--accent-color);
-  }
-
-  .back-to-top .mouse {
-    width: 22px;
-    height: 32px;
-    border-radius: 11px;
-  }
-  .back-to-top .wheel {
-    width: 3.5px;
-    height: 6px;
-  }
-  .back-to-top-icon,
-  .back-to-top .arrow-container::before,
-  .back-to-top .arrow-container::after {
-    font-size: 1rem;
+  /* Dark mode */
+  .dark .back-to-top:not(.scrolling-up) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.4);
   }
 }
 
 /* Mobile button animations */
-@keyframes mobileButtonPulse {
+@keyframes rocketScrollUp {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  50% {
+    transform: translate(-50%, -65%) rotate(-45deg);
+  }
+}
+
+@keyframes fabSlideIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fabFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes rocketLaunch {
   0% {
     transform: scale(1);
-    background-color: var(--background-light);
   }
-  30% {
+  20% {
     transform: scale(0.9);
-    background-color: rgba(var(--accent-color-rgb), 0.15);
   }
-  70% {
+  40% {
     transform: scale(1.1);
-    background-color: rgba(var(--accent-color-rgb), 0.1);
+  }
+  60% {
+    transform: scale(0.9) translateY(5px);
+  }
+  80% {
+    transform: scale(1.05) translateY(-10px);
   }
   100% {
-    transform: scale(1);
-    background-color: var(--background-light);
+    transform: scale(1) translateY(0);
   }
 }
 
-@keyframes mobilePulseIcon {
+@keyframes ripple {
   0% {
-    transform: translateY(0);
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(30) translate(-50%, -50%);
+  }
+}
+
+@keyframes flameEffect {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) rotate(45deg) scale(1);
   }
   30% {
-    transform: translateY(-5px);
+    opacity: 1;
+    transform: translateX(-50%) rotate(45deg) scale(1.5);
   }
   70% {
-    transform: translateY(-8px);
+    opacity: 0.7;
+    transform: translateX(-50%) rotate(45deg) scale(1.2);
   }
   100% {
-    transform: translateY(0);
+    opacity: 0;
+    transform: translateX(-50%) rotate(45deg) scale(1);
   }
 }
 
-.show-more-container {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-xl);
+@keyframes rocketUpward {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  100% {
+    transform: translate(-50%, -250%) rotate(-45deg);
+  }
 }

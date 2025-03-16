@@ -209,14 +209,31 @@ export const Animations = {
 
     let scrollTimer;
     let lastScrollTop = 0;
+    let wasVisible = false;
 
     const handleScroll = Utils.debounce(() => {
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
       const shouldShow = scrollTop > 300;
 
+      // Track if button was previously visible
+      if (backToTopButton.classList.contains("visible")) {
+        wasVisible = true;
+      }
+
       // Control visibility
       backToTopButton.classList.toggle("visible", shouldShow);
+
+      // Apply was-visible class for animation control
+      if (shouldShow) {
+        backToTopButton.classList.toggle("was-visible", wasVisible);
+      } else {
+        // Reset was-visible state after hiding
+        setTimeout(() => {
+          wasVisible = false;
+          backToTopButton.classList.remove("was-visible");
+        }, 300);
+      }
 
       if (shouldShow) {
         // Determine scroll direction
@@ -228,7 +245,7 @@ export const Animations = {
         backToTopButton.classList.remove("scrolling-up", "scrolling-down");
         backToTopButton.classList.add(direction);
 
-        // Stop wheel animation when scrolling stops
+        // Stop animation when scrolling stops
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(() => {
           backToTopButton.classList.remove("scrolling-up", "scrolling-down");
