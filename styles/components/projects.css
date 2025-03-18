@@ -130,7 +130,7 @@
   height: 40px;
   border: 3px solid rgba(66, 153, 225, 0.2);
   border-radius: 50%;
-  border-top-color: var(--primary-color);
+  border-top-color: var(--accent-color);
   animation: spin 1s ease-in-out infinite;
 }
 
