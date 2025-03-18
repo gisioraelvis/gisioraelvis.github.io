@@ -606,13 +606,25 @@
             <!-- Tech Stack subsection-->
             <div class="skills-subsection">
                 <h3 class="skills-subsection-title">Tech Stack</h3>
-                <!-- Core Development Category -->
-                <div class="skills-main-category">
-                    <h3 class="skills-main-heading"><i class="fas fa-laptop-code"></i> Core Development</h3>
 
+                <!-- Category Tabs for Tech Stack -->
+                <div class="skills-category-tabs" role="tablist">
+                    <button class="skills-category-tab active" id="tab-core-dev" role="tab" aria-selected="true"
+                        aria-controls="core-development">
+                        <i class="fas fa-laptop-code"></i> Core Development
+                    </button>
+                    <button class="skills-category-tab" id="tab-ops-infra" role="tab" aria-selected="false"
+                        aria-controls="operations-infrastructure">
+                        <i class="fas fa-cogs"></i> Operations & Infrastructure
+                    </button>
+                </div>
+
+                <!-- Core Development Category -->
+                <div id="core-development" class="skills-main-category active" role="tabpanel"
+                    aria-labelledby="tab-core-dev">
                     <div class="skills-table-container">
                         <div class="skills-table">
-                            <!-- Frontend -->
+                            <!-- Frontend skills -->
                             <div class="skills-category" id="frontend">
                                 <h3><i class="fas fa-desktop"></i> Frontend</h3>
                                 <div class="skills-icons">
@@ -729,9 +741,8 @@
                 </div>
 
                 <!-- Operations & Infrastructure Category -->
-                <div class="skills-main-category">
-                    <h3 class="skills-main-heading"><i class="fas fa-cogs"></i> Operations & Infrastructure</h3>
-
+                <div id="operations-infrastructure" class="skills-main-category" role="tabpanel"
+                    aria-labelledby="tab-ops-infra">
                     <div class="skills-table-container">
                         <div class="skills-table">
                             <!-- Cloud & DevOps -->
@@ -844,9 +855,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="skills-container">
+                <!-- Skills Legend -->
                 <div class="skills-legend">
                     <div class="skills-legend-item">
                         <div class="skills-legend-color expert"></div>
