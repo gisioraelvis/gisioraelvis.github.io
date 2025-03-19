@@ -1,1 +1,1 @@
-Clean up(add/remove necessary/unnecessary comments) and optimize the code. But don't break existing functionality
+Clean up(only necessary), optimize the code and ensuring modularity. But don't break existing functionality
