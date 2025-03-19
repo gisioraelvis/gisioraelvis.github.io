@@ -34,8 +34,6 @@
     <meta property="og:url" content="https://gisioraelvis.github.io">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Elvis Gisiora Portfolio">
-
-    <!-- Structured data loaded dynamically via JavaScript -->
 </head>
 
 <body class="dark">
@@ -603,33 +601,32 @@
                 <div class="section-line" aria-hidden="true"></div>
             </div>
 
-            <div class="skills-container">
-                <div class="skills-legend">
-                    <div class="skills-legend-item">
-                        <div class="skills-legend-color expert"></div>
-                        <span>Expert (85-100%)</span>
-                    </div>
-                    <div class="skills-legend-item">
-                        <div class="skills-legend-color advanced"></div>
-                        <span>Advanced (75-85%)</span>
-                    </div>
-                    <div class="skills-legend-item">
-                        <div class="skills-legend-color intermediate"></div>
-                        <span>Intermediate (65-75%)</span>
-                    </div>
-                    <div class="skills-legend-item">
-                        <div class="skills-legend-color beginner"></div>
-                        <span>Beginner (< 65%)</span>
-                    </div>
+            <!-- Tech Stack subsection-->
+            <div class="skills-subsection">
+                <h3 class="skills-subsection-title">Tech Stack</h3>
+
+                <!-- Category Tabs for Tech Stack -->
+                <div class="skills-category-tabs" role="tablist">
+                    <button class="skills-category-tab active" id="tab-core-dev" role="tab" aria-selected="true"
+                        aria-controls="core-development">
+                        <i class="fas fa-laptop-code"></i>
+                        <span class="tab-text-long">Core Development</span>
+                        <span class="tab-text-short">Core</span>
+                    </button>
+                    <button class="skills-category-tab" id="tab-ops-infra" role="tab" aria-selected="false"
+                        aria-controls="operations-infrastructure">
+                        <i class="fas fa-cogs"></i>
+                        <span class="tab-text-long">Operations & Infrastructure</span>
+                        <span class="tab-text-short">Ops</span>
+                    </button>
                 </div>
 
                 <!-- Core Development Category -->
-                <div class="skills-main-category">
-                    <h3 class="skills-main-heading"><i class="fas fa-laptop-code"></i> Core Development</h3>
-
+                <div id="core-development" class="skills-main-category active" role="tabpanel"
+                    aria-labelledby="tab-core-dev">
                     <div class="skills-table-container">
                         <div class="skills-table">
-                            <!-- Frontend -->
+                            <!-- Frontend skills -->
                             <div class="skills-category" id="frontend">
                                 <h3><i class="fas fa-desktop"></i> Frontend</h3>
                                 <div class="skills-icons">
@@ -656,10 +653,10 @@
                                     <a href="#" title="Redux - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
                                             alt="Redux" width="40" height="40" /></a>
-                                    <a href="#" title="Next.js - 85%"><img
+                                    <a href="#" title="Next.js - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
                                             alt="Next.js" width="40" height="40" /></a>
-                                    <a href="#" title="Angular - 75%"><img
+                                    <a href="#" title="Angular - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
                                             alt="Angular" width="40" height="40" /></a>
                                     <a href="#" title="Tailwind CSS - 85%"><img
@@ -671,7 +668,7 @@
                                     <a href="#" title="PWA - 80%"><img
                                             src="https://raw.githubusercontent.com/webmaxru/progressive-web-apps-logo/master/pwalogo.svg"
                                             alt="PWA" width="40" height="40" /></a>
-                                    <a href="#" title="Flutter - 60%"><img
+                                    <a href="#" title="Flutter - 65%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
                                             alt="Flutter" width="40" height="40" /></a>
                                 </div>
@@ -687,13 +684,13 @@
                                     <a href="#" title="Express.js - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
                                             alt="Express.js" width="40" height="40" /></a>
-                                    <a href="#" title="NestJS - 85%"><img
+                                    <a href="#" title="NestJS - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
                                             alt="NestJS" width="40" height="40" /></a>
-                                    <a href="#" title="Java - 75%"><img
+                                    <a href="#" title="Java - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
                                             alt="Java" width="40" height="40" /></a>
-                                    <a href="#" title="Spring Boot - 70%"><img
+                                    <a href="#" title="Spring Boot - 75%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
                                             alt="Spring Boot" width="40" height="40" /></a>
                                     <a href="#" title="C# - 75%"><img
@@ -721,22 +718,22 @@
                                     <a href="#" title="MongoDB - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
                                             alt="MongoDB" width="40" height="40" /></a>
-                                    <a href="#" title="MySQL - 85%"><img
+                                    <a href="#" title="MySQL - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
                                             alt="MySQL" width="40" height="40" /></a>
-                                    <a href="#" title="PostgreSQL - 80%"><img
+                                    <a href="#" title="PostgreSQL - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
                                             alt="PostgreSQL" width="40" height="40" /></a>
                                     <a href="#" title="MS SQL Server - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
                                             alt="MS SQL Server" width="40" height="40" /></a>
-                                    <a href="#" title="Redis - 75%"><img
+                                    <a href="#" title="Redis - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
                                             alt="Redis" width="40" height="40" /></a>
-                                    <a href="#" title="Firebase - 80%"><img
+                                    <a href="#" title="Firebase - 75%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
                                             alt="Firebase" width="40" height="40" /></a>
-                                    <a href="#" title="Prisma - 80%"><img
+                                    <a href="#" title="Prisma - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
                                             alt="Prisma" width="40" height="40" /></a>
                                 </div>
@@ -746,53 +743,10 @@
                 </div>
 
                 <!-- Operations & Infrastructure Category -->
-                <div class="skills-main-category">
-                    <h3 class="skills-main-heading"><i class="fas fa-cogs"></i> Operations & Infrastructure</h3>
-
+                <div id="operations-infrastructure" class="skills-main-category" role="tabpanel"
+                    aria-labelledby="tab-ops-infra">
                     <div class="skills-table-container">
                         <div class="skills-table">
-                            <!-- Cloud & DevOps -->
-                            <div class="skills-category" id="devops">
-                                <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
-                                <div class="skills-icons">
-                                    <a href="#" title="Azure - 85%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
-                                            alt="Azure" width="40" height="40" /></a>
-                                    <a href="#" title="AWS - 80%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-                                            alt="AWS" width="40" height="40" /></a>
-                                    <a href="#" title="GCP - 75%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
-                                            alt="GCP" width="40" height="40" /></a>
-                                    <a href="#" title="Vercel - 80%"><img
-                                            src="https://cdn.worldvectorlogo.com/logos/vercel.svg" alt="Vercel"
-                                            width="40" height="40" /></a>
-                                    <a href="#" title="Digital Ocean - 90%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"
-                                            alt="Digital Ocean" width="40" height="40" /></a>
-                                    <a href="#" title="Docker - 85%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                                            alt="Docker" width="40" height="40" /></a>
-                                    <a href="#" title="Kubernetes - 70%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                                            alt="Kubernetes" width="40" height="40" /></a>
-                                    <a href="#" title="OpenShift - 65%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redhat/redhat-original.svg"
-                                            alt="OpenShift" width="40" height="40" /></a>
-                                    <a href="#" title="GitHub Actions - 85%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                                            alt="GitHub Actions" width="40" height="40" /></a>
-                                    <a href="#" title="Azure DevOps - 80%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
-                                            alt="Azure DevOps" width="40" height="40" /></a>
-                                    <a href="#" title="Jenkins - 75%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
-                                            alt="Jenkins" width="40" height="40" /></a>
-                                    <a href="#" title="Terraform - 75%"><img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
-                                            alt="Terraform" width="40" height="40" /></a>
-                                </div>
-                            </div>
 
                             <!-- Testing & QA -->
                             <div class="skills-category" id="testing">
@@ -804,10 +758,10 @@
                                     <a href="#" title="Cypress - 80%"><img
                                             src="https://raw.githubusercontent.com/cypress-io/cypress-icons/master/src/logo/cypress-io-logo-round.svg"
                                             alt="Cypress" width="40" height="40" /></a>
-                                    <a href="#" title="Playwright - 80%"><img
+                                    <a href="#" title="Playwright - 90%"><img
                                             src="https://playwright.dev/img/playwright-logo.svg" alt="Playwright"
                                             width="40" height="40" /></a>
-                                    <a href="#" title="xUnit - 75%"><img
+                                    <a href="#" title="xUnit - 70%"><img
                                             src="https://avatars.githubusercontent.com/u/2092016?s=200&v=4" alt="xUnit"
                                             width="40" height="40" /></a>
                                     <a href="#" title="NUnit - 75%"><img
@@ -825,9 +779,52 @@
                                     <a href="#" title="Artillery - 75%"><img
                                             src="https://avatars.githubusercontent.com/u/12608521" alt="Artillery"
                                             width="40" height="40" /></a>
-                                    <a href="#" title="JMeter - 65%"><img
+                                    <a href="#" title="JMeter - 70%"><img
                                             src="https://jmeter.apache.org/images/jmeter_square.svg" alt="JMeter"
                                             width="40" height="40" /></a>
+                                </div>
+                            </div>
+
+                            <!-- Cloud & DevOps -->
+                            <div class="skills-category" id="devops">
+                                <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                                <div class="skills-icons">
+                                    <a href="#" title="Azure - 85%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                                            alt="Azure" width="40" height="40" /></a>
+                                    <a href="#" title="AWS - 80%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+                                            alt="AWS" width="40" height="40" /></a>
+                                    <a href="#" title="GCP - 75%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
+                                            alt="GCP" width="40" height="40" /></a>
+                                    <a href="#" title="Vercel - 90%"><img
+                                            src="https://cdn.worldvectorlogo.com/logos/vercel.svg" alt="Vercel"
+                                            width="40" height="40" /></a>
+                                    <a href="#" title="Digital Ocean - 85%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"
+                                            alt="Digital Ocean" width="40" height="40" /></a>
+                                    <a href="#" title="Docker - 85%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                            alt="Docker" width="40" height="40" /></a>
+                                    <a href="#" title="Kubernetes - 65%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                                            alt="Kubernetes" width="40" height="40" /></a>
+                                    <a href="#" title="OpenShift - 65%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redhat/redhat-original.svg"
+                                            alt="OpenShift" width="40" height="40" /></a>
+                                    <a href="#" title="GitHub Actions - 85%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                            alt="GitHub Actions" width="40" height="40" /></a>
+                                    <a href="#" title="Azure DevOps - 85%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                                            alt="Azure DevOps" width="40" height="40" /></a>
+                                    <a href="#" title="Jenkins - 65%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                                            alt="Jenkins" width="40" height="40" /></a>
+                                    <a href="#" title="Terraform - 60%"><img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
+                                            alt="Terraform" width="40" height="40" /></a>
                                 </div>
                             </div>
 
@@ -835,50 +832,52 @@
                             <div class="skills-category" id="observability">
                                 <h3><i class="fas fa-chart-line"></i> Observability & Analytics</h3>
                                 <div class="skills-icons">
-                                    <a href="#" title="Grafana - 75%"><img
+                                    <a href="#" title="Grafana - 70%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
                                             alt="Grafana" width="40" height="40" /></a>
                                     <a href="#" title="Prometheus - 70%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
                                             alt="Prometheus" width="40" height="40" /></a>
-                                    <a href="#" title="Google Analytics - 80%"><img
+                                    <a href="#" title="Google Analytics - 70%"><img
                                             src="https://www.vectorlogo.zone/logos/google_analytics/google_analytics-icon.svg"
                                             alt="Google Analytics" width="40" height="40" /></a>
-                                    <a href="#" title="Microsoft Clarity - 75%"><img
+                                    <a href="#" title="Microsoft Clarity - 70%"><img
                                             src="https://raw.githubusercontent.com/gisioraelvis/gisioraelvis/refs/heads/v1/assets/images/tech/microsoft-clarity.jpg"
                                             alt="Microsoft Clarity" width="40" height="40" /></a>
-                                    <a href="#" title="ELK Stack - 65%"><img
+                                    <a href="#" title="ELK Stack - 60%"><img
                                             src="https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg"
                                             alt="ELK Stack" width="40" height="40" /></a>
                                     <a href="#" title="Datadog - 60%"><img
                                             src="https://imgix.datadoghq.com/img/dd_logo_70x75.png" alt="Datadog"
                                             width="40" height="40" /></a>
-                                    <a href="#" title="New Relic - 60%"><img
-                                            src="https://newrelic.com/themes/custom/erno/assets/mediakit/new_relic_logo_vertical.svg"
-                                            alt="New Relic" width="40" height="40" /></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="skills-legend">
-                <div class="skills-legend-item">
-                    <div class="skills-legend-color expert"></div>
-                    <span>Expert (85-100%)</span>
-                </div>
-                <div class="skills-legend-item">
-                    <div class="skills-legend-color advanced"></div>
-                    <span>Advanced (75-85%)</span>
-                </div>
-                <div class="skills-legend-item">
-                    <div class="skills-legend-color intermediate"></div>
-                    <span>Intermediate (65-75%)</span>
-                </div>
-                <div class="skills-legend-item">
-                    <div class="skills-legend-color beginner"></div>
-                    <span>Beginner (< 65%)</span>
+                <!-- Skills Legend -->
+                <div class="skills-legend">
+                    <div class="skills-legend-item">
+                        <div class="skills-legend-color expert"></div>
+                        <span class="legend-text">Expert</span>
+                        <span class="legend-percentage">(85-100%)</span>
+                    </div>
+                    <div class="skills-legend-item">
+                        <div class="skills-legend-color advanced"></div>
+                        <span class="legend-text">Advanced</span>
+                        <span class="legend-percentage">(75-85%)</span>
+                    </div>
+                    <div class="skills-legend-item">
+                        <div class="skills-legend-color intermediate"></div>
+                        <span class="legend-text">Intermediate</span>
+                        <span class="legend-percentage">(65-75%)</span>
+                    </div>
+                    <div class="skills-legend-item">
+                        <div class="skills-legend-color beginner"></div>
+                        <span class="legend-text">Beginner</span>
+                        <span class="legend-percentage">(&lt;65%)</span>
+                    </div>
                 </div>
             </div>
 

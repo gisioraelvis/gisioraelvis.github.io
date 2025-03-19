@@ -21,16 +21,15 @@
   padding: 0.75rem 1.5rem;
   background-color: transparent;
   color: var(--text-color);
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
   font-weight: 500;
   transition: all var(--transition-fast);
 }
 
 .secondary-btn:hover {
-  background-color: rgba(var(--accent-color-rgb), 0.1);
-  text-decoration: none;
-  color: var(--accent-color);
+  color: white;
+  border: 1px solid var(--accent-color);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
@@ -42,7 +41,7 @@
   padding: 0.75rem 1.5rem;
   background-color: var(--background-light);
   color: var(--text-color);
-  border: 1px solid var(--card-border);
+  border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
   font-weight: 500;
   cursor: pointer;
@@ -477,8 +476,8 @@
 /* Mobile styling for back-to-top button */
 @media (max-width: 576px) {
   .back-to-top {
-    width: 44px;
-    height: 44px;
+    width: 45px;
+    height: 45px;
     right: 15px;
     bottom: -70px;
     border-radius: 50%;
@@ -507,7 +506,7 @@
     transform: translateX(-50%);
     color: var(--accent-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     opacity: 1;
     display: block;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -522,7 +521,7 @@
   }
 
   .back-to-top .arrow-container::before {
-    content: "\f135";
+    content: "\f135"; /* Rocket icon */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 1.1rem;
