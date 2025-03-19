@@ -4,7 +4,6 @@
 import { ThemeManager } from "./modules/theme.js";
 import { Animations } from "./modules/animations.js";
 import { GitHubProjects } from "./modules/github-projects.js";
-import { SEO } from "./modules/seo.js";
 import { Utils } from "./utils.js";
 
 /**
@@ -14,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ThemeManager.init();
   Animations.init();
   GitHubProjects.init();
-  SEO.init();
   Utils.setCopyrightYear();
 
   Utils.log("Website initialization complete", "info");
