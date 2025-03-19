@@ -1,25 +1,17 @@
 /**
- * SkillsTabs Module
- * Handles interactive category tabs and animations for the Tech Stack section
+ * SkillsTabs Module - Manages interactive skills category tabs and animations
  */
 export class SkillsTabs {
-  /**
-   * Initialize the skills section functionality
-   */
   static init() {
     this.initTechStackTabs();
     this.setupSkillIndicators();
     this.setupIntersectionObservers();
+    this.initResponsiveBehavior();
   }
 
-  /**
-   * Set up the tab system for tech stack categories
-   */
   static initTechStackTabs() {
-    // Get all tech stack category tabs
     const categoryTabs = document.querySelectorAll(".skills-category-tab");
 
-    // Add click event listeners to each tab
     categoryTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         // Update tab states
@@ -31,7 +23,7 @@ export class SkillsTabs {
         tab.classList.add("active");
         tab.setAttribute("aria-selected", "true");
 
-        // Show corresponding category content
+        // Show corresponding content
         const targetId = tab.getAttribute("aria-controls");
         const categories = document.querySelectorAll(".skills-main-category");
 
@@ -45,10 +37,10 @@ export class SkillsTabs {
   }
 
   /**
-   * Set up circular skill level indicators for tech skills
+   * Enhanced skill indicators with consistent color matching between
+   * skill icons, borders, tooltips and legend
    */
   static setupSkillIndicators() {
-    // Add circular progress indicators for skill levels
     document.querySelectorAll(".skills-icons a").forEach((icon) => {
       const title = icon.getAttribute("title") || "";
       const percentageMatch = title.match(/(\d+)%/);
@@ -56,15 +48,33 @@ export class SkillsTabs {
       if (percentageMatch && percentageMatch[1]) {
         const percentage = parseInt(percentageMatch[1], 10);
         icon.style.setProperty("--skill-percentage", `${percentage}%`);
+
+        // Remove any existing level classes first
+        icon.classList.remove(
+          "expert-level",
+          "advanced-level",
+          "intermediate-level",
+          "beginner-level"
+        );
+
+        // Add proficiency level class based on percentage
+        if (percentage >= 85) {
+          icon.classList.add("expert-level");
+        } else if (percentage >= 75) {
+          icon.classList.add("advanced-level");
+        } else if (percentage >= 65) {
+          icon.classList.add("intermediate-level");
+        } else {
+          icon.classList.add("beginner-level");
+        }
+
+        // Make the conic gradient visible by default with subtle opacity
+        icon.classList.add("with-indicator");
       }
     });
   }
 
-  /**
-   * Set up intersection observers for animation elements when they come into view
-   */
   static setupIntersectionObservers() {
-    // Create observer for skills categories
     const skillsObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -77,14 +87,43 @@ export class SkillsTabs {
       { threshold: 0.2, rootMargin: "0px 0px -50px 0px" }
     );
 
-    // Observe all skill categories
-    document.querySelectorAll(".skills-category").forEach((category) => {
-      skillsObserver.observe(category);
-    });
+    // Observe skill categories and soft skill items
+    document
+      .querySelectorAll(".skills-category, .soft-skill-item")
+      .forEach((element) => {
+        skillsObserver.observe(element);
+      });
+  }
 
-    // Observe all soft skill items
-    document.querySelectorAll(".soft-skill-item").forEach((item) => {
-      skillsObserver.observe(item);
+  static initResponsiveBehavior() {
+    // Initial check
+    this.handleViewportChange();
+
+    // Throttled resize handler
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(this.handleViewportChange.bind(this), 100);
+    });
+  }
+
+  static handleViewportChange() {
+    const isMobile = window.innerWidth <= 768;
+    const tabContainer = document.querySelector(".skills-category-tabs");
+
+    if (!tabContainer) return;
+
+    // Toggle mobile view class
+    tabContainer.classList.toggle("mobile-view", isMobile);
+
+    // Update accessibility attributes
+    document.querySelectorAll(".skills-category-tab").forEach((tab) => {
+      const shortText = tab.querySelector(".tab-text-short")?.textContent;
+      const longText = tab.querySelector(".tab-text-long")?.textContent;
+
+      if (shortText && longText) {
+        tab.setAttribute("aria-label", isMobile ? shortText : longText);
+      }
     });
   }
 }
