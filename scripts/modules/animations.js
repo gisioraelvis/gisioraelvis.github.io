@@ -2,10 +2,10 @@ import { CONFIGS } from "../configs.js";
 import { Utils } from "../utils.js";
 
 /**
- * Navigation and UI effects module
+ * UI animations, interactions, and content management module
  */
 export const Animations = {
-  // Selector for all animatable elements
+  // Selector for animatable elements
   ANIMATABLE_ELEMENTS:
     ".about-card, .timeline-item, .certification-item, .skills-category, .project-card, .contact-card",
 
@@ -21,11 +21,12 @@ export const Animations = {
     this.setupBackToTop();
     this.setupAnimations();
     this.setupShowMoreHandlers();
+    this.setupContentExpanders();
+    this.setupSkillsTabs();
+    this.setupSkillIndicators();
+    this.setupSkillsObserver();
   },
 
-  /**
-   * Set up navbar scroll effect
-   */
   setupNavbarScroll() {
     const navbar = document.querySelector(".navbar");
     if (!navbar) return;
@@ -35,9 +36,6 @@ export const Animations = {
     });
   },
 
-  /**
-   * Set up active nav link highlighting
-   */
   setupActiveNavLink() {
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-link");
@@ -65,9 +63,6 @@ export const Animations = {
     window.addEventListener("scroll", highlightNavLink);
   },
 
-  /**
-   * Set up smooth scrolling for anchor links
-   */
   setupSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
@@ -87,9 +82,6 @@ export const Animations = {
     });
   },
 
-  /**
-   * Set up parallax effects for badges
-   */
   setupParallaxEffects() {
     const badges = document.querySelectorAll(".badge");
     if (!badges.length) return;
@@ -108,16 +100,12 @@ export const Animations = {
     });
   },
 
-  /**
-   * Set up animations using Intersection Observer and handle initial visibility
-   */
   setupAnimations() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-in");
-            // Once animated, no need to observe anymore
             observer.unobserve(entry.target);
           }
         });
@@ -125,21 +113,14 @@ export const Animations = {
       { threshold: CONFIGS.animation.threshold }
     );
 
-    // Observe all animatable elements
     document.querySelectorAll(this.ANIMATABLE_ELEMENTS).forEach((el) => {
       observer.observe(el);
     });
 
-    // Initial check for elements already in view
     this.checkElementsInView();
-
-    // Also check on window load to ensure all elements are properly animated
     window.addEventListener("load", () => this.checkElementsInView());
   },
 
-  /**
-   * Check which elements are in view and animate them immediately
-   */
   checkElementsInView() {
     document.querySelectorAll(this.ANIMATABLE_ELEMENTS).forEach((element) => {
       const elementTop = element.getBoundingClientRect().top;
@@ -151,9 +132,6 @@ export const Animations = {
     });
   },
 
-  /**
-   * Set up mobile menu
-   */
   setupMobileMenu() {
     const menuToggle = document.querySelector(".menu-toggle");
     const menuOverlay = document.querySelector(".menu-overlay");
@@ -178,20 +156,15 @@ export const Animations = {
       menuOverlay.addEventListener("click", () => this.closeMobileMenu());
     }
 
-    // Close menu when a nav link is clicked
     navLinks.forEach((link) => {
       link.addEventListener("click", () => this.closeMobileMenu());
     });
 
-    // Close menu on escape key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") this.closeMobileMenu();
     });
   },
 
-  /**
-   * Close the mobile menu
-   */
   closeMobileMenu() {
     document.body.classList.remove("menu-open");
     const menuToggle = document.querySelector(".menu-toggle");
@@ -200,9 +173,6 @@ export const Animations = {
     }
   },
 
-  /**
-   * Set up back to top button behavior
-   */
   setupBackToTop() {
     const backToTopButton = document.getElementById("backToTop");
     if (!backToTopButton) return;
@@ -284,9 +254,6 @@ export const Animations = {
     handleScroll();
   },
 
-  /**
-   * Set up handlers for "show more" functionality, preserves original display properties
-   */
   setupShowMoreHandlers() {
     document.querySelectorAll(".hidden-item").forEach((item) => {
       const computedStyle = window.getComputedStyle(item);
@@ -298,7 +265,6 @@ export const Animations = {
           : "inline";
     });
 
-    // Handle show more/less buttons
     document
       .querySelectorAll('[data-action="show-more"], [data-action="show-less"]')
       .forEach((button) => {
@@ -318,7 +284,6 @@ export const Animations = {
             }
           });
 
-          // Toggle button text if data-alt-text is provided
           const altText = button.getAttribute("data-alt-text");
           if (altText) {
             const currentText = button.textContent;
@@ -326,6 +291,186 @@ export const Animations = {
             button.setAttribute("data-alt-text", currentText);
           }
         });
+      });
+  },
+
+  setupContentExpanders() {
+    this.addContentExpander(
+      ".timeline",
+      ".timeline-item",
+      CONFIGS.showMore.initialItems.experience,
+      "experience"
+    );
+
+    this.addContentExpander(
+      ".certifications-grid",
+      ".certification-item",
+      CONFIGS.showMore.initialItems.education,
+      "education"
+    );
+
+    this.addContentExpander(
+      ".projects-grid",
+      ".project-card",
+      CONFIGS.showMore.initialItems.projects,
+      "projects"
+    );
+
+    this.addContentExpander(
+      ".soft-skills-grid",
+      ".soft-skill-item",
+      CONFIGS.showMore.initialItems.softSkills,
+      "skills"
+    );
+  },
+
+  addContentExpander(containerSelector, itemSelector, initialCount, sectionId) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    const items = container.querySelectorAll(itemSelector);
+    if (items.length <= initialCount) return;
+
+    let buttonContainer = document.querySelector(
+      `#${sectionId} .show-more-container`
+    );
+
+    if (!buttonContainer) {
+      buttonContainer = document.createElement("div");
+      buttonContainer.className = "show-more-container";
+      container.parentNode.insertBefore(buttonContainer, container.nextSibling);
+    } else {
+      buttonContainer.innerHTML = "";
+    }
+
+    const showMoreBtn = document.createElement("button");
+    showMoreBtn.className = "show-more-btn";
+    showMoreBtn.innerHTML = 'Show More <i class="fas fa-chevron-down"></i>';
+    buttonContainer.appendChild(showMoreBtn);
+
+    let isExpanded = false;
+    items.forEach((item, index) => {
+      if (index >= initialCount) {
+        item.classList.add("hidden-item");
+      } else {
+        item.classList.remove("hidden-item");
+      }
+    });
+
+    showMoreBtn.addEventListener("click", () => {
+      isExpanded = !isExpanded;
+
+      items.forEach((item, index) => {
+        if (index >= initialCount) {
+          if (isExpanded) {
+            item.classList.remove("hidden-item");
+            item.classList.add("show-item");
+          } else {
+            item.classList.remove("show-item");
+            item.classList.add("hidden-item");
+          }
+        }
+      });
+
+      showMoreBtn.innerHTML = isExpanded
+        ? 'Show Less <i class="fas fa-chevron-up"></i>'
+        : 'Show More <i class="fas fa-chevron-down"></i>';
+
+      if (!isExpanded && items[initialCount - 1]) {
+        items[initialCount - 1].scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    });
+  },
+
+  // Skills Tabs Integration
+
+  setupSkillsTabs() {
+    const categoryTabs = document.querySelectorAll(".skills-category-tab");
+    if (!categoryTabs.length) return;
+
+    categoryTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        this.updateSkillsTabStates(categoryTabs, tab);
+        this.showSkillsTabContent(tab);
+      });
+    });
+  },
+
+  updateSkillsTabStates(tabs, activeTab) {
+    tabs.forEach((tab) => {
+      tab.classList.remove("active");
+      tab.setAttribute("aria-selected", "false");
+    });
+
+    activeTab.classList.add("active");
+    activeTab.setAttribute("aria-selected", "true");
+  },
+
+  showSkillsTabContent(tab) {
+    const targetId = tab.getAttribute("aria-controls");
+    const categories = document.querySelectorAll(".skills-main-category");
+
+    categories.forEach((category) => {
+      category.classList.remove("active");
+    });
+
+    document.getElementById(targetId)?.classList.add("active");
+  },
+
+  setupSkillIndicators() {
+    document.querySelectorAll(".skills-icons a").forEach((icon) => {
+      const title = icon.getAttribute("title") || "";
+      const percentageMatch = title.match(/(\d+)%/);
+
+      if (!percentageMatch || !percentageMatch[1]) return;
+
+      const percentage = parseInt(percentageMatch[1], 10);
+      icon.style.setProperty("--skill-percentage", `${percentage}%`);
+
+      icon.classList.remove(
+        "expert-level",
+        "advanced-level",
+        "intermediate-level",
+        "beginner-level"
+      );
+
+      this.applyProficiencyClass(icon, percentage);
+      icon.classList.add("with-indicator");
+    });
+  },
+
+  applyProficiencyClass(element, percentage) {
+    if (percentage >= 85) {
+      element.classList.add("expert-level");
+    } else if (percentage >= 75) {
+      element.classList.add("advanced-level");
+    } else if (percentage >= 65) {
+      element.classList.add("intermediate-level");
+    } else {
+      element.classList.add("beginner-level");
+    }
+  },
+
+  setupSkillsObserver() {
+    const skillsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animated");
+            skillsObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document
+      .querySelectorAll(".skills-category, .soft-skill-item")
+      .forEach((element) => {
+        skillsObserver.observe(element);
       });
   },
 };
