@@ -247,12 +247,16 @@ export const GitHubProjects = {
                 }
               </div>
               <div class="project-stats">
-                <span class="project-stat"><i class="fas fa-star"></i> ${
-                  repo.stargazers_count
-                }</span>
-                <span class="project-stat"><i class="fas fa-code-branch"></i> ${
-                  repo.forks_count
-                }</span>
+                ${
+                  repo.stargazers_count > 0
+                    ? `<span class="project-stat"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>`
+                    : ""
+                }
+                ${
+                  repo.forks_count > 0
+                    ? `<span class="project-stat"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>`
+                    : ""
+                }
               </div>
             </div>
           </div>
