@@ -43,7 +43,7 @@ body.no-scroll {
 .section-header {
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-md);
   gap: 1rem;
 }
 
