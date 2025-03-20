@@ -2,7 +2,7 @@ import { CONFIGS } from "../configs.js";
 import { Utils } from "../utils.js";
 
 /**
- * Manages fetching, caching and displaying GitHub projects
+ * Handles fetching, caching and displaying GitHub projects
  */
 export const GitHubProjects = {
   init() {
@@ -10,14 +10,12 @@ export const GitHubProjects = {
   },
 
   /**
-   * Load featured repositories from JSON file with essential validation
-   * @returns {Promise<Array>} The featured repositories or empty array if not available
+   * Load the featured repos
+   * @returns {Promise<Array>} featured reps or empty if not available
    */
   async loadFeaturedRepos() {
     try {
       const response = await fetch("/assets/data/featured-repos.json");
-
-      // Basic response validation
       if (!response.ok) {
         Utils.log(
           `Featured repos unavailable: HTTP ${response.status}`,
@@ -188,6 +186,8 @@ export const GitHubProjects = {
 
   /**
    * Display repositories in the container with proper formatting
+   * @param {Array} repos - Repositories to display
+   * @param {HTMLElement} container - Container element
    */
   displayProjects(repos, container) {
     container.innerHTML = "";
@@ -197,75 +197,108 @@ export const GitHubProjects = {
       return;
     }
 
-    // Create project cards
+    // Create a projects grid container
+    const projectsGrid = document.createElement("div");
+    projectsGrid.className = "projects-grid";
+    container.appendChild(projectsGrid);
+
+    // Create project cards - display all repos from cache
+    // The show/hide logic is handled by setupProjectExpander
     repos.forEach((rawRepo) => {
       const repo = this.sanitizeRepoData(rawRepo);
       const languageColor = this.getLanguageColor(repo.language);
 
-      container.innerHTML += `
-        <div class="project-card">
-          <div class="project-content">
-            <div class="project-header">
-              <h3 class="project-title">
-                <a href="${repo.html_url}" target="_blank" rel="noopener">
-                  <i class="fab fa-github"></i> ${repo.name}
-                </a>
-              </h3>
+      const projectCard = document.createElement("div");
+      projectCard.className = "project-card";
+      projectCard.innerHTML = `
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">
+              <a href="${repo.html_url}" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> ${repo.name}
+              </a>
+            </h3>
+            ${
+              repo.homepage
+                ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Live Demo">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>`
+                : ""
+            }
+          </div>
+          <p class="project-description">${repo.description}</p>
+          <div class="project-footer">
+            <div class="project-tech-stack">
               ${
-                repo.homepage
-                  ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Live Demo">
-                      <i class="fas fa-external-link-alt"></i>
-                    </a>`
-                  : ""
+                repo.language
+                  ? `<span class="tech-tag">
+                      <span class="language-color" style="background-color: ${languageColor}"></span>
+                      ${repo.language}
+                    </span>`
+                  : `<span class="tech-tag empty-tag">No language specified</span>`
               }
             </div>
-            <p class="project-description">${repo.description}</p>
-            <div class="project-footer">
-              <div class="project-tech-stack">
-                ${
-                  repo.language
-                    ? `<span class="tech-tag">
-                        <span class="language-color" style="background-color: ${languageColor}"></span>
-                        ${repo.language}
-                      </span>`
-                    : `<span class="tech-tag empty-tag">No language specified</span>`
-                }
-              </div>
-              <div class="project-stats">
-                ${
-                  repo.stargazers_count > 0
-                    ? `<span class="project-stat has-count">
-                        <i class="fas fa-star"></i> ${repo.stargazers_count}
-                      </span>`
-                    : ""
-                }
-                ${
-                  repo.forks_count > 0
-                    ? `<span class="project-stat has-count">
-                        <i class="fas fa-code-branch"></i> ${repo.forks_count}
-                      </span>`
-                    : ""
-                }
-              </div>
+            <div class="project-stats">
+              ${
+                repo.stargazers_count > 0
+                  ? `<span class="project-stat has-count">
+                      <i class="fas fa-star"></i> ${repo.stargazers_count}
+                    </span>`
+                  : ""
+              }
+              ${
+                repo.forks_count > 0
+                  ? `<span class="project-stat has-count">
+                      <i class="fas fa-code-branch"></i> ${repo.forks_count}
+                    </span>`
+                  : ""
+              }
             </div>
           </div>
         </div>
       `;
+      projectsGrid.appendChild(projectCard);
     });
-
-    // Add "View More" button
-    const username = CONFIGS.github.username;
-    container.innerHTML += `
-      <div class="view-more-container">
-        <a href="https://github.com/${username}?tab=repositories" target="_blank" rel="noopener" class="view-more-button">
-          <span>View More on GitHub</span>
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </a>
-      </div>
-    `;
 
     // Apply animations
     this.applyAnimations();
+
+    // Add show more/less functionality for projects
+    this.setupProjectExpander(repos.length);
+  },
+
+  /**
+   * Set up show more/less expander
+   * @param {number} totalProjects - Total number of projects
+   */
+  setupProjectExpander(totalProjects) {
+    // Import the ContentExpander dynamically to avoid circular dependencies
+    import("../modules/expander.js").then((module) => {
+      const ContentExpander = module.ContentExpander;
+      const initialCount = CONFIGS.showMore.initialItems.projects;
+
+      // Only setup expander if we have more projects than the initial count
+      if (totalProjects > initialCount) {
+        const projectsSection = document.getElementById("projects");
+        const projectsGrid = projectsSection.querySelector(".projects-grid");
+
+        // Apply hidden-item class to projects beyond initial count
+        const projectCards = projectsGrid.querySelectorAll(".project-card");
+        projectCards.forEach((card, index) => {
+          if (index >= initialCount) {
+            card.classList.add("hidden-item");
+          }
+        });
+
+        // Add the show more/less button
+        ContentExpander.addContentExpander(
+          ".projects-grid",
+          ".project-card",
+          initialCount,
+          "projects"
+        );
+      }
+    });
   },
 
   /**
@@ -332,13 +365,11 @@ export const GitHubProjects = {
     // Sort repositories - featured first, then by score
     const sortedRepos = this.sortRepositories(processedRepos);
 
-    // Take top N repositories for display
-    const finalRepos = sortedRepos.slice(0, CONFIGS.github.displayLimit);
+    // Cache all processed repos - not limited by displayLimit
+    // This ensures we have both featured and algorithmic repos in cache
+    this.cacheRepos(sortedRepos);
 
-    // Cache the results
-    this.cacheRepos(finalRepos);
-
-    return finalRepos;
+    return sortedRepos;
   },
 
   /**
