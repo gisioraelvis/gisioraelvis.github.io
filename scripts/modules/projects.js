@@ -5,9 +5,6 @@ import { Utils } from "../utils.js";
  * Manages fetching, caching and displaying GitHub projects
  */
 export const GitHubProjects = {
-  // Cache version for schema validation
-  CACHE_VERSION: 1,
-
   init() {
     this.fetchGitHubProjects();
   },
@@ -24,7 +21,7 @@ export const GitHubProjects = {
       if (!response.ok) {
         Utils.log(
           `Featured repos unavailable: HTTP ${response.status}`,
-          "warn"
+          "error"
         );
         return [];
       }
@@ -55,8 +52,8 @@ export const GitHubProjects = {
         //       Utils.log(`Background refresh failed: ${e.message}`, "warn")
         //     ),
         //   100
-        // );
-        return [];
+        //  );
+        // return [];
       }
 
       Utils.log(`Using featured repos (${ageInDays.toFixed(1)} days old)`);
@@ -64,7 +61,7 @@ export const GitHubProjects = {
         (repo) => typeof repo === "string" && repo.trim().length > 0
       );
     } catch (error) {
-      Utils.log(`Featured repos error: ${error.message}`, "warn");
+      Utils.log(`Featured repos error: ${error.message}`, "error");
       return [];
     }
   },
@@ -103,7 +100,7 @@ export const GitHubProjects = {
           // Refresh aging cache in background (half of cache duration)
           if (cacheAge > CONFIGS.github.cacheDuration / 2) {
             this.fetchAndCacheRepos().catch((error) =>
-              Utils.log(`Background refresh failed: ${error.message}`, "warn")
+              Utils.log(`Background refresh failed: ${error.message}`, "error")
             );
           }
         } else {
@@ -163,7 +160,7 @@ export const GitHubProjects = {
       const isValid =
         cache &&
         Array.isArray(cache.data) &&
-        cache.version === this.CACHE_VERSION &&
+        cache.version === CONFIGS.github.cacheVersion &&
         cache.timestamp &&
         Date.now() - cache.timestamp <= CONFIGS.github.cacheDuration;
 
@@ -175,7 +172,7 @@ export const GitHubProjects = {
       return cache.data;
     } catch (error) {
       // Any parse error means invalid cache
-      Utils.log(`Cache read error: ${error.message}`, "warn");
+      Utils.log(`Cache read error: ${error.message}`, "error");
       return null;
     }
   },
@@ -219,9 +216,8 @@ export const GitHubProjects = {
           <div class="project-content">
             <div class="project-header">
               <h3 class="project-title">
-                <a href="${repo.html_url}" target="_blank" rel="noopener">${
-        repo.name
-      }</a>
+                <a href="${repo.html_url}" target="_blank" rel="noopener">
+                  ${repo.name}</a>
               </h3>
               <div class="project-links">
                 <a href="${
@@ -448,7 +444,7 @@ export const GitHubProjects = {
         } catch (error) {
           Utils.log(
             `Couldn't get stats for ${repo.name}: ${error.message}`,
-            "warn"
+            "error"
           );
           return {
             ...repo,
@@ -490,7 +486,7 @@ export const GitHubProjects = {
   cacheRepos(repos) {
     try {
       const cacheData = {
-        version: this.CACHE_VERSION,
+        version: CONFIGS.github.cacheVersion,
         timestamp: Date.now(),
         data: repos,
       };
@@ -498,7 +494,7 @@ export const GitHubProjects = {
       localStorage.setItem(CONFIGS.github.cacheKey, JSON.stringify(cacheData));
       Utils.log("Repository data cached successfully");
     } catch (error) {
-      Utils.log(`Failed to cache repositories: ${error.message}`, "warn");
+      Utils.log(`Failed to cache repositories: ${error.message}`, "error");
     }
   },
 
