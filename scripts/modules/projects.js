@@ -175,7 +175,7 @@ export const GitHubProjects = {
         short: false,
         includeSeconds: false,
       });
-      Utils.log(`Using cached repos from ${cacheDate} (${cacheAgeFormatted})`);
+      Utils.log(`Using repos cached on ${cacheDate} (${cacheAgeFormatted})`);
 
       return cache.data;
     } catch (error) {
