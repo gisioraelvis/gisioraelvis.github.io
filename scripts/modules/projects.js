@@ -45,15 +45,6 @@ export const GitHubProjects = {
           `Featured repos data is stale (${ageInDays.toFixed(1)} days old)`,
           "warn"
         );
-        // TODO: Trigger GitHub Action to update featured repos instead
-        // setTimeout(
-        //   () =>
-        //     this.fetchAndCacheRepos().catch((e) =>
-        //       Utils.log(`Background refresh failed: ${e.message}`, "warn")
-        //     ),
-        //   100
-        //  );
-        // return [];
       }
 
       Utils.log(`Using featured repos (${ageInDays.toFixed(1)} days old)`);
@@ -217,22 +208,16 @@ export const GitHubProjects = {
             <div class="project-header">
               <h3 class="project-title">
                 <a href="${repo.html_url}" target="_blank" rel="noopener">
-                  ${repo.name}</a>
-              </h3>
-              <div class="project-links">
-                <a href="${
-                  repo.html_url
-                }" target="_blank" rel="noopener" aria-label="GitHub Repository">
-                  <i class="fab fa-github"></i>
+                  <i class="fab fa-github"></i> ${repo.name}
                 </a>
-                ${
-                  repo.homepage
-                    ? `<a href="${repo.homepage}" target="_blank" rel="noopener" aria-label="Live Demo">
-                    <i class="fas fa-external-link-alt"></i>
-                  </a>`
-                    : ""
-                }
-              </div>
+              </h3>
+              ${
+                repo.homepage
+                  ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Live Demo">
+                      <i class="fas fa-external-link-alt"></i>
+                    </a>`
+                  : ""
+              }
             </div>
             <p class="project-description">${repo.description}</p>
             <div class="project-footer">
@@ -240,23 +225,23 @@ export const GitHubProjects = {
                 ${
                   repo.language
                     ? `<span class="tech-tag">
-                    <span class="language-color" style="background-color: ${languageColor}"></span>
-                    ${repo.language}
-                  </span>`
-                    : ""
+                        <span class="language-color" style="background-color: ${languageColor}"></span>
+                        ${repo.language}
+                      </span>`
+                    : `<span class="tech-tag empty-tag">No language specified</span>`
                 }
               </div>
               <div class="project-stats">
-                ${
-                  repo.stargazers_count > 0
-                    ? `<span class="project-stat"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>`
-                    : ""
-                }
-                ${
-                  repo.forks_count > 0
-                    ? `<span class="project-stat"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>`
-                    : ""
-                }
+                <span class="project-stat ${
+                  repo.stargazers_count > 0 ? "has-count" : ""
+                }">
+                  <i class="fas fa-star"></i> ${repo.stargazers_count || 0}
+                </span>
+                <span class="project-stat ${
+                  repo.forks_count > 0 ? "has-count" : ""
+                }">
+                  <i class="fas fa-code-branch"></i> ${repo.forks_count || 0}
+                </span>
               </div>
             </div>
           </div>
@@ -503,31 +488,54 @@ export const GitHubProjects = {
   },
 
   /**
-   * Get color for programming language based on GitHub's language colors
+   * GitHub's language colors
    * @param {string} language - Programming language name
    * @returns {string} Hex color code
    */
   getLanguageColor(language) {
+    if (!language) return "#8257e5"; // Default for undefined/null
+
+    // Official GitHub language colors for popular languages
     const colors = {
+      // Core languages from your tech stack
       JavaScript: "#f1e05a",
-      TypeScript: "#2b7489",
+      TypeScript: "#3178c6",
       HTML: "#e34c26",
       CSS: "#563d7c",
-      Python: "#3572A5",
+
+      // Frontend frameworks/libraries
+      React: "#61dafb",
+      Angular: "#dd0031",
+      Vue: "#41b883",
+      Svelte: "#ff3e00",
+
+      // Backend languages
+      "Node.js": "#339933",
       Java: "#b07219",
       "C#": "#178600",
-      PHP: "#4F5D95",
-      Ruby: "#701516",
+      Python: "#3572A5",
       Go: "#00ADD8",
-      Swift: "#ffac45",
-      Kotlin: "#F18E33",
-      Dart: "#00B4AB",
       Rust: "#dea584",
+      PHP: "#4F5D95",
+
+      // Mobile
+      Kotlin: "#A97BFF",
+      Swift: "#F05138",
+      Dart: "#00B4AB",
+
+      // Database related
+      SQL: "#e38c00",
+      PLpgSQL: "#336790",
+
+      // Config/Shell
+      YAML: "#cb171e",
+      JSON: "#292929",
+      Markdown: "#083fa1",
       Shell: "#89e051",
-      "C++": "#f34b7d",
-      C: "#555555",
+      PowerShell: "#012456",
+      Dockerfile: "#384d54",
     };
 
-    return colors[language] || "#8257e5"; // Default purple for unknown languages
+    return colors[language] || "#8257e5"; // Return matching color or default purple
   },
 };
