@@ -377,19 +377,64 @@ export const GitHubProjects = {
       // Sort repositories by importance
       const sortedRepos = this.sortRepositories(processedRepos);
 
+      // Apply showcase limit while prioritizing featured repos
+      const showcaseRepos = this.selectShowcaseRepos(sortedRepos);
+
       // Cache processed repos
-      this.cacheRepos(sortedRepos);
-      return sortedRepos;
+      this.cacheRepos(showcaseRepos);
+      return showcaseRepos;
     } catch (error) {
-      // Improve error logging with more context for debugging
       const errorMessage =
         error.name === "AbortError"
           ? "GitHub API request timed out"
           : error.message;
 
       Utils.log(`Repository fetch error: ${errorMessage}`, "error");
-      throw error; // Re-throw for upstream error handling
+      throw error;
     }
+  },
+
+  /**
+   * Select repositories for showcase, prioritizing featured repos
+   * @param {Array} repos - Sorted repositories array
+   * @returns {Array} Selected repositories for showcase
+   */
+  selectShowcaseRepos(repos) {
+    if (!repos?.length) return [];
+
+    const showcaseTotal = CONFIGS.github.showcaseTotal || 12;
+    const initialDisplayCount = CONFIGS.showMore.initialItems.projects;
+
+    // Ensure showcase total is at least the initial display count
+    const effectiveShowcaseTotal = Math.max(showcaseTotal, initialDisplayCount);
+
+    // Separate featured and computed repos
+    const featuredRepos = repos.filter((repo) => repo.isFeatured);
+    const computedRepos = repos.filter((repo) => !repo.isFeatured);
+
+    // If fewer repos than the limit, return all of them
+    if (repos.length <= effectiveShowcaseTotal) {
+      return repos;
+    }
+
+    // If featured repos already exceed the limit, truncate them
+    if (featuredRepos.length >= effectiveShowcaseTotal) {
+      return featuredRepos.slice(0, effectiveShowcaseTotal);
+    }
+
+    // Calculate how many computed repos we can include
+    const computedCount = effectiveShowcaseTotal - featuredRepos.length;
+
+    // Pick top computed repos based on the limit
+    const selectedComputedRepos = computedRepos.slice(0, computedCount);
+
+    // Log the number of featured and computed repos
+    Utils.log(
+      `Selected ${featuredRepos.length} featured and ${selectedComputedRepos.length} computed repos for showcase`
+    );
+
+    // Return combined repositories
+    return [...featuredRepos, ...selectedComputedRepos];
   },
 
   /**
