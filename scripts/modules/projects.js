@@ -32,18 +32,18 @@ export const GitHubProjects = {
         return [];
       }
 
-      // Check data freshness
-      const maxAgeDays = CONFIGS.github.cacheDuration / (1000 * 60 * 60 * 24);
-      const ageInDays =
-        (Date.now() - new Date(data.timestamp)) / (1000 * 60 * 60 * 24);
+      // Check data freshness using time utilities
+      const dataAge = Utils.formatTimeElapsed(data.timestamp, {
+        short: false,
+        includeSeconds: false,
+      });
+      const dataAgeMs = Date.now() - new Date(data.timestamp).getTime();
+      const isStale = dataAgeMs >= CONFIGS.github.cacheDuration;
 
-      if (ageInDays >= maxAgeDays) {
-        Utils.log(
-          `Featured repos data is stale (${ageInDays.toFixed(1)} days old)`,
-          "warn"
-        );
+      if (isStale) {
+        Utils.log(`Featured repos data is stale (${dataAge})`, "warn");
       } else {
-        Utils.log(`Using featured repos (${ageInDays.toFixed(1)} days old)`);
+        Utils.log(`Using featured repos updated ${dataAge}`);
       }
 
       // Filter out invalid entries
@@ -82,6 +82,14 @@ export const GitHubProjects = {
         const cacheAge = Date.now() - cache.timestamp;
 
         if (cacheAge > CONFIGS.github.cacheDuration / 2) {
+          // Use a more descriptive log message with formatted time
+          const cacheAgeFormatted = Utils.formatTimeElapsed(cache.timestamp, {
+            includeSeconds: false,
+          });
+          Utils.log(
+            `Cache is ${cacheAgeFormatted} old - refreshing in background`
+          );
+
           // Refresh cache in background without disrupting the UI
           this.fetchAndCacheRepos().catch((error) =>
             Utils.log(`Background refresh failed: ${error.message}`, "error")
@@ -161,9 +169,14 @@ export const GitHubProjects = {
         return null;
       }
 
-      Utils.log(
-        `Using cached repos from ${new Date(cache.timestamp).toLocaleString()}`
-      );
+      // Log date and time elapsed since cache
+      const cacheDate = Utils.formatDate(cache.timestamp, "full-datetime");
+      const cacheAgeFormatted = Utils.formatTimeElapsed(cache.timestamp, {
+        short: false,
+        includeSeconds: false,
+      });
+      Utils.log(`Using cached repos from ${cacheDate} (${cacheAgeFormatted})`);
+
       return cache.data;
     } catch (error) {
       Utils.log(`Cache read error: ${error.message}`, "error");
@@ -560,9 +573,11 @@ export const GitHubProjects = {
   calculateRepoScore(repo, totalCommits) {
     const weights = CONFIGS.github.weights;
 
-    // Calculate recency score (max 100 points for recent repos)
-    const ageInDays =
-      (Date.now() - new Date(repo.pushed_at)) / (1000 * 60 * 60 * 24);
+    // Calculate recency score using time utilities for accurate age calculation
+    // Get age in milliseconds first
+    const ageMs = Date.now() - new Date(repo.pushed_at).getTime();
+    // Convert to days for scoring (max 100 points for recent repos)
+    const ageInDays = ageMs / (1000 * 60 * 60 * 24);
     const recencyScore = Math.max(0, 100 - ageInDays);
 
     // Calculate weighted score with appropriate scaling factors
