@@ -258,7 +258,7 @@ export const GitHubProjects = {
     container.innerHTML += `
       <div class="view-more-container">
         <a href="https://github.com/${username}?tab=repositories" target="_blank" rel="noopener" class="view-more-button">
-          <span>View More Projects</span>
+          <span>View More on GitHub</span>
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
       </div>
