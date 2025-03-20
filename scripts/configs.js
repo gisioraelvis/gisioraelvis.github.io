@@ -3,42 +3,37 @@
  */
 export const CONFIGS = {
   github: {
-    username: "gisioraelvis",
-    cacheKey: "github_repos_cache",
-    cacheVersion: 1, // Increment if cache structure changes
+    username: "gisioraelvis", // GitHub username for API requests
+    cacheKey: "github_repos_cache", // LocalStorage key for caching
+    cacheVersion: 1.1, // Increment when cache structure changes
     cacheDuration: 24 * 60 * 60 * 1000, // 24 hours
-    fetchLimit: 50,
-    analyzeLimit: 15,
-    displayLimit: 6,
-    apiTimeout: 10000, // 10 seconds
-    // Repositories to exclude from display
-    excludedRepos: [
-      // Example: "test-repo", "playground", "learning"
-    ],
-    // Repositories to show at the top
-    featuredReposMaxAgeDays: 30, // 30 days
-    featuredRepos: [
-      // Fallback, overriden by GitHub Action commited repos in /assets/data/featured-repo.json
-      // Example: "my-awesome-project", "cool-library"
-    ],
-    // Scoring weights for repository ranking
+
+    // API request parameters
+    fetchLimit: 30, // Maximum number of repositories to fetch
+    apiTimeout: 10000, // 10 seconds timeout
+
+    // Repo filtering and analysis
+    excludedRepos: [], // Rep names to exclude from display
+
+    // Scoring weights for algorithmic ranking (must sum to 1.0)
     weights: {
-      size: 0.4, // 40% weight for code size
-      commits: 0.3, // 30% weight for commit activity
-      stars: 0.2, // 20% weight for stars
-      recency: 0.1, // 10% weight for recency
+      size: 0.30, // Repository size
+      commits: 0.30, // Commit activity
+      stars: 0.25, // Community interest
+      recency: 0.15, // Recent updates
     },
   },
   animation: {
-    threshold: 0.1, // Intersection observer threshold for animations (10%)
-    scrollOffset: 80, // Offset for smooth scrolling
+    threshold: 0.1, // 10% - Intersection Observer threshold for animations
+    scrollOffset: 80, // Smooth scrolling offset in pixels
   },
   showMore: {
+    // Initial items to show
     initialItems: {
-      experience: 2, // Initial number of timeline items to show
-      education: 6, // Initial number of certification items to show
-      projects: 6, // Initial number of project items to show
-      softSkills: 6, // Initial number of soft skills to show
+      experience: 2,
+      education: 6,
+      projects: 6,
+      softSkills: 6,
     },
   },
 };

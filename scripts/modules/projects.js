@@ -10,8 +10,8 @@ export const GitHubProjects = {
   },
 
   /**
-   * Load the featured repos
-   * @returns {Promise<Array>} featured reps or empty if not available
+   * Load featured repos from JSON file
+   * @returns {Promise<string[]>} Array of featured repository names
    */
   async loadFeaturedRepos() {
     try {
@@ -26,28 +26,29 @@ export const GitHubProjects = {
 
       const data = await response.json();
 
-      // Validate essential data structure
-      if (!data || !Array.isArray(data.repos) || !data.timestamp) {
+      // Validate data structure
+      if (!data?.repos?.length || !data.timestamp) {
         Utils.log("Invalid featured repos data structure", "warn");
         return [];
       }
 
       // Check data freshness
-      const maxAgeDays = CONFIGS.github.featuredReposMaxAgeDays || 30;
-      const timestampDate = new Date(data.timestamp);
-      const now = new Date();
-      const ageInDays = (now - timestampDate) / (1000 * 60 * 60 * 24);
+      const maxAgeDays = CONFIGS.github.cacheDuration / (1000 * 60 * 60 * 24);
+      const ageInDays =
+        (Date.now() - new Date(data.timestamp)) / (1000 * 60 * 60 * 24);
 
       if (ageInDays >= maxAgeDays) {
         Utils.log(
           `Featured repos data is stale (${ageInDays.toFixed(1)} days old)`,
           "warn"
         );
+      } else {
+        Utils.log(`Using featured repos (${ageInDays.toFixed(1)} days old)`);
       }
 
-      Utils.log(`Using featured repos (${ageInDays.toFixed(1)} days old)`);
+      // Filter out invalid entries
       return data.repos.filter(
-        (repo) => typeof repo === "string" && repo.trim().length > 0
+        (repo) => typeof repo === "string" && repo.trim()
       );
     } catch (error) {
       Utils.log(`Featured repos error: ${error.message}`, "error");
@@ -66,70 +67,75 @@ export const GitHubProjects = {
     this.showLoading(container);
 
     try {
-      // Get featured repos and preserve original config
-      const featuredRepos = await this.loadFeaturedRepos();
-      const originalFeatured = [...CONFIGS.github.featuredRepos];
+      // Load featured repos first
+      this.featuredRepoNames = await this.loadFeaturedRepos();
 
-      if (featuredRepos.length > 0) {
-        CONFIGS.github.featuredRepos = featuredRepos;
-      }
+      // Try to use cache for immediate display
+      const cachedRepos = this.getValidCache();
 
-      try {
-        // First try to use cache for immediate display
-        const cachedRepos = this.getValidCache();
-        if (cachedRepos) {
-          this.displayProjects(cachedRepos, container);
+      if (cachedRepos) {
+        // Display cached repos immediately
+        this.displayProjects(cachedRepos, container);
 
-          // Check cache age for background refresh
-          const cache = JSON.parse(
-            localStorage.getItem(CONFIGS.github.cacheKey)
+        // Check if cache needs background refresh (older than half duration)
+        const cache = JSON.parse(localStorage.getItem(CONFIGS.github.cacheKey));
+        const cacheAge = Date.now() - cache.timestamp;
+
+        if (cacheAge > CONFIGS.github.cacheDuration / 2) {
+          // Refresh cache in background without disrupting the UI
+          this.fetchAndCacheRepos().catch((error) =>
+            Utils.log(`Background refresh failed: ${error.message}`, "error")
           );
-          const cacheAge = Date.now() - cache.timestamp;
-
-          // Refresh aging cache in background (half of cache duration)
-          if (cacheAge > CONFIGS.github.cacheDuration / 2) {
-            this.fetchAndCacheRepos().catch((error) =>
-              Utils.log(`Background refresh failed: ${error.message}`, "error")
-            );
-          }
-        } else {
-          // Fetch fresh data when cache is invalid or missing
-          const repos = await this.fetchAndCacheRepos();
-          this.displayProjects(repos, container);
         }
-      } finally {
-        // Always restore original featured repos config
-        if (featuredRepos.length > 0) {
-          CONFIGS.github.featuredRepos = originalFeatured;
-        }
+      } else {
+        // No valid cache, fetch fresh data
+        const repos = await this.fetchAndCacheRepos();
+        this.displayProjects(repos, container);
       }
     } catch (error) {
-      Utils.log(`Error fetching repositories: ${error.message}`, "error");
+      Utils.log(`Error loading GitHub projects: ${error.message}`, "error");
       this.showError(container, error.message);
     }
   },
 
   /**
-   * Display loading indicator in container
+   * Display loading indicator in container with consistent site styling
+   * @param {HTMLElement} container - Target container element
    */
   showLoading(container) {
     container.innerHTML = `
-      <div class="loading-spinner">
-        <i class="fas fa-spinner fa-spin"></i>
-        <p>Loading projects...</p>
+      <div class="loading-container">
+        <div class="loading-card">
+          <div class="loading-spinner-wrapper">
+            <div class="loading-spinner-circle"></div>
+            <i class="fab fa-github loading-logo"></i>
+          </div>
+          <p class="loading-text">Loading GitHub projects...</p>
+          <p class="loading-subtext">Retrieving your latest repositories</p>
+        </div>
       </div>
     `;
   },
 
   /**
-   * Display user-friendly error message
+   * Display user-friendly error message with consistent site styling
+   * @param {HTMLElement} container - Target container element
+   * @param {string} message - Error message to display
    */
   showError(container, message) {
     container.innerHTML = `
-      <div class="error-message">
-        <p><i class="fas fa-exclamation-circle"></i> Failed to load GitHub projects.</p>
-        <p>Error: ${message}</p>
-        <p>Please check your connection and try again.</p>
+      <div class="error-container">
+        <div class="error-card">
+          <div class="error-icon-wrapper">
+            <i class="fas fa-exclamation-circle error-icon"></i>
+          </div>
+          <h3 class="error-title">Unable to Load Projects</h3>
+          <p class="error-message">${message}</p>
+          <p class="error-help">Please check your connection and try again.</p>
+          <button class="error-retry-btn" onclick="window.location.reload()">
+            <i class="fas fa-sync-alt"></i> Retry
+          </button>
+        </div>
       </div>
     `;
   },
@@ -145,22 +151,21 @@ export const GitHubProjects = {
 
       const cache = JSON.parse(cachedString);
 
-      // Quick validation - all conditions must pass
-      const isValid =
-        cache &&
-        Array.isArray(cache.data) &&
-        cache.version === CONFIGS.github.cacheVersion &&
-        cache.timestamp &&
-        Date.now() - cache.timestamp <= CONFIGS.github.cacheDuration;
-
-      if (!isValid) return null;
+      // Validate cache integrity and freshness
+      if (
+        !cache?.data?.length ||
+        cache.version !== CONFIGS.github.cacheVersion ||
+        !cache.timestamp ||
+        Date.now() - cache.timestamp > CONFIGS.github.cacheDuration
+      ) {
+        return null;
+      }
 
       Utils.log(
         `Using cached repos from ${new Date(cache.timestamp).toLocaleString()}`
       );
       return cache.data;
     } catch (error) {
-      // Any parse error means invalid cache
       Utils.log(`Cache read error: ${error.message}`, "error");
       return null;
     }
@@ -168,7 +173,8 @@ export const GitHubProjects = {
 
   /**
    * Sanitize repo data with fallbacks for missing properties
-   * Ensures consistent data structure regardless of API response
+   * @param {Object} repo - Repository data from API or cache
+   * @returns {Object} Sanitized repository object
    */
   sanitizeRepoData(repo) {
     return {
@@ -185,7 +191,7 @@ export const GitHubProjects = {
   },
 
   /**
-   * Display repositories in the container with proper formatting
+   * Display repositories in the container
    * @param {Array} repos - Repositories to display
    * @param {HTMLElement} container - Container element
    */
@@ -201,29 +207,24 @@ export const GitHubProjects = {
     projectsGrid.className = "projects-grid";
     container.appendChild(projectsGrid);
 
-    // Create project cards for all repos
-    // The show/hide logic is handled by setupProjectExpander
+    // Create project cards
     repos.forEach((rawRepo) => {
       const repo = this.sanitizeRepoData(rawRepo);
       const languageColor = this.getLanguageColor(repo.language);
 
       const projectCard = document.createElement("div");
       projectCard.className = "project-card";
-
-      // Use template literal for readability
       projectCard.innerHTML = this.projectCard(repo, languageColor);
       projectsGrid.appendChild(projectCard);
     });
 
-    // Apply animations
+    // Apply animations and show/hide functionality
     this.applyAnimations();
-
-    // Show more/less projects
     this.setupProjectExpander(repos.length);
   },
 
   /**
-   * HTML for a project card
+   * Generate HTML for a project card
    * @param {Object} repo - Repository data
    * @param {string} languageColor - Color code for language
    * @returns {string} HTML for project card
@@ -239,9 +240,9 @@ export const GitHubProjects = {
           </h3>
           ${
             repo.homepage
-              ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Live Demo">
-                  <i class="fas fa-external-link-alt"></i>
-                </a>`
+              ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link">
+              <i class="fas fa-external-link-alt"></i>
+            </a>`
               : ""
           }
         </div>
@@ -251,9 +252,9 @@ export const GitHubProjects = {
             ${
               repo.language
                 ? `<span class="tech-tag">
-                    <span class="language-color" style="background-color: ${languageColor}"></span>
-                    ${repo.language}
-                  </span>`
+                <span class="language-color" style="background-color: ${languageColor}"></span>
+                ${repo.language}
+              </span>`
                 : `<span class="tech-tag empty-tag">No language specified</span>`
             }
           </div>
@@ -261,15 +262,15 @@ export const GitHubProjects = {
             ${
               repo.stargazers_count > 0
                 ? `<span class="project-stat has-count">
-                    <i class="fas fa-star"></i> ${repo.stargazers_count}
-                  </span>`
+                <i class="fas fa-star"></i> ${repo.stargazers_count}
+              </span>`
                 : ""
             }
             ${
               repo.forks_count > 0
                 ? `<span class="project-stat has-count">
-                    <i class="fas fa-code-branch"></i> ${repo.forks_count}
-                  </span>`
+                <i class="fas fa-code-branch"></i> ${repo.forks_count}
+              </span>`
                 : ""
             }
           </div>
@@ -279,21 +280,23 @@ export const GitHubProjects = {
   },
 
   /**
-   * Set up show more/less expander
+   * Set up show more/less expander for projects
    * @param {number} totalProjects - Total number of projects
    */
   setupProjectExpander(totalProjects) {
+    const initialCount = CONFIGS.showMore.initialItems.projects;
+
+    // Only proceed if we have more projects than initial count
+    if (totalProjects <= initialCount) return;
+
     // Import the ContentExpander dynamically to avoid circular dependencies
     import("../modules/expander.js")
       .then((module) => {
         const ContentExpander = module.ContentExpander;
-        const initialCount = CONFIGS.showMore.initialItems.projects;
-
-        // Only setup expander if we have more projects than the initial count
-        if (totalProjects <= initialCount) return;
-
         const projectsSection = document.getElementById("projects");
-        const projectsGrid = projectsSection.querySelector(".projects-grid");
+        const projectsGrid = projectsSection?.querySelector(".projects-grid");
+
+        if (!projectsGrid) return;
 
         // Apply hidden-item class to projects beyond initial count
         const projectCards = projectsGrid.querySelectorAll(".project-card");
@@ -332,62 +335,60 @@ export const GitHubProjects = {
 
     document
       .querySelectorAll(".project-card, .view-more-container")
-      .forEach((el) => {
-        observer.observe(el);
-      });
+      .forEach((el) => observer.observe(el));
   },
 
   /**
-   * Fetch repositories from GitHub API and cache the processed results
+   * Fetch repositories from GitHub API and process them
    * @returns {Promise<Array>} Processed repositories ordered by importance
    */
   async fetchAndCacheRepos() {
-    const username = CONFIGS.github.username;
     Utils.log("Fetching repositories from GitHub API");
 
     try {
       // API request with timeout protection
       const response = await fetch(
-        `https://api.github.com/users/${username}/repos?sort=pushed&per_page=${CONFIGS.github.fetchLimit}`,
+        `https://api.github.com/users/${CONFIGS.github.username}/repos?sort=pushed&per_page=${CONFIGS.github.fetchLimit}`,
         {
-          headers: { Accept: "application/vnd.github.v3+json" },
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+          },
           signal: AbortSignal.timeout(CONFIGS.github.apiTimeout),
         }
       );
 
       if (!response.ok) {
-        throw new Error(`GitHub API returned ${response.status}`);
+        throw new Error(
+          `GitHub API returned ${response.status}: ${response.statusText}`
+        );
       }
 
       // Process repositories
       const allRepos = await response.json();
       Utils.log(`Fetched ${allRepos.length} repos from GitHub API`);
 
-      // Filter and separate repositories
+      // Organize and filter repositories
       const { featuredRepos, otherRepos } = this.organizeRepositories(allRepos);
-
-      // Select repos to analyze in detail (featured + top other repos)
-      const reposToAnalyze = [
-        ...featuredRepos,
-        ...otherRepos.slice(
-          0,
-          CONFIGS.github.analyzeLimit - featuredRepos.length
-        ),
-      ];
+      const reposToAnalyze = [...featuredRepos, ...otherRepos];
 
       // Get detailed stats and calculate scores
       const processedRepos = await this.getDetailedRepoStats(reposToAnalyze);
 
-      // Sort repositories - featured first, then by score
+      // Sort repositories by importance
       const sortedRepos = this.sortRepositories(processedRepos);
 
-      // Cache all processed repos to ensure we have both featured and algorithmic repos
+      // Cache processed repos
       this.cacheRepos(sortedRepos);
-
       return sortedRepos;
     } catch (error) {
-      Utils.log(`Repository fetch error: ${error.message}`, "error");
-      throw error; // Re-throw to allow proper error handling upstream
+      // Improve error logging with more context for debugging
+      const errorMessage =
+        error.name === "AbortError"
+          ? "GitHub API request timed out"
+          : error.message;
+
+      Utils.log(`Repository fetch error: ${errorMessage}`, "error");
+      throw error; // Re-throw for upstream error handling
     }
   },
 
@@ -397,21 +398,22 @@ export const GitHubProjects = {
    * @returns {Object} Object with featuredRepos and otherRepos arrays
    */
   organizeRepositories(repos) {
+    // Filter out excluded repos
+    const filteredRepos = repos.filter((repo) => !this.isExcluded(repo.name));
+
+    // Separate featured and other repos
     const featuredRepos = [];
     const otherRepos = [];
 
-    // Filter out excluded repos and categorize remaining
-    repos
-      .filter((repo) => !this.isExcluded(repo.name))
-      .forEach((repo) => {
-        if (CONFIGS.github.featuredRepos.includes(repo.name)) {
-          featuredRepos.push({ ...repo, isFeatured: true });
-        } else {
-          otherRepos.push(repo);
-        }
-      });
+    filteredRepos.forEach((repo) => {
+      if (this.featuredRepoNames?.includes(repo.name)) {
+        featuredRepos.push({ ...repo, isFeatured: true });
+      } else {
+        otherRepos.push(repo);
+      }
+    });
 
-    // Sort non-featured repos by size (as initial relevance indicator)
+    // Sort non-featured repos by initial relevance indicator
     otherRepos.sort((a, b) => b.size - a.size);
 
     return { featuredRepos, otherRepos };
@@ -425,14 +427,15 @@ export const GitHubProjects = {
   sortRepositories(repos) {
     return [...repos].sort((a, b) => {
       // Featured repos always come first
-      if (a.isFeatured && !b.isFeatured) return -1;
-      if (!a.isFeatured && b.isFeatured) return 1;
+      if (a.isFeatured !== b.isFeatured) {
+        return a.isFeatured ? -1 : 1;
+      }
 
-      // Order featured repos by their order in the configuration
+      // Keep featured repos in their specified order
       if (a.isFeatured && b.isFeatured) {
         return (
-          CONFIGS.github.featuredRepos.indexOf(a.name) -
-          CONFIGS.github.featuredRepos.indexOf(b.name)
+          this.featuredRepoNames.indexOf(a.name) -
+          this.featuredRepoNames.indexOf(b.name)
         );
       }
 
@@ -443,8 +446,12 @@ export const GitHubProjects = {
 
   /**
    * Check if repo should be excluded based on naming patterns
+   * @param {string} repoName - Repository name
+   * @returns {boolean} True if repo should be excluded
    */
   isExcluded(repoName) {
+    if (!repoName || !CONFIGS.github.excludedRepos?.length) return false;
+
     return CONFIGS.github.excludedRepos.some((excluded) =>
       repoName.toLowerCase().includes(excluded.toLowerCase())
     );
@@ -456,25 +463,23 @@ export const GitHubProjects = {
    * @returns {Promise<Array>} Repositories with additional stats and scores
    */
   async getDetailedRepoStats(repos) {
-    const username = CONFIGS.github.username;
-
+    // Process repositories in parallel for better performance
     return Promise.all(
       repos.map(async (repo) => {
         try {
-          // Get commit activity for the past year
+          // Get commit activity for scoring
           const statsResponse = await fetch(
-            `https://api.github.com/repos/${username}/${repo.name}/stats/participation`
+            `https://api.github.com/repos/${CONFIGS.github.username}/${repo.name}/stats/participation`
           );
 
           let totalCommits = 0;
           if (statsResponse.ok) {
             const stats = await statsResponse.json();
-            totalCommits = stats.all
-              ? stats.all.reduce((sum, count) => sum + count, 0)
-              : 0;
+            totalCommits =
+              stats.all?.reduce((sum, count) => sum + count, 0) || 0;
           }
 
-          // Calculate score
+          // Calculate score - featured repos get maximum score
           const score = repo.isFeatured
             ? Number.MAX_SAFE_INTEGER
             : this.calculateRepoScore(repo, totalCommits);
@@ -487,8 +492,10 @@ export const GitHubProjects = {
         } catch (error) {
           Utils.log(
             `Couldn't get stats for ${repo.name}: ${error.message}`,
-            "error"
+            "warn"
           );
+
+          // Return repo with fallback score
           return {
             ...repo,
             totalCommits: 0,
@@ -508,16 +515,16 @@ export const GitHubProjects = {
   calculateRepoScore(repo, totalCommits) {
     const weights = CONFIGS.github.weights;
 
-    // Calculate recency score (higher for recently updated repos)
+    // Calculate recency score (max 100 points for recent repos)
     const ageInDays =
-      (new Date() - new Date(repo.pushed_at)) / (1000 * 60 * 60 * 24);
+      (Date.now() - new Date(repo.pushed_at)) / (1000 * 60 * 60 * 24);
     const recencyScore = Math.max(0, 100 - ageInDays);
 
-    // Calculate weighted score from multiple factors
+    // Calculate weighted score with appropriate scaling factors
     return (
       repo.size * weights.size +
-      totalCommits * weights.commits * 10 +
-      repo.stargazers_count * weights.stars * 20 +
+      totalCommits * 10 * weights.commits +
+      repo.stargazers_count * 20 * weights.stars +
       recencyScore * weights.recency
     );
   },
@@ -527,6 +534,8 @@ export const GitHubProjects = {
    * @param {Array} repos - Repositories to cache
    */
   cacheRepos(repos) {
+    if (!repos?.length) return;
+
     try {
       const cacheData = {
         version: CONFIGS.github.cacheVersion,
@@ -542,22 +551,22 @@ export const GitHubProjects = {
   },
 
   /**
-   * GitHub's language colors
+   * Get color for programming language
    * @param {string} language - Programming language name
    * @returns {string} Hex color code
    */
   getLanguageColor(language) {
-    if (!language) return "#8257e5"; // Default for undefined/null
+    if (!language) return "#8257e5"; // Default purple for undefined/null
 
-    // Official GitHub language colors
+    // Common language colors - matches GitHub's color scheme
     const colors = {
-      // Core languages from your tech stack
+      // Core languages
       JavaScript: "#f1e05a",
       TypeScript: "#3178c6",
       HTML: "#e34c26",
       CSS: "#563d7c",
 
-      // Frontend frameworks/libraries
+      // Frontend frameworks
       React: "#61dafb",
       Angular: "#dd0031",
       Vue: "#41b883",
@@ -577,11 +586,9 @@ export const GitHubProjects = {
       Swift: "#F05138",
       Dart: "#00B4AB",
 
-      // Database related
+      // Database and config
       SQL: "#e38c00",
       PLpgSQL: "#336790",
-
-      // Config/Shell
       YAML: "#cb171e",
       JSON: "#292929",
       Markdown: "#083fa1",
@@ -590,6 +597,6 @@ export const GitHubProjects = {
       Dockerfile: "#384d54",
     };
 
-    return colors[language] || "#8257e5"; // Return matching color or default purple
+    return colors[language] || "#8257e5";
   },
 };
