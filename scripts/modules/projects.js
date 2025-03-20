@@ -443,7 +443,7 @@ export const GitHubProjects = {
 
     // Log the number of featured and computed repos
     Utils.log(
-      `Selected ${featuredRepos.length} featured and ${selectedComputedRepos.length} computed repos for showcase`
+      `Showing ${featuredRepos.length} featured and ${selectedComputedRepos.length} computed repos`
     );
 
     // Return combined repositories
