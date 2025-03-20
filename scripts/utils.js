@@ -3,19 +3,6 @@
  */
 export const Utils = {
   /**
-   * Safely access nested object properties
-   * @param {Object} obj - The object to access
-   * @param {String} path - The path to the property (e.g. "a.b.c")
-   * @param {*} defaultValue - Default value if path doesn't exist
-   * @returns {*} The value at the path or the default value
-   */
-  getNestedValue(obj, path, defaultValue = null) {
-    return path
-      .split(".")
-      .reduce((o, p) => (o && o[p] !== undefined ? o[p] : defaultValue), obj);
-  },
-
-  /**
    * Debounce function to limit how often a function can be called
    * @param {Function} func - The function to debounce
    * @param {number} wait - The debounce wait time in ms

@@ -38,44 +38,4 @@ export const CONFIGS = {
       softSkills: 6, // Initial number of soft skills to show
     },
   },
-  // SEO configuration and structured data
-  seo: {
-    // Schema.org structured data for person profile
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Elvis Gisiora",
-      jobTitle: "Software Engineer",
-      url: "https://gisioraelvis.github.io/gem",
-      image:
-        "https://gisioraelvis.github.io/gem/assets/gisioraelvis-passport.jpg",
-      sameAs: [
-        "https://linkedin.com/in/gisioraelvis",
-        "https://github.com/gisioraelvis",
-        "https://x.com/gisioraelvis",
-      ],
-      worksFor: {
-        "@type": "Organization",
-        name: "Griffin Global Technologies",
-      },
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: "Egerton University",
-      },
-      knowsAbout: [
-        "Software Development",
-        "Full-Stack Web Development",
-        "JavaScript",
-        "TypeScript",
-        "React",
-        "Node.js",
-        ".NET",
-        "Java",
-        "Spring Boot",
-        "DevOps",
-        "Cloud Computing",
-        "System Integration",
-      ],
-    },
-  },
 };
