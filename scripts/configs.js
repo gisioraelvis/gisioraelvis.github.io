@@ -15,6 +15,7 @@ export const CONFIGS = {
       // Example: "test-repo", "playground", "learning"
     ],
     // Repositories to show at the top
+    featuredReposMaxAgeDays: 30, // 30 days
     featuredRepos: [
       // Fallback, overriden by GitHub Action commited repos in /assets/data/featured-repo.json
       // Example: "my-awesome-project", "cool-library"
@@ -35,7 +36,7 @@ export const CONFIGS = {
     initialItems: {
       experience: 2, // Initial number of timeline items to show
       education: 6, // Initial number of certification items to show
-      projects: 4, // Initial number of project items to show
+      projects: 6, // Initial number of project items to show
       softSkills: 6, // Initial number of soft skills to show
     },
   },
