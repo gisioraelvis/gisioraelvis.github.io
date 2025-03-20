@@ -4,9 +4,9 @@
 export const CONFIGS = {
   github: {
     username: "gisioraelvis",
-    cacheDuration: 24 * 60 * 60 * 1000, // 24 hours
     cacheKey: "github_repos_cache",
-    cacheVersion: 1, // Increment this if the cache/repo structure changes
+    cacheVersion: 1, // Increment if cache structure changes
+    cacheDuration: 24 * 60 * 60 * 1000, // 24 hours
     fetchLimit: 50,
     analyzeLimit: 15,
     displayLimit: 6,

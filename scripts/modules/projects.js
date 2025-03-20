@@ -190,19 +190,18 @@ export const GitHubProjects = {
    * @param {HTMLElement} container - Container element
    */
   displayProjects(repos, container) {
-    container.innerHTML = "";
-
     if (!repos?.length) {
       container.innerHTML = "<p>No repositories found.</p>";
       return;
     }
 
-    // Create a projects grid container
+    // Clear container and create projects grid
+    container.innerHTML = "";
     const projectsGrid = document.createElement("div");
     projectsGrid.className = "projects-grid";
     container.appendChild(projectsGrid);
 
-    // Create project cards - display all repos from cache
+    // Create project cards for all repos
     // The show/hide logic is handled by setupProjectExpander
     repos.forEach((rawRepo) => {
       const repo = this.sanitizeRepoData(rawRepo);
@@ -210,61 +209,73 @@ export const GitHubProjects = {
 
       const projectCard = document.createElement("div");
       projectCard.className = "project-card";
-      projectCard.innerHTML = `
-        <div class="project-content">
-          <div class="project-header">
-            <h3 class="project-title">
-              <a href="${repo.html_url}" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i> ${repo.name}
-              </a>
-            </h3>
-            ${
-              repo.homepage
-                ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Live Demo">
-                    <i class="fas fa-external-link-alt"></i>
-                  </a>`
-                : ""
-            }
-          </div>
-          <p class="project-description">${repo.description}</p>
-          <div class="project-footer">
-            <div class="project-tech-stack">
-              ${
-                repo.language
-                  ? `<span class="tech-tag">
-                      <span class="language-color" style="background-color: ${languageColor}"></span>
-                      ${repo.language}
-                    </span>`
-                  : `<span class="tech-tag empty-tag">No language specified</span>`
-              }
-            </div>
-            <div class="project-stats">
-              ${
-                repo.stargazers_count > 0
-                  ? `<span class="project-stat has-count">
-                      <i class="fas fa-star"></i> ${repo.stargazers_count}
-                    </span>`
-                  : ""
-              }
-              ${
-                repo.forks_count > 0
-                  ? `<span class="project-stat has-count">
-                      <i class="fas fa-code-branch"></i> ${repo.forks_count}
-                    </span>`
-                  : ""
-              }
-            </div>
-          </div>
-        </div>
-      `;
+
+      // Use template literal for readability
+      projectCard.innerHTML = this.projectCard(repo, languageColor);
       projectsGrid.appendChild(projectCard);
     });
 
     // Apply animations
     this.applyAnimations();
 
-    // Add show more/less functionality for projects
+    // Show more/less projects
     this.setupProjectExpander(repos.length);
+  },
+
+  /**
+   * HTML for a project card
+   * @param {Object} repo - Repository data
+   * @param {string} languageColor - Color code for language
+   * @returns {string} HTML for project card
+   */
+  projectCard(repo, languageColor) {
+    return `
+      <div class="project-content">
+        <div class="project-header">
+          <h3 class="project-title">
+            <a href="${repo.html_url}" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> ${repo.name}
+            </a>
+          </h3>
+          ${
+            repo.homepage
+              ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Live Demo">
+                  <i class="fas fa-external-link-alt"></i>
+                </a>`
+              : ""
+          }
+        </div>
+        <p class="project-description">${repo.description}</p>
+        <div class="project-footer">
+          <div class="project-tech-stack">
+            ${
+              repo.language
+                ? `<span class="tech-tag">
+                    <span class="language-color" style="background-color: ${languageColor}"></span>
+                    ${repo.language}
+                  </span>`
+                : `<span class="tech-tag empty-tag">No language specified</span>`
+            }
+          </div>
+          <div class="project-stats">
+            ${
+              repo.stargazers_count > 0
+                ? `<span class="project-stat has-count">
+                    <i class="fas fa-star"></i> ${repo.stargazers_count}
+                  </span>`
+                : ""
+            }
+            ${
+              repo.forks_count > 0
+                ? `<span class="project-stat has-count">
+                    <i class="fas fa-code-branch"></i> ${repo.forks_count}
+                  </span>`
+                : ""
+            }
+          </div>
+        </div>
+      </div>
+    `;
   },
 
   /**
@@ -273,12 +284,14 @@ export const GitHubProjects = {
    */
   setupProjectExpander(totalProjects) {
     // Import the ContentExpander dynamically to avoid circular dependencies
-    import("../modules/expander.js").then((module) => {
-      const ContentExpander = module.ContentExpander;
-      const initialCount = CONFIGS.showMore.initialItems.projects;
+    import("../modules/expander.js")
+      .then((module) => {
+        const ContentExpander = module.ContentExpander;
+        const initialCount = CONFIGS.showMore.initialItems.projects;
 
-      // Only setup expander if we have more projects than the initial count
-      if (totalProjects > initialCount) {
+        // Only setup expander if we have more projects than the initial count
+        if (totalProjects <= initialCount) return;
+
         const projectsSection = document.getElementById("projects");
         const projectsGrid = projectsSection.querySelector(".projects-grid");
 
@@ -297,8 +310,10 @@ export const GitHubProjects = {
           initialCount,
           "projects"
         );
-      }
-    });
+      })
+      .catch((error) => {
+        Utils.log(`Failed to load expander module: ${error.message}`, "error");
+      });
   },
 
   /**
@@ -330,46 +345,50 @@ export const GitHubProjects = {
     const username = CONFIGS.github.username;
     Utils.log("Fetching repositories from GitHub API");
 
-    // API request with timeout protection
-    const response = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=pushed&per_page=${CONFIGS.github.fetchLimit}`,
-      {
-        headers: { Accept: "application/vnd.github.v3+json" },
-        signal: AbortSignal.timeout(CONFIGS.github.apiTimeout),
+    try {
+      // API request with timeout protection
+      const response = await fetch(
+        `https://api.github.com/users/${username}/repos?sort=pushed&per_page=${CONFIGS.github.fetchLimit}`,
+        {
+          headers: { Accept: "application/vnd.github.v3+json" },
+          signal: AbortSignal.timeout(CONFIGS.github.apiTimeout),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`GitHub API returned ${response.status}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`GitHub API returned ${response.status}`);
+      // Process repositories
+      const allRepos = await response.json();
+      Utils.log(`Fetched ${allRepos.length} repos from GitHub API`);
+
+      // Filter and separate repositories
+      const { featuredRepos, otherRepos } = this.organizeRepositories(allRepos);
+
+      // Select repos to analyze in detail (featured + top other repos)
+      const reposToAnalyze = [
+        ...featuredRepos,
+        ...otherRepos.slice(
+          0,
+          CONFIGS.github.analyzeLimit - featuredRepos.length
+        ),
+      ];
+
+      // Get detailed stats and calculate scores
+      const processedRepos = await this.getDetailedRepoStats(reposToAnalyze);
+
+      // Sort repositories - featured first, then by score
+      const sortedRepos = this.sortRepositories(processedRepos);
+
+      // Cache all processed repos to ensure we have both featured and algorithmic repos
+      this.cacheRepos(sortedRepos);
+
+      return sortedRepos;
+    } catch (error) {
+      Utils.log(`Repository fetch error: ${error.message}`, "error");
+      throw error; // Re-throw to allow proper error handling upstream
     }
-
-    // Process repositories
-    const allRepos = await response.json();
-    Utils.log(`Fetched ${allRepos.length} repos from GitHub API`);
-
-    // Filter and separate repositories
-    const { featuredRepos, otherRepos } = this.organizeRepositories(allRepos);
-
-    // Select repos to analyze in detail (featured + top other repos)
-    const reposToAnalyze = [
-      ...featuredRepos,
-      ...otherRepos.slice(
-        0,
-        CONFIGS.github.analyzeLimit - featuredRepos.length
-      ),
-    ];
-
-    // Get detailed stats and calculate scores
-    const processedRepos = await this.getDetailedRepoStats(reposToAnalyze);
-
-    // Sort repositories - featured first, then by score
-    const sortedRepos = this.sortRepositories(processedRepos);
-
-    // Cache all processed repos - not limited by displayLimit
-    // This ensures we have both featured and algorithmic repos in cache
-    this.cacheRepos(sortedRepos);
-
-    return sortedRepos;
   },
 
   /**
@@ -530,7 +549,7 @@ export const GitHubProjects = {
   getLanguageColor(language) {
     if (!language) return "#8257e5"; // Default for undefined/null
 
-    // Official GitHub language colors for popular languages
+    // Official GitHub language colors
     const colors = {
       // Core languages from your tech stack
       JavaScript: "#f1e05a",
