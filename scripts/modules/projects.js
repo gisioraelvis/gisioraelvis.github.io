@@ -2,21 +2,62 @@ import { CONFIGS } from "../configs.js";
 import { Utils } from "../utils.js";
 
 /**
- * GitHub repository fetching and display module
+ * Fetches and displays GitHub projects.
  */
 export const GitHubProjects = {
-  /**
-   * Initialize GitHub projects section
-   */
   init() {
     this.fetchGitHubProjects();
+  },
+
+  /**
+   * Load featured repositories from JSON file
+   * @returns {Promise<Array>} The featured repositories or empty array if not available
+   */
+  async loadFeaturedRepos() {
+    try {
+      const response = await fetch("/assets/data/featured-repos.json");
+      if (!response.ok) {
+        throw new Error(`Failed to load featured repos: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Validate data structure and check if timestamp is within the last 30 days
+      if (data && Array.isArray(data.repos) && data.repos.length > 0) {
+        // Check if data is still valid (within 30 days)
+        if (data.timestamp) {
+          const timestampDate = new Date(data.timestamp);
+          const now = new Date();
+          const ageInDays = (now - timestampDate) / (1000 * 60 * 60 * 24);
+
+          // Consider data valid if less than 30 days old
+          if (ageInDays < 30) {
+            Utils.log(
+              `Using featured repositories from file (${ageInDays.toFixed(
+                1
+              )} days old)`
+            );
+            return data.repos;
+          }
+          Utils.log(
+            `Featured repos data is too old (${ageInDays.toFixed(
+              1
+            )} days), ignoring`
+          );
+          return [];
+        }
+      }
+      return [];
+    } catch (error) {
+      Utils.log(`Error loading featured repos: ${error.message}`, "warn");
+      return [];
+    }
   },
 
   /**
    * Fetch GitHub projects and display them
    */
   async fetchGitHubProjects() {
-    const username = CONFIGS.github.username;
     const projectsContainer = document.getElementById("github-projects");
     if (!projectsContainer) return;
 
@@ -24,6 +65,23 @@ export const GitHubProjects = {
     this.showLoading(projectsContainer);
 
     try {
+      // Load featured repos from JSON file
+      const featuredRepos = await this.loadFeaturedRepos();
+
+      // Use GitHub-defined featured repos if available
+      if (featuredRepos && featuredRepos.length > 0) {
+        Utils.log("Using featured repositories from file cache");
+        // Store original config to restore later
+        const originalFeaturedRepos = [...CONFIGS.github.featuredRepos];
+        // Override with fetched featured repos
+        CONFIGS.github.featuredRepos = featuredRepos;
+
+        // Restore after processing is complete
+        setTimeout(() => {
+          CONFIGS.github.featuredRepos = originalFeaturedRepos;
+        }, 5000);
+      }
+
       // Check for cached data first
       const cachedData = this.checkCache();
       if (cachedData) {
@@ -406,11 +464,6 @@ export const GitHubProjects = {
       C: "#555555",
     };
 
-    return colors[language] || "#8257e5"; // Default purple color if not found
+    return colors[language] || "#8257e5"; // purple fallback
   },
 };
-
-/* Refactor the projects section to:
-First, fetch the pinned repos, then the algorithmically determined repos excluding any if they are already in the pinned repos. The View More project on GitHub should only show after the show/less button. Feel free to design/style the section better. In the process ensure the most optimal implementation/design/styling and any security considerations. 
-
-Add an equivalent show more/less to the projects when they exceed 6 and then view more on GitHub */

@@ -1,9 +1,0 @@
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "node",
-    "GITHUB_CLIENT_ID": "your-github-client-id",
-    "GITHUB_CLIENT_SECRET": "your-github-client-secret"
-  }
-}

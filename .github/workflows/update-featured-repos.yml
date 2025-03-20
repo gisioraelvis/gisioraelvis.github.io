@@ -1,0 +1,109 @@
+name: Update Featured Repositories
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # Run weekly on Sundays at midnight
+  workflow_dispatch: # Allow manual triggering
+  push:
+    branches:
+      - main # Only run on the main branch
+    paths:
+      - ".github/workflows/update-featured-repos.yml" # Run when workflow file changes
+
+jobs:
+  update-featured-repos:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to push changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PROFILE_REPO_TOKEN }}
+
+      - name: Fetch featured repositories
+        id: fetch-featured
+        run: |
+          # Set error handling
+          set -eo pipefail
+
+          # Get repository owner
+          GITHUB_USERNAME="${{ github.repository_owner }}"
+          echo "Fetching GitHub featured repositories for $GITHUB_USERNAME..."
+
+          # GraphQL query to fetch pinned repositories
+          GRAPHQL_QUERY='
+          query {
+            user(login: "'"$GITHUB_USERNAME"'") {
+              pinnedItems(first: 6, types: REPOSITORY) {
+                nodes {
+                  ... on Repository {
+                    name
+                  }
+                }
+              }
+            }
+          }'
+
+          # Execute API request with proper error handling
+          API_RESPONSE=$(curl -s -w "%{http_code}" -H "Authorization: token ${{ secrets.PROFILE_REPO_TOKEN }}" \
+            -X POST -d "{\"query\":$(echo $GRAPHQL_QUERY | jq -R -s .)}" \
+            https://api.github.com/graphql)
+
+          # Extract status code and response body
+          HTTP_STATUS=${API_RESPONSE: -3}
+          RESPONSE_BODY=${API_RESPONSE:0:${#API_RESPONSE}-3}
+
+          # Validate API response
+          if [[ $HTTP_STATUS != 200 ]]; then
+            echo "Error fetching repositories: HTTP status $HTTP_STATUS"
+            echo "Response: $RESPONSE_BODY"
+            exit 1
+          fi
+
+          # Extract repository names and validate response structure
+          if ! echo "$RESPONSE_BODY" | jq -e '.data.user.pinnedItems.nodes' > /dev/null; then
+            echo "Error: Invalid response structure from GitHub API"
+            echo "Response: $RESPONSE_BODY"
+            exit 1
+          fi
+
+          # Parse repository names
+          FEATURED_REPOS=$(echo "$RESPONSE_BODY" | jq -r '.data.user.pinnedItems.nodes[].name' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          # Validate we got at least one repository
+          REPO_COUNT=$(echo "$FEATURED_REPOS" | jq 'length')
+          echo "Found $REPO_COUNT featured repositories"
+
+          if [[ $REPO_COUNT -eq 0 ]]; then
+            echo "Warning: No featured repositories found. Using empty array."
+          fi
+
+          # Generate JSON content with ISO timestamp
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          JSON_CONTENT="{\"timestamp\": \"$TIMESTAMP\", \"repos\": $FEATURED_REPOS}"
+
+          # Format JSON for better readability
+          FORMATTED_JSON=$(echo "$JSON_CONTENT" | jq '.')
+
+          # Ensure assets/data directory exists
+          mkdir -p assets/data
+
+          # Write to JSON file
+          echo "$FORMATTED_JSON" > assets/data/featured-repos.json
+
+          echo "✅ Successfully updated featured repositories data"
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add assets/data/featured-repos.json
+
+          # Only commit if there are changes
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Update featured repositories" -m "Fetch latest pinned repositories from GitHub profile via automated workflow"
+            git push
+          )

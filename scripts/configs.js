@@ -16,7 +16,8 @@ export const CONFIGS = {
     ],
     // Repositories to show at the top
     featuredRepos: [
-      // Example: "portfolio-website", "important-project"
+      // Fallback, overriden by GitHub Action commited repos in /assets/data/featured-repo.json
+      // Example: "my-awesome-project", "cool-library"
     ],
     // Scoring weights for repository ranking
     weights: {
