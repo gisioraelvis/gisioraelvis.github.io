@@ -41,7 +41,7 @@ export const CONFIGS = {
   },
   analytics: {
     gaId: "G-GD006D7DPB", // Google Analytics 4 measurement ID (also used for Search Console verification)
-    searchConsoleId: "", // Explicit Search Console verification ID (only if needed)
+    searchConsoleId: "kDrMkev9Yuw3pXPHVlM8ldDKQK-wEMfVgYVaEANWsvU", // Explicit Search Console verification ID (only if needed)
     clarityId: "qu811yayq4", // Microsoft Clarity project ID
 
     // Privacy settings
