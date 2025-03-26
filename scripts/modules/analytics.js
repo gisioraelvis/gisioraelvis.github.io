@@ -1,4 +1,4 @@
-import { CONFIGS } from "../config.js";
+import { CONFIGS } from "../configs.js";
 import { Utils } from "../utils.js";
 
 /**
