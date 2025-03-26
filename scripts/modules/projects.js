@@ -521,47 +521,118 @@ export const GitHubProjects = {
    * @returns {Promise<Array>} Repositories with additional stats and scores
    */
   async getDetailedRepoStats(repos) {
-    // Process repositories in parallel for better performance
-    return Promise.all(
-      repos.map(async (repo) => {
-        try {
-          // Get commit activity for scoring
-          const statsResponse = await fetch(
-            `https://api.github.com/repos/${CONFIGS.github.username}/${repo.name}/stats/participation`
-          );
+    // Process repositories sequentially with rate limiting awareness
+    const processedRepos = [];
+    const delayBetweenRequests = 250; // 250ms delay between requests
 
-          let totalCommits = 0;
-          if (statsResponse.ok) {
-            const stats = await statsResponse.json();
-            totalCommits =
-              stats.all?.reduce((sum, count) => sum + count, 0) || 0;
+    for (const repo of repos) {
+      try {
+        // Get commit activity for scoring with retry logic
+        let totalCommits = 0;
+        let retries = 0;
+        const maxRetries = 3;
+        let lastError = null;
+
+        while (retries < maxRetries) {
+          try {
+            const statsResponse = await fetch(
+              `https://api.github.com/repos/${CONFIGS.github.username}/${repo.name}/stats/participation`,
+              {
+                headers: {
+                  Accept: "application/vnd.github.v3+json",
+                },
+              }
+            );
+
+            // Check for rate limiting
+            if (statsResponse.status === 403) {
+              const rateLimitRemaining = statsResponse.headers.get(
+                "X-RateLimit-Remaining"
+              );
+              const rateLimitReset =
+                statsResponse.headers.get("X-RateLimit-Reset");
+
+              if (rateLimitRemaining === "0" && rateLimitReset) {
+                const resetTime = new Date(rateLimitReset * 1000);
+                const waitTime = Math.max(0, resetTime - new Date()) + 1000;
+
+                // Log the rate limit and fallback to score calculation without commits
+                Utils.log(
+                  `GitHub API rate limit reached. Reset at ${resetTime.toLocaleTimeString()}`,
+                  "warn"
+                );
+
+                // If wait time is reasonable, wait and retry
+                if (waitTime < 60000) {
+                  // Less than a minute
+                  await new Promise((resolve) => setTimeout(resolve, waitTime));
+                  retries++;
+                  continue;
+                } else {
+                  // If wait time is too long, break and continue with limited data
+                  break;
+                }
+              }
+            }
+
+            if (statsResponse.ok) {
+              const stats = await statsResponse.json();
+              totalCommits =
+                stats.all?.reduce((sum, count) => sum + count, 0) || 0;
+              break; // Success, exit retry loop
+            } else if (statsResponse.status === 202) {
+              // GitHub is computing the stats, wait and retry
+              Utils.log(
+                `Stats for ${repo.name} being computed, retrying...`,
+                "info"
+              );
+              await new Promise((resolve) => setTimeout(resolve, 2000));
+              retries++;
+            } else {
+              throw new Error(`HTTP ${statsResponse.status}`);
+            }
+          } catch (error) {
+            lastError = error;
+            // Exponential backoff
+            const backoffTime = Math.min(1000 * Math.pow(2, retries), 10000);
+            await new Promise((resolve) => setTimeout(resolve, backoffTime));
+            retries++;
           }
-
-          // Calculate score - featured repos get maximum score
-          const score = repo.isFeatured
-            ? Number.MAX_SAFE_INTEGER
-            : this.calculateRepoScore(repo, totalCommits);
-
-          return {
-            ...repo,
-            totalCommits,
-            score,
-          };
-        } catch (error) {
-          Utils.log(
-            `Couldn't get stats for ${repo.name}: ${error.message}`,
-            "warn"
-          );
-
-          // Return repo with fallback score
-          return {
-            ...repo,
-            totalCommits: 0,
-            score: repo.isFeatured ? Number.MAX_SAFE_INTEGER : 0,
-          };
         }
-      })
-    );
+
+        // Calculate score - featured repos get maximum score
+        const score = repo.isFeatured
+          ? Number.MAX_SAFE_INTEGER
+          : this.calculateRepoScore(repo, totalCommits);
+
+        processedRepos.push({
+          ...repo,
+          totalCommits,
+          score,
+        });
+
+        // Add delay between requests to avoid hitting rate limits
+        if (repos.length > 5) {
+          await new Promise((resolve) =>
+            setTimeout(resolve, delayBetweenRequests)
+          );
+        }
+      } catch (error) {
+        Utils.log(
+          `Couldn't get stats for ${repo.name}: ${error.message}`,
+          "warn"
+        );
+
+        // Add repo with fallback score even if there was an error
+        processedRepos.push({
+          ...repo,
+          totalCommits: 0,
+          score: repo.isFeatured ? Number.MAX_SAFE_INTEGER : 0,
+        });
+      }
+    }
+
+    return processedRepos;
   },
 
   /**
@@ -645,6 +716,7 @@ export const GitHubProjects = {
       Kotlin: "#A97BFF",
       Swift: "#F05138",
       Dart: "#00B4AB",
+      Flutter: "#02569B",
 
       // Database and config
       SQL: "#e38c00",
