@@ -31,12 +31,27 @@ export const CONFIGS = {
     scrollOffset: 80, // Smooth scrolling offset in pixels
   },
   showMore: {
-    // Expander initial shown items
+    // Expander initial visible elements
     initialItems: {
       experience: 2,
       education: 6,
       projects: 6,
       softSkills: 6,
     },
+  },
+  analytics: {
+    gaId: "G-GD006D7DPB", // Google Analytics 4 measurement ID (also used for Search Console verification)
+    searchConsoleId: "", // Explicit Search Console verification ID (only if needed)
+    clarityId: "qu811yayq4", // Microsoft Clarity project ID
+
+    // Privacy settings
+    respectDnt: true, // Respect Do Not Track browser setting
+
+    // Enhanced tracking options
+    trackSections: true, // Track when sections become visible
+    trackOutboundLinks: true, // Track clicks on external links
+
+    // Performance considerations
+    cookieExpiry: 365, // Cookie lifetime in days
   },
 };

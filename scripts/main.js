@@ -3,6 +3,7 @@ import { Navigation } from "./modules/navigation.js";
 import { Animations } from "./modules/animations.js";
 import { ContentExpander } from "./modules/expander.js";
 import { GitHubProjects } from "./modules/projects.js";
+import { Analytics } from "./modules/analytics.js";
 import { Utils } from "./utils.js";
 
 // Initialize all modules when the DOM is ready
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   Animations.init();
   ContentExpander.init();
   GitHubProjects.init();
+  Analytics.init();
   Utils.setCopyrightYear();
   Utils.log("Website initialization complete", "info");
 });
