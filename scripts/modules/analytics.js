@@ -11,6 +11,7 @@ import { Utils } from "../utils.js";
  *
  * Features:
  * - Respects user privacy (Do Not Track)
+ * - Automatically disables in development environments
  * - Error handling and logging
  * - Custom event tracking
  */
@@ -21,6 +22,12 @@ export const Analytics = {
    */
   init() {
     try {
+      // Skip analytics in development environments
+      if (this.isDevEnvironment()) {
+        Utils.log("Analytics disabled in development environment", "info");
+        return;
+      }
+
       // Check if user has opted out of tracking
       if (this.shouldRespectPrivacy()) {
         Utils.log("Analytics disabled due to privacy settings", "info");
@@ -37,6 +44,34 @@ export const Analytics = {
     } catch (error) {
       Utils.log(`Analytics initialization failed: ${error.message}`, "error");
     }
+  },
+
+  /**
+   * Detects if application is running in a development environment
+   * @private
+   * @returns {boolean} True when running in a development environment
+   */
+  isDevEnvironment() {
+    const hostname = window.location.hostname;
+
+    // Check for explicit environment configuration
+    if (CONFIGS.env === "dev" || CONFIGS.isDev === true) {
+      return true;
+    }
+
+    // Check for common local development hostnames
+    return (
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname.match(/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/) || // Private IP ranges
+      hostname.endsWith(".local") ||
+      hostname.endsWith(".test") ||
+      hostname.includes("localhost:") ||
+      hostname.includes("gitpod.io") ||
+      hostname.includes("codespace") ||
+      hostname.includes("stackblitz") ||
+      (hostname !== "gisioraelvis.github.io" && hostname.includes("github.io")) // Exclude GitHub Pages
+    );
   },
 
   /**
