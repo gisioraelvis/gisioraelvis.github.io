@@ -1,10 +1,9 @@
 #### General Guidelines
 
 1. Always generate cleaned up optimized(UI/UX/DX) code with clear, concise and relevant comments.
-   Enhance/refine/extend the code as you see fit, but maintain the project's overall architecture and functionality
 2. Prioritize readability and adherence to best practices for the specific programming language in use.
    Simpler is better; avoid unnecessary complexity.
-3. Ensure the code is modular, reusable and follows project and established design patterns e.g. DRY 
+3. Ensure the code is modular, reusable and follows project and established design patterns e.g. DRY, KISS, YAGNI.
 
 #### Code Generation
 
@@ -13,10 +12,12 @@
 3. Incorporate security best practices e.g. input validation, data sanitation, and secure coding techniques.
 4. Prefer functional programming paradigms where applicable, such as immutability and pure functions.
 
-#### Commit Messages
+Enhance/refine/extend as you see fit, but maintain the project's overall architecture and functionality
 
-1. Use imperative mood (e.g., "Add feature" instead of "Added feature").
+#### Conventional Commits
+
+1. Use the conventional commit format and 
+2. Use imperative mood e.g. feat: add new feature
 2. Follow the structure:
-   - A short summary of changes (e.g., "Fix null-pointer exception in user login").
-   - A detailed explanation of the reason for changes and the solution implemented,
-     if necessary i.e. for complex non-trivial changes.
+   - Concise summary of changes e.g. fix: null-pointer exception in user login. 
+   - For complex non-trivial changes, a detailed explanation of the reason for changes and the solution implemented.
