@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ThemeManager.init();
     Navigation.init();
     Utils.setCopyrightYear();
+    Utils.lazyLoadImages();
     Utils.log("Core UI initialized", "info");
 
     // Load and initialize enhancement features asynchronously

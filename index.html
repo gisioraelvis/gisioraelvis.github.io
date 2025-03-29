@@ -22,7 +22,7 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="assets/gisioraelvis-passport.webp" as="image" fetchpriority="high">
     <link rel="preload" href="styles/main.css" as="style">
-    <link rel="preload" href="scripts/main.js" as="script" crossorigin>
+    <link rel="preload" href="scripts/main.js" as="script">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
@@ -37,7 +37,7 @@
         media="print" onload="this.media='all'">
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" media="print" onload="this.media='all'">
+        rel="stylesheet" media="print" onload="this.media='all'" crossorigin>
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link rel="stylesheet"
@@ -133,182 +133,182 @@
                 <div class="hero-image">
                     <div class="profile-image">
                         <img src="assets/gisioraelvis-passport.webp"
-                            alt="Elvis Gisiora - Software Engineer portrait photo">
+                            alt="Elvis Gisiora - Software Engineer portrait photo" width="400" height="400">
                     </div>
                     <div class="floating-badges" aria-hidden="true">
                         <!-- Core/Foundational Technologies (closest to image) -->
                         <div class="badge frontend"
                             style="--delay: 0.5s; --x-pos: -170px; --y-pos: -120px; --drift-x: 15px; --drift-y: 10px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                                alt="HTML5" width="24" height="24" />
+                                alt="HTML5" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge frontend"
                             style="--delay: 1.2s; --x-pos: -110px; --y-pos: -185px; --drift-x: 12px; --drift-y: 14px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                                alt="CSS3" width="24" height="24" />
+                                alt="CSS3" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge frontend"
                             style="--delay: 1.8s; --x-pos: -40px; --y-pos: -215px; --drift-x: 16px; --drift-y: 12px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                                alt="JavaScript" width="24" height="24" />
+                                alt="JavaScript" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge frontend"
                             style="--delay: 2.3s;  --x-pos: 90px; --y-pos: -200px; --drift-x: 14px; --drift-y: 18px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                                alt="TypeScript" width="24" height="24" />
+                                alt="TypeScript" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
 
                         <!-- Second Layer - Common Frameworks/Libraries -->
                         <div class="badge frontend"
                             style="--delay: 1.0s; --x-pos: -200px; --y-pos: -180px; --drift-x: 18px; --drift-y: 15px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                                alt="React" width="24" height="24" />
+                                alt="React" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge frontend"
                             style="--delay: 2.5s;  --x-pos: 160px; --y-pos: -140px; --drift-x: 20px; --drift-y: 16px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-                                alt="Next.js" width="24" height="24" />
+                                alt="Next.js" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge frontend"
                             style="--delay: 3.2s; --x-pos: 200px; --y-pos: -200px; --drift-x: 17px; --drift-y: 14px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
-                                alt="Angular" width="24" height="24" />
+                                alt="Angular" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
 
                         <!-- Backend Core -->
                         <div class="badge backend"
                             style="--delay: 1.5s; --x-pos: 150px; --y-pos: 70px; --drift-x: 16px; --drift-y: 12px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                                alt="Node.js" width="24" height="24" />
+                                alt="Node.js" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge backend"
                             style="--delay: 2.7s; --x-pos: 180px; --y-pos: 140px; --drift-x: 14px; --drift-y: 18px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
-                                alt="Express" width="24" height="24" />
+                                alt="Express" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge backend"
                             style="--delay: 3.4s; --x-pos: 100px; --y-pos: 150px; --drift-x: 18px; --drift-y: 16px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
-                                alt="NestJS" width="24" height="24" />
+                                alt="NestJS" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge backend"
                             style="--delay: 3.6s; --x-pos: -10px; --y-pos: 200px; --drift-x: 16px; --drift-y: 12px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
-                                alt="C#" width="24" height="24" />
+                                alt="C#" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge backend"
                             style="--delay: 4.7s; --x-pos: 50px; --y-pos: 220px; --drift-x: 12px; --drift-y: 10px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg"
-                                alt=".NET" width="24" height="24" />
+                                alt=".NET" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge backend"
                             style="--delay: 0.8s; --x-pos: -150px; --y-pos: 180px; --drift-x: 10px; --drift-y: 14px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                                alt="Java" width="24" height="24" />
+                                alt="Java" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge backend"
                             style="--delay: 2.0s; --x-pos: -200px; --y-pos: 120px; --drift-x: 18px; --drift-y: 20px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
-                                alt="Spring" width="24" height="24" />
+                                alt="Spring" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
 
                         <!-- Database badges (third layer) -->
                         <div class="badge database"
                             style="--delay: 0.7s; --x-pos: -260px; --y-pos: -100px; --drift-x: 20px; --drift-y: 16px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                                alt="MySQL" width="24" height="24" />
+                                alt="MySQL" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge database"
                             style="--delay: 1.9s; --x-pos: -290px; --y-pos: 10px; --drift-x: 22px; --drift-y: 18px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-                                alt="PostgreSQL" width="24" height="24" />
+                                alt="PostgreSQL" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge database"
                             style="--delay: 3.1s; --x-pos: -320px; --y-pos: 80px; --drift-x: 19px; --drift-y: 15px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
-                                alt="MongoDB" width="24" height="24" />
+                                alt="MongoDB" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge database"
                             style="--delay: 4.2s; --x-pos: -250px; --y-pos: 150px; --drift-x: 17px; --drift-y: 20px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
-                                alt="Redis" width="24" height="24" />
+                                alt="Redis" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge database"
                             style="--delay: 2.4s; --x-pos: -200px; --y-pos: 240px; --drift-x: 12px; --drift-y: 11px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
-                                alt="SQLite" width="24" height="24" />
+                                alt="SQLite" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
 
                         <!-- DevOps & Cloud (outermost layer) -->
                         <div class="badge cloud"
                             style="--delay: 0.9s; --x-pos: -280px; --y-pos: -200px; --drift-x: 22px; --drift-y: 17px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
-                                alt="AWS" width="24" height="24" />
+                                alt="AWS" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 2.2s; --x-pos: 0px; --y-pos: -250px; --drift-x: 24px; --drift-y: 18px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
-                                alt="Azure" width="24" height="24" />
+                                alt="Azure" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 3.8s; --x-pos: 240px; --y-pos: -240px; --drift-x: 20px; --drift-y: 16px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
-                                alt="Google Cloud" width="24" height="24" />
+                                alt="Google Cloud" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 1.3s; --x-pos: 270px; --y-pos: -100px; --drift-x: 25px; --drift-y: 15px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                                alt="Docker" width="24" height="24" />
+                                alt="Docker" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 2.9s; --x-pos: 260px; --y-pos: 40px; --drift-x: 18px; --drift-y: 22px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                                alt="Kubernetes" width="24" height="24" />
+                                alt="Kubernetes" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 4.4s; --x-pos: 250px; --y-pos: 180px; --drift-x: 21px; --drift-y: 19px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                                alt="GitHub" width="24" height="24" />
+                                alt="GitHub" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 3.5s; --x-pos: 160px; --y-pos: 230px; --drift-x: 19px; --drift-y: 16px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg"
-                                alt="GitLab" width="24" height="24" />
+                                alt="GitLab" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 1.6s; --x-pos: 10px; --y-pos: 280px; --drift-x: 16px; --drift-y: 12px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
-                                alt="Jenkins" width="24" height="24" />
+                                alt="Jenkins" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 2.6s; --x-pos: -80px; --y-pos: 220px; --drift-x: 20px; --drift-y: 17px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg"
-                                alt="GitHub Actions" width="24" height="24" />
+                                alt="GitHub Actions" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 4.0s; --x-pos: -320px; --y-pos: 230px; --drift-x: 18px; --drift-y: 21px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
-                                alt="Kafka" width="24" height="24" />
+                                alt="Kafka" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 4.5s; --x-pos: -300px; --y-pos: 170px; --drift-x: 22px; --drift-y: 19px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"
-                                alt="Digital Ocean" width="24" height="24" />
+                                alt="Digital Ocean" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 1.7s; --x-pos: -140px; --y-pos: 290px; --drift-x: 13px; --drift-y: 14px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuredevops/azuredevops-original.svg"
-                                alt="Azure DevOps" width="24" height="24" />
+                                alt="Azure DevOps" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 3.0s; --x-pos: -240px; --y-pos: -30px; --drift-x: 21px; --drift-y: 16px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg"
-                                alt="Jira" width="24" height="24" />
+                                alt="Jira" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                         <div class="badge cloud"
                             style="--delay: 2.1s; --x-pos: 200px; --y-pos: -30px; --drift-x: 17px; --drift-y: 20px;">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
-                                alt="Figma" width="24" height="24" />
+                                alt="Figma" width="24" height="24" loading="lazy" decoding="async" />
                         </div>
                     </div>
                 </div>
@@ -678,41 +678,46 @@
                                     <!-- Web Foundations -->
                                     <a href="#" tabindex="-1" title="HTML5 - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                                            alt="HTML5" width="40" height="40" /></a>
+                                            alt="HTML5" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="CSS3 - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                                            alt="CSS3" width="40" height="40" /></a>
+                                            alt="CSS3" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <!-- JavaScript Ecosystem -->
                                     <a href="#" title="JavaScript - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                                            alt="JavaScript" width="40" height="40" /></a>
+                                            alt="JavaScript" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="TypeScript - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                                            alt="TypeScript" width="40" height="40" /></a>
+                                            alt="TypeScript" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="React - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                                            alt="React" width="40" height="40" /></a>
+                                            alt="React" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="React Router - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg"
-                                            alt="React Router" width="40" height="40" /></a>
+                                            alt="React Router" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Redux - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
-                                            alt="Redux" width="40" height="40" /></a>
+                                            alt="Redux" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Next.js - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-                                            alt="Next.js" width="40" height="40" /></a>
+                                            alt="Next.js" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Angular - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
-                                            alt="Angular" width="40" height="40" /></a>
+                                            alt="Angular" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Tailwind CSS - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-                                            alt="Tailwind CSS" width="40" height="40" /></a>
+                                            alt="Tailwind CSS" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Material UI - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"
-                                            alt="Material UI" width="40" height="40" /></a>
+                                            alt="Material UI" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Flutter - 65%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
-                                            alt="Flutter" width="40" height="40" /></a>
+                                            alt="Flutter" width="40" height="40" loading="lazy" decoding="async" /></a>
                                 </div>
                             </div>
 
@@ -722,34 +727,36 @@
                                 <div class="skills-icons">
                                     <a href="#" title="Node.js - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                                            alt="Node.js" width="40" height="40" /></a>
+                                            alt="Node.js" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Express.js - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
-                                            alt="Express.js" width="40" height="40" /></a>
+                                            alt="Express.js" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="NestJS - 90%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
-                                            alt="NestJS" width="40" height="40" /></a>
+                                            alt="NestJS" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Java - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                                            alt="Java" width="40" height="40" /></a>
+                                            alt="Java" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Spring Boot - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
-                                            alt="Spring Boot" width="40" height="40" /></a>
+                                            alt="Spring Boot" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="C# - 75%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
-                                            alt="C#" width="40" height="40" /></a>
+                                            alt="C#" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title=".NET - 75%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg"
-                                            alt=".NET" width="40" height="40" /></a>
+                                            alt=".NET" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Kafka - 70%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
-                                            alt="Kafka" width="40" height="40" /></a>
+                                            alt="Kafka" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Swagger/OpenAPI - 80%"><img
                                             src="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png"
-                                            alt="Swagger" width="40" height="40" /></a>
+                                            alt="Swagger" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="GraphQL - 70%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
-                                            alt="GraphQL" width="40" height="40" /></a>
+                                            alt="GraphQL" width="40" height="40" loading="lazy" decoding="async" /></a>
                                 </div>
                             </div>
 
@@ -759,25 +766,27 @@
                                 <div class="skills-icons">
                                     <a href="#" title="MongoDB - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
-                                            alt="MongoDB" width="40" height="40" /></a>
+                                            alt="MongoDB" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="MySQL - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                                            alt="MySQL" width="40" height="40" /></a>
+                                            alt="MySQL" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="PostgreSQL - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-                                            alt="PostgreSQL" width="40" height="40" /></a>
+                                            alt="PostgreSQL" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="MS SQL Server - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
-                                            alt="MS SQL Server" width="40" height="40" /></a>
+                                            alt="MS SQL Server" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Redis - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
-                                            alt="Redis" width="40" height="40" /></a>
+                                            alt="Redis" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Firebase - 75%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
-                                            alt="Firebase" width="40" height="40" /></a>
+                                            alt="Firebase" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Prisma - 95%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
-                                            alt="Prisma" width="40" height="40" /></a>
+                                            alt="Prisma" width="40" height="40" loading="lazy" decoding="async" /></a>
                                 </div>
                             </div>
                         </div>
@@ -796,34 +805,34 @@
                                 <div class="skills-icons">
                                     <a href="#" title="Jest - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
-                                            alt="Jest" width="40" height="40" /></a>
+                                            alt="Jest" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Cypress - 85%"><img
                                             src="https://raw.githubusercontent.com/cypress-io/cypress-icons/master/src/logo/cypress-io-logo-round.svg"
-                                            alt="Cypress" width="40" height="40" /></a>
+                                            alt="Cypress" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Playwright - 90%"><img
                                             src="https://playwright.dev/img/playwright-logo.svg" alt="Playwright"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="xUnit - 70%"><img
                                             src="https://avatars.githubusercontent.com/u/2092016?s=200&v=4" alt="xUnit"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="NUnit - 75%"><img
                                             src="https://www.nuget.org/profiles/nunit/avatar?imageSize=512" alt="NUnit"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="JUnit - 80%"><img
                                             src="https://avatars.githubusercontent.com/u/874086?s=200&v=4" alt="JUnit"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Mockito - 70%"><img
                                             src="https://raw.githubusercontent.com/mockito/mockito.github.io/master/img/logo.png"
-                                            alt="Mockito" width="40" height="40" /></a>
+                                            alt="Mockito" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Postman - 90%"><img
                                             src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
-                                            alt="Postman" width="40" height="40" /></a>
+                                            alt="Postman" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Artillery - 75%"><img
                                             src="https://avatars.githubusercontent.com/u/12608521" alt="Artillery"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="JMeter - 70%"><img
                                             src="https://jmeter.apache.org/images/jmeter_square.svg" alt="JMeter"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                 </div>
                             </div>
 
@@ -833,40 +842,46 @@
                                 <div class="skills-icons">
                                     <a href="#" title="Azure - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
-                                            alt="Azure" width="40" height="40" /></a>
+                                            alt="Azure" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="AWS - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-                                            alt="AWS" width="40" height="40" /></a>
+                                            alt="AWS" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="GCP - 75%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
-                                            alt="GCP" width="40" height="40" /></a>
+                                            alt="GCP" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Vercel - 90%"><img
                                             src="https://cdn.worldvectorlogo.com/logos/vercel.svg" alt="Vercel"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Digital Ocean - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"
-                                            alt="Digital Ocean" width="40" height="40" /></a>
+                                            alt="Digital Ocean" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Docker - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                                            alt="Docker" width="40" height="40" /></a>
+                                            alt="Docker" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Kubernetes - 65%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                                            alt="Kubernetes" width="40" height="40" /></a>
+                                            alt="Kubernetes" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="OpenShift - 60%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redhat/redhat-original.svg"
-                                            alt="OpenShift" width="40" height="40" /></a>
+                                            alt="OpenShift" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="GitHub Actions - 80%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                                            alt="GitHub Actions" width="40" height="40" /></a>
+                                            alt="GitHub Actions" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Azure DevOps - 85%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuredevops/azuredevops-original.svg"
-                                            alt="Azure DevOps" width="40" height="40" /></a>
+                                            alt="Azure DevOps" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Jenkins - 65%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
-                                            alt="Jenkins" width="40" height="40" /></a>
+                                            alt="Jenkins" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Terraform - 60%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
-                                            alt="Terraform" width="40" height="40" /></a>
+                                            alt="Terraform" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                 </div>
                             </div>
 
@@ -876,22 +891,26 @@
                                 <div class="skills-icons">
                                     <a href="#" title="Grafana - 70%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
-                                            alt="Grafana" width="40" height="40" /></a>
+                                            alt="Grafana" width="40" height="40" loading="lazy" decoding="async" /></a>
                                     <a href="#" title="Prometheus - 70%"><img
                                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
-                                            alt="Prometheus" width="40" height="40" /></a>
+                                            alt="Prometheus" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Google Analytics - 70%"><img
                                             src="https://www.vectorlogo.zone/logos/google_analytics/google_analytics-icon.svg"
-                                            alt="Google Analytics" width="40" height="40" /></a>
+                                            alt="Google Analytics" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Microsoft Clarity - 70%"><img
                                             src="https://raw.githubusercontent.com/gisioraelvis/gisioraelvis/refs/heads/v1/assets/images/tech/microsoft-clarity.jpg"
-                                            alt="Microsoft Clarity" width="40" height="40" /></a>
+                                            alt="Microsoft Clarity" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="ELK Stack - 60%"><img
                                             src="https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg"
-                                            alt="ELK Stack" width="40" height="40" /></a>
+                                            alt="ELK Stack" width="40" height="40" loading="lazy"
+                                            decoding="async" /></a>
                                     <a href="#" title="Datadog - 60%"><img
                                             src="https://imgix.datadoghq.com/img/dd_logo_70x75.png" alt="Datadog"
-                                            width="40" height="40" /></a>
+                                            width="40" height="40" loading="lazy" decoding="async" /></a>
                                 </div>
                             </div>
                         </div>

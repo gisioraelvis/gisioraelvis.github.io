@@ -244,4 +244,67 @@ export const Utils = {
       copyrightElement.textContent = new Date().getFullYear();
     }
   },
+
+  /**
+   * Initialize lazy loading for images to improve page performance
+   * Uses native browser support with fallback for older browsers
+   * @param {Object} options - Configuration options
+   * @param {string} options.selector - CSS selector for lazy images (default: 'img[loading="lazy"]')
+   * @param {string} options.rootMargin - Margin around root for IntersectionObserver (default: '50px 0px')
+   * @param {number} options.threshold - Visibility threshold to trigger loading (default: 0.01)
+   */
+  lazyLoadImages(options = {}) {
+    try {
+      const {
+        selector = 'img[loading="lazy"]',
+        rootMargin = "50px 0px",
+        threshold = 0.01,
+      } = options;
+
+      // Exit early if native lazy loading is supported
+      if ("loading" in HTMLImageElement.prototype) {
+        this.log("Using native image lazy loading", "info");
+        return;
+      }
+
+      // Fallback for browsers without native support
+      const lazyImages = document.querySelectorAll(selector);
+      if (!lazyImages.length) {
+        this.log("No lazy-loaded images found", "info");
+        return;
+      }
+
+      this.log(
+        `Setting up IntersectionObserver for ${lazyImages.length} images`,
+        "info"
+      );
+
+      // Create observer to watch for images entering viewport
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const src = img.dataset.src || img.getAttribute("data-src");
+
+              if (src) {
+                img.src = src;
+                img.removeAttribute("data-src");
+                this.log(`Lazy loaded image: ${src.split("/").pop()}`, "info");
+              }
+
+              // Stop observing this image once loaded
+              obs.unobserve(img);
+            }
+          });
+        },
+        { rootMargin, threshold }
+      );
+
+      // Start observing all lazy images
+      lazyImages.forEach((img) => observer.observe(img));
+    } catch (error) {
+      this.log(`Lazy loading setup error: ${error.message}`, "error");
+    }
+  },
 };
