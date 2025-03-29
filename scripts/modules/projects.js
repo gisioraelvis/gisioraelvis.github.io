@@ -253,9 +253,9 @@ export const GitHubProjects = {
           </h3>
           ${
             repo.homepage
-              ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link">
+              ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="homepage-link" aria-label="Visit live site for ${repo.name}">
               <i class="fas fa-external-link-alt"></i>
-            </a>`
+                 </a>`
               : ""
           }
         </div>
@@ -265,7 +265,7 @@ export const GitHubProjects = {
             ${
               repo.language
                 ? `<span class="tech-tag">
-                <span class="language-color" style="background-color: ${languageColor}"></span>
+                <span class="language-color" style="background-color: ${languageColor}" aria-hidden="true"></span>
                 ${repo.language}
               </span>`
                 : `<span class="tech-tag empty-tag">No language specified</span>`
@@ -275,14 +275,14 @@ export const GitHubProjects = {
             ${
               repo.stargazers_count > 0
                 ? `<span class="project-stat has-count">
-                <i class="fas fa-star"></i> ${repo.stargazers_count}
+                <i class="fas fa-star" aria-hidden="true"></i> ${repo.stargazers_count}
               </span>`
                 : ""
             }
             ${
               repo.forks_count > 0
                 ? `<span class="project-stat has-count">
-                <i class="fas fa-code-branch"></i> ${repo.forks_count}
+                <i class="fas fa-code-branch" aria-hidden="true"></i> ${repo.forks_count}
               </span>`
                 : ""
             }
