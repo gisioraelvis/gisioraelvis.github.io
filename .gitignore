@@ -1,5 +1,4 @@
 # Local development files
-TODO
 .env
 .env.local
 .env.development.local
