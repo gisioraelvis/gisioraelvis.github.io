@@ -1,6 +1,7 @@
 # Code Refinement Guidelines 
 
-Clean up, optimize and ensure modularity. You're free to enhance/refine/extend the code as you see fit, but don't break existing functionality. 
+Clean up, optimize and ensure modularity. 
+You're free to enhance/refine/extend the code approbriately, but don't break existing functionality. 
 
 ## Project Structure
 
@@ -49,4 +50,4 @@ portfolio/
 - Implement appropriate error handling and security best practices
 - Preserve the vanilla approach HTML, CSS, JS (no frameworks)
 
-Remember, maintain the project's overall architecture and functionality but you're free to improve the code quality, performance, and user experience.
+Remember, maintain the project's overall architecture and functionality but you're free to improve the UI, UX & DX
