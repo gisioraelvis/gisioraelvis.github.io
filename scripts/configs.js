@@ -5,7 +5,7 @@ export const CONFIGS = {
   github: {
     username: "gisioraelvis", // GitHub username for API requests
     cacheKey: "github_repos_cache", // LocalStorage key for caching
-    cacheVersion: 1.0, // Increment when cache structure changes
+    cacheVersion: "1.0.1", // SemVer (MAJOR.MINOR.PATCH) - increment when cache structure changes
     cacheDuration: 24 * 60 * 60 * 1000, // 24 hours
 
     // API request parameters

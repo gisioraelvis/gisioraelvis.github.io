@@ -159,10 +159,16 @@ export const GitHubProjects = {
 
       const cache = JSON.parse(cachedString);
 
+      // Check if cache version is compatible with current version
+      const isCacheVersionCompatible = this.isVersionCompatible(
+        cache.version,
+        CONFIGS.github.cacheVersion
+      );
+
       // Validate cache integrity and freshness
       if (
         !cache?.data?.length ||
-        cache.version !== CONFIGS.github.cacheVersion ||
+        !isCacheVersionCompatible ||
         !cache.timestamp ||
         Date.now() - cache.timestamp > CONFIGS.github.cacheDuration
       ) {
@@ -181,6 +187,44 @@ export const GitHubProjects = {
     } catch (error) {
       Utils.log(`Cache read error: ${error.message}`, "error");
       return null;
+    }
+  },
+
+  /**
+   * Check if cache version is compatible with current version using SemVer rules
+   * @param {string} cacheVersion - Version from cached data
+   * @param {string} currentVersion - Current application version
+   * @returns {boolean} True if versions are compatible
+   */
+  isVersionCompatible(cacheVersion, currentVersion) {
+     // Handle legacy number formats (e.g., 1.0)
+    if (typeof cacheVersion === "number") {
+      return cacheVersion === parseFloat(currentVersion);
+    }
+
+    // If exact match, return true
+    if (cacheVersion === currentVersion) return true;
+
+    try {
+      // Parse SemVer components
+      const [cacheMajor, cacheMinor] = (cacheVersion || "")
+        .split(".")
+        .map(Number);
+      const [currentMajor, currentMinor] = (currentVersion || "")
+        .split(".")
+        .map(Number);
+
+      // Only allow caches with same MAJOR version and equal or lower MINOR version
+      return (
+        cacheMajor === currentMajor &&
+        !isNaN(cacheMajor) &&
+        !isNaN(currentMajor) &&
+        !isNaN(cacheMinor) &&
+        !isNaN(currentMinor)
+      );
+    } catch (e) {
+      // If any parsing errors occur, invalidate cache to be safe
+      return false;
     }
   },
 
