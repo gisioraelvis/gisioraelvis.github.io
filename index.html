@@ -22,7 +22,7 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="assets/gisioraelvis-passport.webp" as="image" fetchpriority="high">
     <link rel="preload" href="styles/main.css" as="style">
-    <link rel="preload" href="scripts/main.js" as="script">
+    <link rel="preload" href="scripts/main.js" as="script" crossorigin>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
@@ -1126,7 +1126,7 @@
         </div>
     </button>
 
-    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/main.js" defer></script>
 </body>
 
 </html>
