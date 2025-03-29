@@ -1,93 +1,132 @@
-# GEM - Portfolio Website Template
+# GEM - My Portfolio Website
 
-A modern, responsive portfolio website template for developers and tech professionals. Built with vanilla JavaScript, HTML5, and CSS3.
-
-![GEM Portfolio Preview](preview.png)
+This is my personal portfolio website, designed to showcase my work, skills, and projects as a software engineer. It reflects my journey, achievements, and aspirations in the tech world.
 
 ## Features
 
-- 🌓 Light/Dark mode toggle
-- 📱 Fully responsive design
-- ✨ Modern animations and transitions
-- 🔄 Dynamic GitHub projects showcase
-- ⚡ Fast loading and performance optimized
-- 📊 Built-in analytics support
-- 🧩 Modular architecture for easy customization
+- 🌓 Light/Dark mode toggle for a personalized viewing experience
+- 📱 Fully responsive design to ensure compatibility across devices
+- ✨ Modern animations and transitions for a polished look
+- 🔄 Dynamic GitHub projects showcase, automatically updated
+- ⚡ Optimized for fast loading and performance
+- 📊 Integrated analytics for tracking visitor interactions
+- 🧩 Modular architecture for easy maintenance and scalability
+- 🚀 CI/CD workflows for seamless updates and deployments
 
-## Getting Started
+## Development Setup
 
 ### Prerequisites
 
-- Basic knowledge of HTML, CSS, and JavaScript
-- A web browser
-- A code editor (VSCode etc.)
+To work on this project, you need:
 
-### Installation
+- Basic knowledge of HTML, CSS, and JavaScript
+- A modern web browser
+- A code editor (e.g., VSCode)
+- A GitHub account (for API integration)
+
+### Local Development
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/gem.git
-cd gem
+git clone https://github.com/gisioraelvis/gisioraelvis.github.io.git
+cd gisioraelvis.github.io
 ```
 
-2. Open `index.html` in your browser or use a local development server.
-
-For a simple local server, you can use live server in VSCode
-
-### Customization
-
-1. **Personal Information**: Update your details in `index.html`
-2. **Styling**: Modify colors and styles in `styles.css`
-3. **Configuration**: Adjust settings in the CONFIG object in `script.js`
-4. **GitHub Integration**: Set your GitHub username in the CONFIG object
+2. Open `index.html` in your browser or use a local development server like [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) in VSCode.
 
 ## Project Structure
 
 ```
-gem/
+portfolio/
 │
-├── assets/           # Images and other static assets
-├── scripts/          # JavaScript modules
+├── assets/           # Static assets like images and data
+│   ├── data/         # JSON files for dynamic content
+│   ├── favicon/      # Favicon files
+│   └── images/       # Portfolio images
+│
+├── github-profile/   # Source for syncing GitHub profile README
+│   └── README.md
+│
+├── scripts/          # JavaScript modules for functionality
 │   ├── modules/      # Feature-specific modules
-│   └── main.js       # Main entry point
-├── styles/           # CSS files
+│   │   ├── analytics.js      # Analytics integration
+│   │   ├── animations.js     # UI animations
+│   │   ├── expander.js       # Expandable content
+│   │   ├── navigation.js     # Navigation handling
+│   │   ├── projects.js       # GitHub projects integration
+│   │   └── theme.js          # Theme switching
+│   ├── configs.js   # Configuration settings
+│   ├── main.js      # Main entry point
+│   └── utils.js     # Utility functions
+│
+├── styles/           # CSS files for styling
+│   ├── base/         # Base styles and variables
+│   ├── components/   # Component-specific styles
+│   └── main.css      # Main CSS entry point
+│
+├── .github/          # GitHub Actions workflows
+│   └── workflows/
+│       ├── update-featured-repos.yml   # Updates featured repos
+│       └── update-github-profile.yml   # Syncs GitHub profile README
+│
 ├── index.html        # Main HTML file
 └── README.md         # Project documentation
 ```
 
-## Browser Support
+## Technical Details
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+### JavaScript Architecture
 
-## Contributing
+The JavaScript code is modular and follows best practices:
 
-Contributions are welcome! Here's how you can contribute:
+- **Module Loader**: Ensures efficient and error-resilient module loading
+- **Lazy Loading**: Non-critical features load after the initial render
+- **Error Handling**: Graceful degradation to prevent cascading failures
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+### CSS Architecture
 
-Please ensure your code follows the project's coding standards and includes appropriate documentation.
+The CSS is organized for maintainability:
+
+- **Component-Based**: Each UI component has its own CSS file
+- **Base Styles**: Shared styles and variables for consistency
+- **Modular Imports**: All styles are imported into `main.css`
+
+## Automated Workflows
+
+### Featured Repositories Update
+
+This workflow fetches my pinned GitHub repositories and updates `assets/data/featured-repos.json` weekly or on demand.
+
+### GitHub Profile README Sync
+
+This workflow syncs my portfolio README with my GitHub profile, ensuring centralized convinient and consistent updates.  
+
+## Deployment
+
+The website is deployed using GitHub Pages at [gisioraelvis.github.io](https://gisioraelvis.github.io).
+
+1. Hosted on GitHub
+2. GitHub Pages enabled in repository settings
+3. Automatically deployed from the `main` branch
+
+## Feedback and Contributions
+
+I welcome feedback and contributions! Feel free to:
+
+1. Open an issue for suggestions or bug reports
+2. Submit a pull request for improvements
+3. Contact me directly using the information below
 
 ## Contact
 
-If you have questions or feedback about GEM, feel free to reach out:
-
-- Create an issue in this repository
 - Email: gisioraelvis20@gmail.com
 - LinkedIn: [linkedin.com/in/gisioraelvis](https://linkedin.com/in/gisioraelvis)
 - Twitter: [x.com/gisioraelvis](https://x.com/gisioraelvis)
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgments
 
