@@ -1,11 +1,14 @@
-# GEM - My Portfolio Website
+# GEM - Portfolio Website
 
-This is my personal portfolio website, designed to showcase my work, skills, and projects as a software engineer. It reflects my journey, achievements, and aspirations in the tech world.
+My portfolio website as a dynamic and interactive resume of my experience, skills and projects.
+A reflection of my tech journey learnings, achievements and aspirations.
 
 ## Features
 
-- 🌓 Light/Dark mode toggle for a personalized viewing experience
+Built with modern web technologies and best practices.
+
 - 📱 Fully responsive design to ensure compatibility across devices
+- 🌓 Light/Dark mode toggle for a personalized viewing experience
 - ✨ Modern animations and transitions for a polished look
 - 🔄 Dynamic GitHub projects showcase, automatically updated
 - ⚡ Optimized for fast loading and performance
@@ -19,7 +22,7 @@ This is my personal portfolio website, designed to showcase my work, skills, and
 
 To work on this project, you need:
 
-- Basic knowledge of HTML, CSS, and JavaScript
+- Basic knowledge of HTML, CSS and JavaScript
 - A modern web browser
 - A code editor (e.g., VSCode)
 - A GitHub account (for API integration)
