@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       critical: true,
     });
 
-    Utils.log("Starting application initialization", "info");
+    Utils.log("Starting website initialization...", "info");
 
     // Pre-check for configs.js existence
     const configModule = await loadModule(
