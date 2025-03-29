@@ -1,10 +1,10 @@
 #### General Guidelines
 
-1. Always generate cleaned up optimized code with clear, concise and relevant comments.
-   Ensuring not to loose the intended goal, extend or ehance exisitng functionality.
+1. Always generate cleaned up optimized(UI/UX/DX) code with clear, concise and relevant comments.
+   Enhance/refine/extend the code as you see fit, but maintain the project's overall architecture and functionality
 2. Prioritize readability and adherence to best practices for the specific programming language in use.
    Simpler is better; avoid unnecessary complexity.
-3. Ensure the code is modular, reusable and follows project and established design patterns eg DRY 
+3. Ensure the code is modular, reusable and follows project and established design patterns e.g. DRY 
 
 #### Code Generation
 
