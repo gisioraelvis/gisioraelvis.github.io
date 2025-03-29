@@ -119,7 +119,7 @@ export const GitHubProjects = {
             <i class="fab fa-github loading-logo"></i>
           </div>
           <p class="loading-text">Loading GitHub projects...</p>
-          <p class="loading-subtext">Retrieving your latest repositories</p>
+          <p class="loading-subtext">Retrieving latest repositories</p>
         </div>
       </div>
     `;
