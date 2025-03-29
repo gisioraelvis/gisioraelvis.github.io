@@ -14,7 +14,9 @@
     <link rel="canonical" href="https://gisioraelvis.github.io">
 
     <!-- Preload some assets -->
-    <link rel="preload" href="assets/gisioraelvis-passport.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/gisioraelvis-passport-400w.webp" as="image" fetchpriority="high" imagesrcset="assets/gisioraelvis-passport-200w.webp 200w, 
+          assets/gisioraelvis-passport-400w.webp 400w, 
+          assets/gisioraelvis-passport-600w.webp 600w" imagesizes="(max-width: 768px) 200px, 400px">
     <link rel="preload" href="styles/main.css" as="style">
 
     <!-- Favicon -->
@@ -118,8 +120,12 @@
                 </div>
                 <div class="hero-image">
                     <div class="profile-image">
-                        <img src="assets/gisioraelvis-passport.webp"
-                            alt="Elvis Gisiora - Software Engineer portrait photo" width="400" height="400">
+                        <img srcset="assets/gisioraelvis-passport-200w.webp 200w,
+                                     assets/gisioraelvis-passport-400w.webp 400w,
+                                     assets/gisioraelvis-passport-600w.webp 600w"
+                            sizes="(max-width: 768px) 200px, 400px" src="assets/gisioraelvis-passport-400w.webp"
+                            alt="Elvis Gisiora - Software Engineer portrait photo" width="400" height="400"
+                            fetchpriority="high">
                     </div>
                     <div class="floating-badges" aria-hidden="true">
                         <!-- Core/Foundational Technologies (closest to image) -->
