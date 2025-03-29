@@ -1,6 +1,7 @@
 # GEM - Portfolio Website
 
 My portfolio website as a dynamic and interactive resume of my experience, skills and projects.
+
 A reflection of my tech journey learnings, achievements and aspirations.
 
 ## Features
