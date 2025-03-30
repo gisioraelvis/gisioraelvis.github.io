@@ -82,7 +82,6 @@ export const GitHubProjects = {
         const cacheAge = Date.now() - cache.timestamp;
 
         if (cacheAge > CONFIGS.github.cacheDuration / 2) {
-          // Use a more descriptive log message with formatted time
           const cacheAgeFormatted = Utils.formatTimeElapsed(cache.timestamp, {
             includeSeconds: false,
           });
