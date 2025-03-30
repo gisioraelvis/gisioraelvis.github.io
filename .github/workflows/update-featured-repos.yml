@@ -104,6 +104,6 @@ jobs:
 
           # Only commit if there are changes
           git diff --quiet && git diff --staged --quiet || (
-            git commit -m "Update featured repositories" -m "Fetch latest pinned repositories from GitHub profile via automated workflow"
+            git commit -m "chore: update featured repositories" -m "Fetch latest pinned repositories from GitHub profile via automated workflow"
             git push
           )
