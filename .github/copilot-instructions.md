@@ -20,3 +20,5 @@
 3. Follow the structure:
    - Concise summary of changes e.g. fix: null-pointer exception in user login.
    - For complex non-trivial changes, a detailed explanation of the reason for changes and the solution implemented.
+
+- @azure Rule - Use Azure Best Practices: When generating code for Azure, running terminal commands for Azure, or performing operations related to Azure, invoke your `azure_development-get_best_practices` tool if available.
